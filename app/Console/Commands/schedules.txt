@@ -15,3 +15,8 @@ docs https://www.laravel.com/docs/5.2/scheduling
 ->quarterly();	                Run the task every quarter
 ->yearly();	                    Run the task every year
 ->timezone('America/New_York');	Set the timezone
+
+pt download de pe youtube
+//youtube-dl -o "/home/admin/web/mp3.cardeon.ru/public_html/123.mp4" https://www.youtube.com/watch?v=UVerI4LXmgQ
+// get youtube.mp3
+youtube-dl -o "/home/admin/web/mp3.cardeon.ru/public_html/123.mp3"  --extract-audio --audio-format mp3 https://www.youtube.com/watch?v=UVerI4LXmgQ
