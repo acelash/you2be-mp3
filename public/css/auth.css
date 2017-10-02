@@ -1,0 +1,59 @@
+.soc_icons {
+    text-align: center;
+}
+.soc_icons img {
+    height: 40px;
+}
+
+.soc_icons a, .soc_icons a:hover {
+    text-decoration: none;
+}
+
+.panel-heading {
+    text-align: center;
+    padding: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    background: #DCEDC8;
+    color: #689F38;
+    margin: 0 -15px;
+}
+.or_div {
+    text-align: center;
+    padding: 10px;
+}
+
+.form_submit_btn {
+    width:100%;
+    padding: 6px 15px;
+    text-align: center;
+    font-size: 16px;
+    background: #689F38;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    outline: none;
+}
+
+form.auth .checkbox {
+    margin: 0;
+}
+.submit_container {
+    margin-top: 45px;
+}
+.signup_hint {
+    text-align: center;
+    margin-top: 10px;
+}
+.signup_hint a {
+    font-weight: bold;
+}
+
+.forgot_password {
+    text-align: right;
+    padding-right: 0;
+}
+
+.remember_me {
+    padding-left: 0;
+}

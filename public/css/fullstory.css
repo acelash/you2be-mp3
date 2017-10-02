@@ -1,0 +1,261 @@
+.breadcrumb {
+    margin: 0 0 20px;
+    border-radius: 0;
+    background: #DCEDC8;
+}
+.fullstory_title h1 {
+    margin-top: 0;
+}
+
+ul.fullstory_info {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    font-size: 19px;
+}
+
+.fullstory_info_label {
+    font-weight: bold;
+}
+
+.fullstory_ratings {
+    text-align: right;
+}
+
+.rating_count {
+    font-size: 18px;
+    font-weight: 500;
+    width: 100%;
+}
+
+.rating_count .likes, .unlikes {
+    text-align: center;
+    width: 49%;
+    display: inline-block;
+}
+
+.rating_bar_container {
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.rating_bar {
+    height: 10px;
+    background-color: #c40000;
+    border-radius: 4px;
+    width: 300px;
+    margin: auto;
+    text-align: left;
+    display: inline-block;
+}
+
+.rating_bar_filled {
+    height: 10px;
+    background-color: #689F38;
+    border-radius: 4px 0 0 4px;
+    width: 205px;
+}
+
+.embeded_video_container {
+    text-align: center;
+    width: 100%;
+}
+
+.embeded_video_container iframe {
+    width: 854px;
+    height: 480px;
+}
+
+@media screen and (max-width: 1200px) {
+    .embeded_video_container iframe {
+        width: 640px;
+        height: 360px;
+    }
+}
+@media screen and (max-width: 700px) {
+    .embeded_video_container iframe {
+        width: 426px;
+        height: 240px;
+    }
+}
+
+
+.fullstory_header_line {
+    width: 97%;
+    border-top: 1px solid #e2e2e2;
+}
+
+.fullstory_text {
+    text-indent: 30px;
+    padding-top: 15px;
+}
+
+.original_title {
+    margin-top: 0;
+}
+.procent_container {
+    color: #689F38;
+    font-weight: bold;
+    font-size: 24px;
+    display: inline-block;
+    position: relative;
+    top: 3px;
+    margin-left: 5px;
+}
+
+.similar_movie {
+    width:20%;
+}
+@media screen and (max-width: 1200px) {
+    .similar_movie {
+        width:25%;
+    }
+    .similar_movies > div:last-child {
+        display: none;
+    }
+}
+@media screen and (max-width: 700px) {
+    .similar_movie {
+        width:50%;
+    }
+    .similar_movies > div:last-child {
+        display: none;
+    }
+}
+
+.share_container {
+    padding: 10px;
+    text-align: center;
+}
+.share_container span {
+    display: inline-block;
+    margin-right: 15px;
+    font-size: 16px;
+}
+.share_container img {
+    vertical-align: baseline;
+}
+.share_container a, .share_container a:hover {
+    text-decoration: none;
+}
+
+.author a {
+    font-weight: bold;
+    color: #FF5722;
+}
+
+.type {
+    color: white;
+    font-size: 12px;
+    padding: 2px 4px;
+    border-radius: 2px;
+    position: relative;
+    top: -1px;
+}
+
+.type.positive {
+    background-color: #689F38;
+}
+
+.type.negative {
+    background-color: #e91e1e;
+}
+
+.comment_single {
+    margin-bottom: 15px;
+    padding: 10px;
+}
+
+.comment_author_avatar {
+    width:100px;
+    text-align: center;
+    display: inline-block;
+    float: left;
+}
+.comment_author_avatar img {
+    margin: auto;
+    width: 90%;
+}
+.comment_single .meta,.comment_single .text, .comment_single .title{
+    margin-left: 105px;
+}
+.comment_single .meta span{
+    margin-right: 7px;
+}
+
+.comment_single .title {
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+.comment_single .text {
+    margin-top: 5px;
+}
+
+.add_comment {
+    margin-top: 20px;
+}
+.add_comment h4 {
+    margin: 0 0 5px;
+    padding: 0;
+    font-weight: normal;
+}
+.add_comment hr {
+    margin-bottom: 10px;
+}
+.add_comment .help-block {
+    color: #e91e1e;
+}
+
+.alert-info a {
+    text-decoration: underline;
+}
+
+.btn {
+    border: none;
+    outline: none;
+    padding: 6px 12px;
+    text-align: center;
+    background-color: #689F38;
+    color: white;
+    border-radius: 3px;
+    transition: .3s;
+}
+.btn:hover {
+    background-color: rgba(104, 159, 56, 0.75);
+}
+
+.btn.like {
+    border-radius: 3px 0 0 3px;
+}
+
+.btn.dislike {
+    border-radius: 0 3px 3px 0;
+}
+
+.watch_later, .seen {
+    margin-left: 10px;
+}
+
+.btn.active {
+    background-color: #FF5722;
+}
+
+.rating_count div span {
+    font-weight: bold;
+}
+
+.movie_actions a, .movie_actions a:hover {
+    text-decoration: none;
+}
+
+.fullstory_desc {
+    margin: 20px 0;
+    /* text-indent: 30px; */
+    font-size: 17px;
+    font-style: italic;
+    color: #777;
+    line-height: 22px;
+
+}

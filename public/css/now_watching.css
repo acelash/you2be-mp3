@@ -1,0 +1,15 @@
+.now_watching .title {
+    font-weight: bold;
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+.now_watching_item .poster {
+    height: 250px;
+    margin: auto;
+}
+
+.now_watching .movie_info {
+    min-height: 50px;
+    text-align: center;
+}

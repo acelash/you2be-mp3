@@ -1,0 +1,23 @@
+.actions {
+    width: 100%;
+    margin: 10px 0 10px;
+}
+.actions a {
+    border: none;
+    outline: none;
+    padding: 6px 12px;
+    text-align: center;
+    background-color: #FF5722;
+    color: white;
+    border-radius: 3px;
+    transition: .3s;
+}
+.actions a:hover{
+    color: white;
+    text-decoration: none;
+    background-color: rgba(255, 88, 34, 0.76);
+}
+
+.content_block .title a,.content_block .title a:hover{
+    color: #689F38;
+}

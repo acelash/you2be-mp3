@@ -1,0 +1,105 @@
+td.active {
+    background-color: #00b80f !important;
+    color: white;
+}
+
+td.inactive {
+    background-color: #ff4b2d !important;
+    color: white;
+}
+
+.is_admin {
+    color: white;
+    background-color: #b9002d;
+}
+
+.is_user {
+    color: white;
+    background-color: #077d1c;
+}
+
+.ellipsis {
+    text-overflow: ellipsis;
+    white-space: nowrap; /* Запрещаем перенос строк */
+    overflow: hidden; /* Обрезаем все, что не помещается в область */
+}
+
+.dataTables_processing.panel.panel-default {
+    padding: 5px 20px 20px 20px;
+    font-weight: bold;
+    font-style: oblique;
+}
+
+table.dataTable tbody td {
+    vertical-align: middle;
+}
+
+.mini-avatar-preview {
+    height: 50px;
+    max-width:50px;
+}
+
+.text-centered {
+    text-align: center;
+}
+
+.userblock {
+
+    font-weight: bold;
+}
+
+.userblock.active {
+    color: #bf150c;
+}
+
+.userblock.expired {
+    color: #424445;
+}
+
+#event-edit-map {
+    height: 250px;
+    /*width: 500px;*/
+}
+
+.preview-event-image {
+    max-height: 280px;
+    max-width:500px;
+}
+
+.event_files_table {
+    width: 100%
+}
+
+.event_files_table tbody tr td {
+    vertical-align: middle;
+}
+
+a.btn, button.btn {
+    min-width: 75px;
+}
+
+.cover-preview {
+    height: 150px;
+    margin: 0 0 10px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+.thumbnails div input[type='file'] {
+    margin: auto;
+}
+
+.edit_form > div {
+    margin-bottom: 10px;
+}
+
+.state_active {
+    background: green;
+    color:white;
+}
+
+.state_unchecked {
+    background: #ff5d76;
+    color:white;
+}
