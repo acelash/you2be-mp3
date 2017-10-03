@@ -5,24 +5,21 @@ namespace App\Models;
 use App\Extensions\SearchableTrait;
 use Illuminate\Support\Facades\DB;
 
-class Movie extends Elegant
+class Song extends Elegant
 {
     use SearchableTrait;
-    protected $table = "movies";
+    protected $table = "songs";
     protected $fillable = [
         'state_id',
         'user_id',
         'source_id',
-        'source_start_at',
-        'title',
-        'title_original',
-        'text',
-        'thumbnail_default',
-        'thumbnail_medium',
-        'thumbnail_high',
-        'year',
+        'source_title',
+        'source_description',
+        'views',
+        'likes',
+        'dislikes',
     ];
-    protected $searchable = [
+    /*protected $searchable = [
 
         'columns' => [
             'movies.title' => 15,
@@ -38,7 +35,7 @@ class Movie extends Elegant
             "movies.seo_description",
             "movies.year",
         ]
-    ];
+    ];*/
 
     protected $dates = ['created_at', 'updated_at'];
 
@@ -81,7 +78,7 @@ class Movie extends Elegant
     {
         $query = parent::getAll();
 
-        $query->whereNotIn("movies.state_id", [
+        $query->whereNotIn("songs.state_id", [
             config('constants.STATE_DRAFT'),
             config('constants.STATE_UNCHECKED'),
             config('constants.STATE_SKIPPED'),
@@ -94,32 +91,10 @@ class Movie extends Elegant
     {
         $query = parent::getById($id)
             ->addSelect("states.name AS state")
-            ->join("states", "states.id", "=", "movies.state_id");
-
-        // Positive rating
-        $query->leftJoin(DB::raw("(
-            SELECT 
-                SUM(movie_vote.vote) AS total,
-                movie_vote.movie_id
-            FROM movie_vote
-            WHERE movie_vote.type = 1 /* positive */
-            GROUP BY movie_vote.movie_id
-        ) AS positive_rating"), "positive_rating.movie_id", "movies.id")
-            ->addSelect("positive_rating.total AS positive_rating");
-
-        // negative rating
-        $query->leftJoin(DB::raw("(
-            SELECT 
-                SUM(movie_vote.vote) AS total,
-                movie_vote.movie_id
-            FROM movie_vote
-            WHERE movie_vote.type = 2 /* negative */
-            GROUP BY movie_vote.movie_id
-        ) AS negative_rating"), "negative_rating.movie_id", "movies.id")
-            ->addSelect("negative_rating.total AS negative_rating");
+            ->join("states", "states.id", "=", "songs.state_id");
 
         if (!$all_states) {
-            $query->whereNotIn("movies.state_id", [
+            $query->whereNotIn("songs.state_id", [
                 config('constants.STATE_DRAFT'),
                 config('constants.STATE_UNCHECKED'),
                 config('constants.STATE_SKIPPED'),
@@ -133,15 +108,13 @@ class Movie extends Elegant
     public function getAllDatatable()
     {
         $query = $this->select(
-            "movies.id",
-            "movies.title",
-            "movies.thumbnail_medium",
-            "movies.year",
-            "movies.created_at"
+            "songs.id",
+            "songs.source_title",
+            "songs.created_at"
         )
             ->addSelect("states.name AS state")
-            ->join("states", "states.id", "=", "movies.state_id")
-            ->whereNotIn("movies.state_id", [
+            ->join("states", "states.id", "=", "songs.state_id")
+            ->whereNotIn("songs.state_id", [
                 config('constants.STATE_DRAFT'),
                 config('constants.STATE_SKIPPED')
             ]);
@@ -153,18 +126,6 @@ class Movie extends Elegant
     public function getNowWatching($movie = false)
     {
         $query = $this->getAll();
-
-        $query->join(DB::raw('(
-            SELECT 
-                MAX(movie_views.`updated_at`) AS last_view,
-                COUNT(movie_views.`id`) AS total_view,
-                movie_views.`entry_id`
-            FROM movie_views
-            GROUP BY  movie_views.entry_id
-            ORDER BY
-                COUNT(movie_views.`id`) DESC,   
-                MAX(movie_views.`updated_at`) DESC 
-        ) AS lastView'), "lastView.entry_id", "=", "movies.id");
 
         $query->whereNotIn("movies.state_id", [
             config('constants.STATE_DRAFT'),

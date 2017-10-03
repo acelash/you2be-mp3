@@ -16,7 +16,7 @@ return [
     "STATE_SKIPPED" => 4,
     "YOUTUBE_GRABBER_PAGE" => 10,
     "YOUTUBE_GRABBER_PAGES" => 5,
-    'YOUTUBE_GRABBER_QUERY' => "фильм, боевик, комедия, мелодрама, фантастика, кино",
+    'YOUTUBE_GRABBER_QUERY' => "official video 2017",
     'STORE_VIEW_AFTER' => 2000, // milisecunde
     'LIKED_MOVIES_ON_PAGE' => 12,
     'MOVIES_CATALOG_ON_PAGE' => 24,
