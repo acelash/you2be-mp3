@@ -17,9 +17,6 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                     <div class="x_content">
-                        Unckecked comments: {{$unchecked_comments}}<br>
-                        Active movies: {{$active_movies}}<br>
-                        Unckecked movies: {{$unchecked_movies}}<br>
                     </div>
                 </div>
             </div>

@@ -50,8 +50,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6',
-            'has_current_password' => 1
+            'password' => 'required|string|min:6'
         ]);
     }
 
@@ -68,6 +67,7 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
             'avatar' => asset('public/images/no-avatar.png'),
+            'has_current_password' => 1
         ]);
     }
     public function showRegistrationForm()
