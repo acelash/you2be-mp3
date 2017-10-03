@@ -94,6 +94,7 @@ class GetNewYoutubeMovies extends Command
                     }
 
                     $videoInfo['source_title'] = $details->snippet->title;
+                    $videoInfo['title'] = $this->prepareTitle($details->snippet->title);
                     $videoInfo['source_description'] = $details->snippet->description;
 
                     // likes, dislikes , views
@@ -129,5 +130,12 @@ class GetNewYoutubeMovies extends Command
                 }
             }
 
+    }
+    protected  function prepareTitle($source_title){
+        $title = $source_title;
+
+
+
+        return $title;
     }
 }

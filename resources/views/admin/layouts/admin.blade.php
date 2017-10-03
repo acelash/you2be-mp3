@@ -96,11 +96,11 @@
                     <div class="menu_section">
                         {{--<h3>General</h3>--}}
                         <ul class="nav side-menu">
-                            <li><a><i class="fa fa-file-movie-o"></i> {{trans('translate.movies')}} <span class="fa fa-chevron-down"></span></a>
+                            <li><a><i class="fa fa-file-movie-o"></i> {{trans('translate.songs')}} <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
-                                    <li><a href="{{url('admin/movies/check')}}">{{trans('translate.check_new_movie')}}</a></li>
-                                    <li><a href="{{url('admin/movies/new')}}">{{trans('translate.add')}}</a></li>
-                                    <li><a href="{{url('admin/movies')}}">{{trans('translate.all_movies')}}</a></li>
+                                    <li><a href="{{url('admin/songs/check')}}">{{trans('translate.check_new_song')}}</a></li>
+                                    <li><a href="{{url('admin/songs/new')}}">{{trans('translate.add')}}</a></li>
+                                    <li><a href="{{url('admin/songs')}}">{{trans('translate.all_songs')}}</a></li>
                                 </ul>
                             </li>
                             <li><a><i class="fa fa-users"></i> {{trans('translate.users')}} <span class="fa fa-chevron-down"></span></a>

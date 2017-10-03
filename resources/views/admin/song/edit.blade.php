@@ -6,7 +6,7 @@
  */--}}
 @extends('admin.layouts.admin')
 
-@section('pageTitle', 'Movie ID:' . $entry->id)
+@section('pageTitle', 'Song ID:' . $entry->id)
 
 
 @section('headerScripts', '')
@@ -19,7 +19,7 @@
     <div class="">
         <div class="page-title">
             <div class="title_left">
-                <h3>Editing movie ID: {{$entry->id}} [{{$entry->state}}]</h3>
+                <h3>Editing song ID: {{$entry->id}} [{{$entry->state}}]</h3>
             </div>
 
         </div>
@@ -54,29 +54,10 @@
                         @endif
 
                         <form id="edit_movie" class="form-horizontal form-label-left edit_form"
-                              enctype="multipart/form-data"
                               method="POST"
-                              action="{{ url('/admin/movies/'.$entry->id) }}">
+                              action="{{ url('/admin/songs/'.$entry->id) }}">
                             {{ csrf_field() }}
 
-                            <div class="col-md-12 thumbnails">
-                                <label class="control-label col-md-1">Thumbnails</label>
-                               {{-- <div class="col-md-3">
-                                    <div class="cover-preview"
-                                         style="background-image: url('{{$entry->thumbnail_default}}');"></div>
-                                    <input type="file" name="thumbnail_default">
-                                </div>--}}
-                                <div class="col-md-11">
-                                    <div class="cover-preview"
-                                         style="background-image: url('{{$entry->thumbnail_medium}}');"></div>
-                                    <input type="file" name="thumbnail_medium">
-                                </div>
-                               {{-- <div class="col-md-3">
-                                    <div class="cover-preview"
-                                         style="background-image: url('{{$entry->thumbnail_high}}');"></div>
-                                    <input type="file" name="thumbnail_high">
-                                </div>--}}
-                            </div>
 
                             <div class="col-md-12">
                                 <label class="control-label col-md-1" for="title">Title <span

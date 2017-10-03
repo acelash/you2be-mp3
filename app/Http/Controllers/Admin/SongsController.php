@@ -20,18 +20,19 @@ use App\Model\Region;
 use App\Models\Country;
 use App\Models\Genre;
 use App\Models\Movie;
+use App\Models\Song;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
 
-class MoviesController extends Controller
+class SongsController extends Controller
 {
 
-    protected $templateDirectory = 'admin.movie.';
+    protected $templateDirectory = 'admin.song.';
 
     public function boot()
     {
-        $this->setModel(new Movie());
+        $this->setModel(new Song());
     }
 
 

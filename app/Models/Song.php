@@ -13,6 +13,7 @@ class Song extends Elegant
         'state_id',
         'user_id',
         'source_id',
+        'title',
         'source_title',
         'source_description',
         'views',

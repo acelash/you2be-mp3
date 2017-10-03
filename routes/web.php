@@ -89,13 +89,13 @@ Route::group(
         Route::get('prices', 'PricesController@index');
         Route::post('prices/{slug}', 'PricesController@update');
 
-        Route::get('movies', 'MoviesController@index');
-        Route::get('movies/check', 'MoviesController@check');
-        Route::get('movies/new', 'MoviesController@storeDraft');
-        Route::get('movies/{id}', 'MoviesController@show')->where('id', '[0-9]+');
-        Route::post('movies/{id}', 'MoviesController@update')->where('id', '[0-9]+');
-        Route::get('movies/delete/{id}', 'MoviesController@destroy')->where('id', '[0-9]+');
-        Route::get('movies/datatable', 'MoviesController@datatable');
+        Route::get('songs', 'SongsController@index');
+        Route::get('songs/check', 'SongsController@check');
+        Route::get('songs/new', 'SongsController@storeDraft');
+        Route::get('songs/{id}', 'SongsController@show')->where('id', '[0-9]+');
+        Route::post('songs/{id}', 'SongsController@update')->where('id', '[0-9]+');
+        Route::get('songs/delete/{id}', 'SongsController@destroy')->where('id', '[0-9]+');
+        Route::get('songs/datatable', 'SongsController@datatable');
 
         Route::get('comments/moderate', 'CommentsController@moderate');
         Route::get('comments/approve/{id}', 'CommentsController@approve')->where('id', '[0-9]+');
