@@ -14,6 +14,7 @@ return [
     "STATE_ACTIVE" => 2,
     "STATE_UNCHECKED" => 3,
     "STATE_CHECKED" => 5,
+    "STATE_WITH_AUDIO" => 6,
     "STATE_SKIPPED" => 4,
     "YOUTUBE_GRABBER_PAGE" => 10,
     "YOUTUBE_GRABBER_PAGES" => 5,

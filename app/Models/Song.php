@@ -19,6 +19,7 @@ class Song extends Elegant
         'views',
         'likes',
         'dislikes',
+        'file_url',
     ];
     /*protected $searchable = [
 
@@ -70,20 +71,17 @@ class Song extends Elegant
         return $this->belongsToMany(Country::class, 'movie_country', 'movie_id', 'country_id');
     }
 
-    public function actors()
-    {
-        return $this->belongsToMany(Star::class, 'movie_actors', 'movie_id', 'star_id');
-    }
-
-    public function getAll()
+    public function getAll($all_states = false)
     {
         $query = parent::getAll();
 
-        $query->whereNotIn("songs.state_id", [
-            config('constants.STATE_DRAFT'),
-            config('constants.STATE_UNCHECKED'),
-            config('constants.STATE_SKIPPED'),
-        ]);
+        if (!$all_states) {
+            $query->whereNotIn("songs.state_id", [
+                config('constants.STATE_DRAFT'),
+                config('constants.STATE_UNCHECKED'),
+                config('constants.STATE_SKIPPED'),
+            ]);
+        }
 
         return $query;
     }

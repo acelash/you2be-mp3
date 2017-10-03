@@ -15,6 +15,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         Commands\RemoveDrafts::class,
         Commands\GetNewYoutubeMovies::class,
+        Commands\GetAudioFromYoutube::class,
         Commands\OptimizeImages::class,
     ];
 
