@@ -15,7 +15,11 @@ class HomeController extends Controller
     public function index()
     {
         $viewData = [
-            'songs' => (new Song())->getAll()->where("state_id",config('constants.STATE_WITH_AUDIO'))->get()
+            'songs' => (new Song())->getAll()
+                ->where("state_id",config('constants.STATE_WITH_AUDIO'))
+                ->orderBy("created_at","DESC")
+                ->take(50)
+                ->get()
         ];
         return $this->customResponse("home",$viewData);
     }

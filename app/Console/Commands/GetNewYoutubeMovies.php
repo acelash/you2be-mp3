@@ -74,6 +74,7 @@ class GetNewYoutubeMovies extends Command
     protected function processSearchResults($results){
             foreach ($results as $video) {
                 $thumbnail_path = "";
+                $thumbnail_mini_path = "";
                 // ne uitam daca nu a fost parsat deja
                 $source_id = $video->id->videoId;
 
@@ -119,7 +120,14 @@ class GetNewYoutubeMovies extends Command
 
                     $thumbnails = $details->snippet->thumbnails;
 
-                    // salvam imagine default
+                    // salvam imagine mini
+                    $remoteUrl = $thumbnails->medium->url;
+                    $imageName = $source_id . "." . config("constants.THUMBNAIL_EXTENSION");
+                    $thumbnail_mini_path = base_path() . '/' . config("constants.THUMBNAIL_MINI_PATH") . $imageName;
+                    file_put_contents($thumbnail_mini_path, file_get_contents($remoteUrl));
+                    $videoInfo['thumbnail_mini'] = asset(config("constants.THUMBNAIL_MINI_PATH") . $imageName);
+
+                    // salvam imagine medium
                     $remoteUrl = $thumbnails->medium->url;
                     $imageName = $source_id . "." . config("constants.THUMBNAIL_EXTENSION");
                     $thumbnail_path = base_path() . '/' . config("constants.THUMBNAIL_PATH") . $imageName;
@@ -163,6 +171,7 @@ class GetNewYoutubeMovies extends Command
                 } catch (\Exception $e) {
                     DB::rollback();
                     if(File::exists($thumbnail_path)) unlink($thumbnail_path);
+                    if(File::exists($thumbnail_mini_path)) unlink($thumbnail_mini_path);
                     echo "video " . $source_id . " not saved:{$e->getMessage()} \n";
                 }
             }

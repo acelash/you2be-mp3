@@ -38,9 +38,18 @@ class OptimizeImages extends Command
                     $resize->save($pathToImage);
                     //optimize image
                     $optimizerChain = OptimizerChainFactory::create();
-
                     $optimizerChain->optimize($pathToImage);
 
+                    //***************************
+                    $pathToImage = base_path() .'/'.config("constants.THUMBNAIL_MINI_PATH").basename($song->thumbnail_mini);
+
+                    // resize image
+                    $resize = Image::make($pathToImage);
+                    $resize->heighten(config("constants.THUMBNAIL_MINI_HEIGHT"));
+                    $resize->save($pathToImage);
+                    //optimize image
+                    $optimizerChain = OptimizerChainFactory::create();
+                    $optimizerChain->optimize($pathToImage);
                     $totalBlanks++;
                 }
 

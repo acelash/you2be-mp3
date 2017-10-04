@@ -20,6 +20,7 @@ class Song extends Elegant
         'dislikes',
         'file_url',
         'thumbnail',
+        'thumbnail_mini',
     ];
     /*protected $searchable = [
 
