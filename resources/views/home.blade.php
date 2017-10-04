@@ -8,7 +8,11 @@
     <div class="container page_content">
         <div class="row">
             <div class="col-md-12">
-                //content
+                @forelse($songs as $song)
+                    <p> <audio controls type="audio/mpeg" src="{{asset($song->file_url)}}">Your browser does not support the audio element.</audio> {{$song->title}} </p>
+                @empty
+                    No songs
+                @endforelse
             </div>
         </div>
         @include("partials.footer")

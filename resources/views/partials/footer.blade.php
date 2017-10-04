@@ -1,6 +1,6 @@
 <div class="row light-primary-color footer">
 
-    <div class="col-md-4 footer_block">
+   {{-- <div class="col-md-4 footer_block">
         <div class="title">Смотреть</div>
         <ul>
             <li><a href="{{url('movies')}}">Все фильмы</a></li>
@@ -32,6 +32,6 @@
                 "' alt='' title='LiveInternet' "+
                 "border='0' width='31' height='31'><\/a>")
         </script><!--/LiveInternet-->
-    </div>
+    </div>--}}
 
 </div>

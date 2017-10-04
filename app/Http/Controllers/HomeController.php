@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Movie;
+use App\Models\Song;
 
 class HomeController extends Controller
 {
@@ -13,7 +14,10 @@ class HomeController extends Controller
 
     public function index()
     {
-        return $this->customResponse("home");
+        $viewData = [
+            'songs' => (new Song())->getAll()->where("state_id",config('constants.STATE_WITH_AUDIO'))->get()
+        ];
+        return $this->customResponse("home",$viewData);
     }
     public function rules()
     {
