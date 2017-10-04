@@ -9,7 +9,9 @@
         <div class="row">
             <div class="col-md-12">
                 @forelse($songs as $song)
-                    <p> <audio controls type="audio/mpeg" src="{{asset($song->file_url)}}">Your browser does not support the audio element.</audio> {{$song->title}} </p>
+                    <div>
+                        <img style="height: 50px" src="{{$song->thumbnail}}">
+                        <audio controls type="audio/mpeg" src="{{asset($song->file_url)}}">Your browser does not support the audio element.</audio> {{$song->title}} </div>
                 @empty
                     No songs
                 @endforelse

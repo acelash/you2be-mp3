@@ -6,13 +6,35 @@ namespace App\Console\Commands;
 use Alaouy\Youtube\Facades\Youtube;
 use App\Models\Movie;
 use App\Models\Song;
+use App\Models\Tag;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 
 class GetNewYoutubeMovies extends Command
 {
 
     protected $signature = 'getmovies';
+
+    protected $wordsToReplace = [
+        'Official Music Video',
+        'Official Video',
+        'Official Video 2017',
+        '(Official Video 2017)',
+        '[Official Video 2017]',
+        '(Official Video)',
+        '[Official Video]',
+        '(official music video)',
+        '2017',
+        '(2017)',
+        '()',
+        '( )',
+        '[]',
+        '[ ]',
+        'Music Video',
+    ];
+
+    protected $inserted = 0;
 
     protected $description = '...';
 
@@ -20,7 +42,7 @@ class GetNewYoutubeMovies extends Command
     {
         echo "starting...\n";
 
-        $pagesToPass = config("constants.YOUTUBE_GRABBER_PAGES");
+        $goal = config("constants.YOUTUBE_GRABBER_PORTION");
         $pagesPassed = 0;
 
         $params = array(
@@ -39,7 +61,7 @@ class GetNewYoutubeMovies extends Command
         echo "page passed. \n";
 
         // Check if we have a pageToken
-        while(isset($search['info']['nextPageToken']) && $pagesPassed < $pagesToPass) {
+        while(isset($search['info']['nextPageToken']) && $this->inserted <= $goal) {
             $params['pageToken'] = $search['info']['nextPageToken'];
             $search = Youtube::searchAdvanced($params, true);
             if (array_key_exists('results', $search)) {
@@ -51,6 +73,7 @@ class GetNewYoutubeMovies extends Command
     }
     protected function processSearchResults($results){
             foreach ($results as $video) {
+                $thumbnail_path = "";
                 // ne uitam daca nu a fost parsat deja
                 $source_id = $video->id->videoId;
 
@@ -70,6 +93,7 @@ class GetNewYoutubeMovies extends Command
                 $details = Youtube::getVideoInfo($source_id);
                 if ($details) {
                     echo "processing video ".$source_id." \n";
+
                     // salvam doar din categoria muzica
                     if(property_exists($details->snippet, 'categoryId')
                         &&
@@ -93,9 +117,17 @@ class GetNewYoutubeMovies extends Command
                         continue;
                     }
 
+                    $thumbnails = $details->snippet->thumbnails;
+
+                    // salvam imagine default
+                    $remoteUrl = $thumbnails->medium->url;
+                    $imageName = $source_id . "." . config("constants.THUMBNAIL_EXTENSION");
+                    $thumbnail_path = base_path() . '/' . config("constants.THUMBNAIL_PATH") . $imageName;
+                    file_put_contents($thumbnail_path, file_get_contents($remoteUrl));
+                    $videoInfo['thumbnail'] = asset(config("constants.THUMBNAIL_PATH") . $imageName);
+
                     $videoInfo['source_title'] = $details->snippet->title;
                     $videoInfo['title'] = $this->prepareTitle($details->snippet->title);
-                    $videoInfo['source_description'] = $details->snippet->description;
 
                     // likes, dislikes , views
                     if(property_exists($details, 'statistics')){
@@ -107,11 +139,6 @@ class GetNewYoutubeMovies extends Command
                             $videoInfo['views'] = $details->statistics->viewCount;
                         }
                     }
-
-                    // tags, de facut
-                    if(property_exists($details->snippet, 'tags')){
-                        $tags = $details->snippet->tags; // array of tags
-                    }
                 }
 
                 $new = (new Song())->newInstance();
@@ -121,11 +148,21 @@ class GetNewYoutubeMovies extends Command
                 try {
                     $new->save();
 
+                    // tags
+                    if(property_exists($details->snippet, 'tags')){
+                        $tags = $details->snippet->tags; // array of tags
+                        $tagsIds = $this->prepareTagsIds($tags);
+                        $new->tags()->sync($tagsIds);
+                    }
+
+                    $this->inserted++;
+
                     DB::commit();
                     echo "video " . $source_id . " saved. \n";
 
                 } catch (\Exception $e) {
                     DB::rollback();
+                    if(File::exists($thumbnail_path)) unlink($thumbnail_path);
                     echo "video " . $source_id . " not saved:{$e->getMessage()} \n";
                 }
             }
@@ -134,8 +171,28 @@ class GetNewYoutubeMovies extends Command
     protected  function prepareTitle($source_title){
         $title = $source_title;
 
+        foreach ($this->wordsToReplace AS $word){
+            $title =  str_replace($word,"",$title);
+            $title =  str_replace(strtolower($word),"",$title);
+            $title =  str_replace(strtoupper($word),"",$title);
+        }
 
+        return trim($title);
+    }
 
-        return $title;
+    protected function prepareTagsIds($tags){
+        $ids = [];
+        foreach ($tags as $tag){
+            $existing = (new Tag())->where("name",strtolower($tag))->get()->first();
+            if($existing){
+                array_push($ids,$existing->id);
+            } else {
+                $new = (new Tag())->newInstance();
+                $new->fill(['name'=>strtolower($tag)]);
+                $new->save();
+                array_push($ids,$new->getKey());
+            }
+        }
+        return $ids;
     }
 }

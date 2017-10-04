@@ -15,11 +15,11 @@ class Song extends Elegant
         'source_id',
         'title',
         'source_title',
-        'source_description',
         'views',
         'likes',
         'dislikes',
         'file_url',
+        'thumbnail',
     ];
     /*protected $searchable = [
 
@@ -61,9 +61,9 @@ class Song extends Elegant
         return $this->hasMany('App\Models\MovieVote', "vote_id", "id");
     }
 
-    public function genres()
+    public function tags()
     {
-        return $this->belongsToMany(Genre::class, 'movie_genre', 'movie_id', 'genre_id');
+        return $this->belongsToMany(Tag::class, 'song_tag', 'song_id', 'tag_id');
     }
 
     public function countries()

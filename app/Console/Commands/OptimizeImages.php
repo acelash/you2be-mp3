@@ -4,7 +4,9 @@ namespace App\Console\Commands;
 
 
 use App\Models\Movie;
+use App\Models\Song;
 use Illuminate\Console\Command;
+use Intervention\Image\Facades\Image;
 use Spatie\ImageOptimizer\OptimizerChainFactory;
 
 //use ImageOptimizer;
@@ -19,16 +21,21 @@ class OptimizeImages extends Command
     {
         $totalBlanks = 0;
 
-        $movies = (new Movie())
-            ->where("state_id", config("constants.STATE_ACTIVE"))
+        $songs = (new Song())
+            ->where("state_id", config("constants.STATE_CHECKED"))
             ->get();
 
-        if ($movies) {
+        if ($songs) {
             try {
 
-                foreach ($movies AS $movie) {
-                    echo " " . $movie->thumbnail_medium;
-                    $pathToImage = base_path() .'/'.config("constants.THUMBNAIL_MEDIUM_PATH").basename($movie->thumbnail_medium);
+                foreach ($songs AS $song) {
+                    echo " " . $song->thumbnail;
+                    $pathToImage = base_path() .'/'.config("constants.THUMBNAIL_PATH").basename($song->thumbnail);
+
+                    // resize image
+                    $resize = Image::make($pathToImage);
+                    $resize->heighten(config("constants.THUMBNAIL_HEIGHT"));
+                    $resize->save($pathToImage);
                     //optimize image
                     $optimizerChain = OptimizerChainFactory::create();
 

@@ -60,10 +60,13 @@
 
 
                             <div class="col-md-12">
+                                <div class="col-md-1">
+                                    <img style="    height: 100px;" src="{{asset($entry->thumbnail)}}">
+                                </div>
                                 <label class="control-label col-md-1" for="title">Title <span
                                             class="required">*</span>
                                 </label>
-                                <div class="col-md-11">
+                                <div class="col-md-10">
                                     <input type="text" id="title" name="title" required="required"
                                            value="{{ $entry->title }}"
                                            class="form-control">
@@ -95,7 +98,7 @@
             </div>
         </div>
     </div>
-    <script src="{{url('')}}/public/admin/vendors/tinymce_4.6.4/js/tinymce/tinymce.min.js"></script>
+    {{--<script src="{{url('')}}/public/admin/vendors/tinymce_4.6.4/js/tinymce/tinymce.min.js"></script>
     <script>
         tinymce.init({
             selector: '#text',
@@ -111,5 +114,5 @@
             $('#countries').multiSelect();
         });
 
-    </script>
+    </script>--}}
 @endsection

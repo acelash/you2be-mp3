@@ -21,6 +21,7 @@ class GetAudioFromYoutube extends Command
 
         $songs = (new Song())->getAll(true)
             ->where("songs.state_id",config("constants.STATE_CHECKED"))
+            ->take(20)
             ->get();
         echo "songs found:".$songs->count()." \n";
         foreach ($songs as $song){

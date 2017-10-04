@@ -28,6 +28,21 @@ class Kernel extends ConsoleKernel
             ->after(function () {
                 $this->saveLogs('RemoveDrafts');
             });
+        $schedule->command('GetNewYoutubeMovies')->daily()
+            ->sendOutputTo(storage_path($this->outputFile))
+            ->after(function () {
+                $this->saveLogs('GetNewYoutubeMovies');
+            });
+        $schedule->command('GetAudioFromYoutube')->hourly()
+            ->sendOutputTo(storage_path($this->outputFile))
+            ->after(function () {
+                $this->saveLogs('GetAudioFromYoutube');
+            });
+        $schedule->command('OptimizeImages')->daily()
+            ->sendOutputTo(storage_path($this->outputFile))
+            ->after(function () {
+                $this->saveLogs('OptimizeImages');
+            });
     }
 
     protected function saveLogs($scheduleName)
