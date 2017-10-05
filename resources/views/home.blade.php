@@ -6,30 +6,38 @@
 @section('content')
     <style>{!!file_get_contents(public_path('css/homepage.css'))!!}</style>
     <div class="sticky_player_container">
-        <div id="jp_container" class="row sticky_player">
-            <div class="col-lg-2 image_container">
-
+        <div class="sticky_player_holder">
+        <div id="jp_container" class="sticky_player">
+            <div class="buttons">
+                <ul>
+                    <li><a class="jp-play" href="#" style="display: inline;">Play</a></li>
+                    <li><a class="jp-pause" href="#" style="display: none;">Pause</a></li>
+                    <li><a class="jp-stop" href="#">Stop</a></li>
+                </ul>
             </div>
-            <div class="col-lg-2"></div>
-            <p>
-                <span class="play-state">Track selected</span> :
-                <span class="track-name">The Separation</span>
-                at <span class="extra-play-info">0%</span>
-                of <span class="jp-duration">4 min 29 sec</span>, which is
-                <span class="jp-current-time">0 min 0 sec</span>
-            </p>
-            <ul>
-                <li><a class="jp-play" href="#" style="display: inline;">Play</a></li>
-                <li><a class="jp-pause" href="#" style="display: none;">Pause</a></li>
-                <li><a class="jp-stop" href="#">Stop</a></li>
-            </ul>
-            <ul>
-                <li>volume :</li>
-                <li><a class="jp-mute" href="#">Mute</a></li>
-                <li><a class="jp-unmute" href="#" style="display: none;">Unmute</a></li>
-                <li><a class="jp-volume-bar" href="#">|&lt;----------&gt;|</a></li>
-                <li><a class="jp-volume-max" href="#">Max</a></li>
-            </ul>
+            <div class="image_container"></div>
+            <div class="track_container">
+                <p>
+                    <span class="play-state">Track selected</span> :
+                    <span class="track-name">The Separation</span>
+                    at <span class="extra-play-info">0%</span>
+                    of <span class="jp-duration">4 min 29 sec</span>, which is
+                    <span class="jp-current-time">0 min 0 sec</span>
+                </p>
+            </div>
+            <div class="volume_container">
+                <ul>
+                    <li>volume :</li>
+                    <li><a class="jp-mute" href="#">Mute</a></li>
+                    <li><a class="jp-unmute" href="#" style="display: none;">Unmute</a></li>
+                    <li><a class="jp-volume-bar" href="#">|&lt;----------&gt;|</a></li>
+                    <li><a class="jp-volume-max" href="#">Max</a></li>
+                </ul>
+            </div>
+
+
+
+        </div>
         </div>
     </div>
 

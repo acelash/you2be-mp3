@@ -71,8 +71,18 @@ body {
     padding-bottom: 70px;
 }
 
+.sticky_player_holder {
+    background: rgba(255, 255, 255, 0.7);
+  /*  border: 1px solid white;*/
+    text-align: left;
+    margin: auto;
+    width:1180px;
+    padding: 5px 5px 0;
+    border-radius: 3px 3px 0 0;
+}
+
 .sticky_player {
-    background: #FF5722;
+    background: rgba(255, 87, 34, 0.6);
     text-align: left;
     margin: auto;
     width:1170px;
@@ -82,7 +92,14 @@ body {
 }
 
 .sticky_player .image_container {
-    height: 50px;
+    height: 40px;
     width:70px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 
+.buttons, .image_container,.track_container,.volume_container {
+    display: inline-block;
+    margin-left: 10px;
 }
