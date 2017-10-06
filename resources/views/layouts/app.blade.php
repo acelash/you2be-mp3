@@ -16,7 +16,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>@yield('pageTitle') | Смотреть фильм онлайн без рекламы, бесплатно</title>
+    <title>@yield('pageTitle') | Вся музыка мира, для тебя</title>
     <link rel="shortcut icon" href="{{asset('public/images/logo-min.png')}}" type="image/x-icon">
     <meta name="description" content="@yield('pageDescription')" />
     <meta name="keywords" content="смотреть,онлайн,фильмы,бесплатно,без рекламы,в хорошем качестве,полностью" />

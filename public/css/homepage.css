@@ -1,29 +1,6 @@
-.sticky_player a, .sticky_player a:link, .sticky_player a:visited,
-.sticky_player a:hover, .sticky_player a:focus, .sticky_player a:active {
-    color: #009BE3;
+body {
+    padding-bottom: 60px;
 }
-
-.sticky_player ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 1em 0;
-    width: 100%;
-    overflow: hidden;
-}
-
-.sticky_player ul span {
-    color: #A0A600;
-}
-
-.sticky_player li {
-    float: left;
-    margin-right: 1em;
-}
-
-.sticky_player p span.track-name {
-    color: #CC0090;
-}
-
 .songs {
     padding: 0;
     margin: 0;
@@ -55,34 +32,4 @@
     height: 40px;
     display: inline-block;
     margin: 0 10px 0 0;
-}
-
-.sticky_player_container {
-    position: fixed;
-    bottom: 0;
-    color: white;
-    width: 100%;
-    text-align: center;
-    z-index: 2;
-
-
-}
-body {
-    padding-bottom: 70px;
-}
-
-.sticky_player {
-    background: #FF5722;
-    text-align: left;
-    margin: auto;
-    width:1170px;
-    height: 70px;
-    padding: 5px;
-    border-radius: 3px 3px 0 0;
-}
-
-.sticky_player .image_container {
-    height: 50px;
-    width:70px;
-
 }
