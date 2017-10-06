@@ -32,6 +32,9 @@ class GetNewYoutubeMovies extends Command
         '[]',
         '[ ]',
         'Music Video',
+        'Official Lyric Video',
+        '(Official Lyric Video)',
+        'With Lyrics',
     ];
 
     protected $inserted = 0;
@@ -117,6 +120,9 @@ class GetNewYoutubeMovies extends Command
                         echo "video " . $source_id . " skipped. >8 min duration \n";
                         continue;
                     }
+
+                    // scoated durata in sec
+                    $videoInfo['duration'] = $duration[0]*60+$duration[1];
 
                     $thumbnails = $details->snippet->thumbnails;
 

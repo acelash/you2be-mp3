@@ -14,8 +14,8 @@ return [
     "STATE_CHECKED" => 5,
     "STATE_WITH_AUDIO" => 6,
     "STATE_SKIPPED" => 4,
-    "YOUTUBE_GRABBER_PAGE" => 5,
-    "YOUTUBE_GRABBER_PORTION" => 10,
+    "YOUTUBE_GRABBER_PAGE" => 50,
+    "YOUTUBE_GRABBER_PORTION" => 15,
     'YOUTUBE_GRABBER_QUERY' => "official video",
     'STORE_VIEW_AFTER' => 2000, // milisecunde
     'LIKED_MOVIES_ON_PAGE' => 12,

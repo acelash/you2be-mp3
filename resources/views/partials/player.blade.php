@@ -16,8 +16,8 @@
                 <ul>
                     <li class="time_played current-time"></li>
                     <li class="timeline">
-                        <div class="time_bar">
-                            <div class="time_bar_filled"></div>
+                        <div class="time_bar jp-seek-bar">
+                            <div class="time_bar_filled jp-play-bar"></div>
                         </div>
 
                     </li>

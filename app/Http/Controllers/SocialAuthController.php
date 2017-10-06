@@ -27,12 +27,12 @@ class SocialAuthController extends Controller
             $user = $service->createOrGetUser(Socialite::driver($provider));
 
             if (intval($user['banned_till']) > time()) {
-                return redirect("/login")->with(["success" => false, "message" => trans('translate.is_banned_till')." " . date("d.m.Y H:i", $user['banned_till'])]);
+                return redirect("/login")->with(["success" => false, "message" => trans('translate.is_banned_till') . " " . date("d.m.Y H:i", $user['banned_till'])]);
             }
 
             auth()->login($user);
 
-                return redirect()->to($this->redirectTo);
+            return redirect()->to($this->redirectTo);
         } else {
             dd($error);
         }

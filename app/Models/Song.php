@@ -21,6 +21,7 @@ class Song extends Elegant
         'file_url',
         'thumbnail',
         'thumbnail_mini',
+        'duration',
     ];
     /*protected $searchable = [
 
