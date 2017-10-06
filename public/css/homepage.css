@@ -152,14 +152,24 @@ body {
 .track.current_track  {
     background-color: #DCEDC8;
 }
-.track.current_track .pause {
+.track.current_track.playing .pause {
      display: inline-block;
  }
-.track.current_track .play {
+.track.current_track.playing .play {
     display: none;
 }
 .track.current_track  .song_poster_cover {
     display: inline-block;
 }
 
+.track.current_track:not(.playing) .play {
+    display: inline-block;
+}
+
+.song_download {
+    width: 25px;
+    margin: 3px 10px 0;
+    cursor: pointer;
+    float: right;
+}
 

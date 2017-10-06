@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-class MovieView extends Elegant
+class SongView extends Elegant
 {
-    protected $table= 'movie_views';
+    protected $table= 'song_views';
      protected $fillable = [
          'entry_id',
          "from_ip"
@@ -12,7 +12,7 @@ class MovieView extends Elegant
 
     public function offer()
     {
-        return $this->hasOne('App\Models\Movie',"id","entry_id");
+        return $this->hasOne('App\Models\Song',"id","entry_id");
     }
 
 }

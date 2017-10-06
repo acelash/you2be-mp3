@@ -8,6 +8,7 @@
 
         </div>
         <a class="song_name" onclick="showSong(this)" href="{{route('show_song',[ 'slug' => prepareSlugUrl($song->id,$song->title)])}}">{{$song->title}}</a>
+        <img class="song_download" onclick="download({{$song->id}})" src="{{asset('public/images/down-arrow.svg')}}" alt="Download">
         <span class="duration">{{gmdate("i:s", $song->duration)}}</span>
     </div>
 </li>

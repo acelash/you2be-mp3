@@ -63,12 +63,6 @@
         my_playState = $("#jp_container .play-state");
 
     $(document).ready(function () {
-        // Change the time format
-        /*$.jPlayer.timeFormat.padMin = false;
-        $.jPlayer.timeFormat.padSec = false;
-        $.jPlayer.timeFormat.sepMin = " : ";
-        $.jPlayer.timeFormat.sepSec = " ";
-*/
         // Instance jPlayer
         my_jPlayer.jPlayer({
             ready: function () {
@@ -88,10 +82,10 @@
             },
             pause: function (event) {
                 my_playState.text(opt_text_selected);
-            },
-            ended: function (event) {
-                my_playState.text(opt_text_selected);
             },*/
+            ended: function (event) {
+                $(".current_track").removeClass('playing');
+            },
             swfPath: "/public/vendors/jplayer/jplayer/jquery.jplayer.swf",
             cssSelectorAncestor: "#jp_container",
             supplied: "mp3",
@@ -103,8 +97,13 @@
 
     function playTrack(track) {
         if($(track).hasClass('current_track')){
-            $(track).removeClass('current_track');
-            my_jPlayer.jPlayer("stop");
+            if($(track).hasClass('playing')){
+                my_jPlayer.jPlayer("pause");
+                $(track).removeClass('playing');
+            } else {
+                my_jPlayer.jPlayer("play");
+                $(track).addClass('playing');
+            }
             return false;
         }
 
@@ -117,8 +116,8 @@
 
         my_jPlayer.jPlayer("play");
 
-        $(".current_track").removeClass('current_track');
-        $(track).addClass('current_track');
+        $(".current_track").removeClass('current_track playing');
+        $(track).addClass('current_track playing');
 
         var image = $(track).find('.song_poster')[0];
         $(".image_container").css('background-image',$(image).css('background-image'));
@@ -152,6 +151,9 @@
     }
 
     function showSong(track) {
-        debugger
+        window.location.href = track.href;
+    }
+    function download(track_id) {
+
     }
 </script>

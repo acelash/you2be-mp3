@@ -11,6 +11,8 @@ use App\Models\MovieView;
 use App\Models\MovieVote;
 use App\Models\MovieWatchLater;
 use App\Models\Song;
+use App\Models\SongComment;
+use App\Models\SongView;
 use Illuminate\Support\Facades\DB;
 
 class SongsController extends Controller
@@ -49,7 +51,7 @@ class SongsController extends Controller
             'seen' => $seen,
             'watch_later' => $watch_later,*/
             'entity' => $entity,
-            'comments' => (new MovieComment())->getAll()->where('movie_id', $entity->id)->get(),
+            'comments' => (new SongComment())->getAll()->where('song_id', $entity->id)->get(),
             /*'now_watching' => (new Movie())->getNowWatching($entity)->get(),
             'similar_movies' => (new Movie())->getSimilar($entity)->get()->take(5),*/
         ];
@@ -184,7 +186,7 @@ class SongsController extends Controller
 
         $ip = $this->request->ip();
 
-        $viewExists = (new MovieView())
+        $viewExists = (new SongView())
             ->where("entry_id", $id)
             ->where("from_ip", $ip)
             ->get()
@@ -194,7 +196,7 @@ class SongsController extends Controller
             return ['status' => 'view already Exists'];
         }
 
-        $new = (new MovieView())->newInstance();
+        $new = (new SongView())->newInstance();
         $new->fill([
             "entry_id" => $id,
             "from_ip" => $ip,

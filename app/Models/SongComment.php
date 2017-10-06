@@ -2,16 +2,14 @@
 
 namespace App\Models;
 
-class MovieComment extends Elegant
+class SongComment extends Elegant
 {
-    protected $table = "movie_comment";
+    protected $table = "song_comment";
     protected $fillable = [
         'state_id',
         'user_id',
-        'movie_id',
-        'title',
+        'song_id',
         'text',
-        'type',
     ];
 
     protected $dates = ['created_at', 'updated_at'];
@@ -26,11 +24,11 @@ class MovieComment extends Elegant
         $query = parent::getAll()
             ->addSelect("states.name AS state")
             ->addSelect("users.name AS user_name")
-            ->addSelect("movies.title AS movie_title")
+            ->addSelect("songs.title AS song_title")
             ->addSelect("users.avatar AS user_avatar")
-            ->join("states", "states.id", "=", "movie_comment.state_id")
-            ->join("movies", "movies.id", "=", "movie_comment.movie_id")
-            ->join("users", "users.id", "=", "movie_comment.user_id");
+            ->join("states", "states.id", "=", "song_comment.state_id")
+            ->join("songs", "songs.id", "=", "song_comment.song_id")
+            ->join("users", "users.id", "=", "song_comment.user_id");
 
 
         return $query;
@@ -40,7 +38,7 @@ class MovieComment extends Elegant
     {
         $query = parent::getById($id)
             ->addSelect("states.name AS state")
-            ->join("states", "states.id", "=", "movie_comment.state_id");
+            ->join("states", "states.id", "=", "song_comment.state_id");
 
         return $query;
     }

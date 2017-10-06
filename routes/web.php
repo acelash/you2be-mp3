@@ -18,10 +18,10 @@ Route::get('/rules', 'HomeController@rules')->name('rules');
 Route::get('/redirect/{provider}', 'SocialAuthController@redirect');
 Route::get('/callback/{provider}', 'SocialAuthController@callback');
 
+Route::get('/song/{slug}', 'SongsController@show')->name('show_song');
+Route::get('/song/store_view/{id}', 'SongsController@storeView');
 Route::get('/movies', 'MoviesController@showCatalog')->name('catalog');
 Route::get('/movies/{slug}/{id}', 'MoviesController@showCatalog')->name('catalog_filtered');
-Route::get('/song/{slug}', 'SongsController@show')->name('show_song');
-Route::get('/movie/store_view/{id}', 'MoviesController@storeView');
 
 Route::group(['middleware' => ['auth']], function () {
 
