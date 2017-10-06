@@ -1,5 +1,6 @@
 <style>{!!file_get_contents(public_path('css/player.css'))!!}</style>
-<div class="sticky_player_container">
+<div id="jquery_jplayer" style="width: 0; height: 0;"></div>
+<div style="" class="sticky_player_container">
         <div id="jp_container" class="sticky_player">
             <div class="buttons">
                 <ul>
@@ -21,7 +22,7 @@
                         </div>
 
                     </li>
-                    <li class="time_total duration"></li>
+                    <li class="time_total player_duration"></li>
                 </ul>
             </div>
             <div class="volume_container">
@@ -56,37 +57,22 @@
         </div>
 </div>
 <script>
+    var timeBarWidth = parseInt($('.time_bar').css('width').replace('px','')),
+        my_jPlayer = $("#jquery_jplayer"),
+        my_trackName = $("#jp_container .track-name"),
+        my_playState = $("#jp_container .play-state");
+
     $(document).ready(function () {
-        var timeBarWidth = parseInt($('.time_bar').css('width').replace('px',''));
-
-        // Local copy of jQuery selectors, for performance.
-        var my_jPlayer = $("#jquery_jplayer"),
-            my_trackName = $("#jp_container .track-name"),
-            my_playState = $("#jp_container .play-state"),
-            my_extraPlayInfo = $("#jp_container .extra-play-info");
-
-        // Some options
-        var opt_play_first = false, // If true, will attempt to auto-play the default track on page loads. No effect on mobile devices, like iOS.
-            opt_auto_play = true, // If true, when a track is selected, it will auto-play.
-            opt_text_playing = "Now playing", // Text when playing
-            opt_text_selected = "Track selected"; // Text when not playing
-
-        // A flag to capture the first track
-        var first_track = true;
-
         // Change the time format
-        $.jPlayer.timeFormat.padMin = false;
+        /*$.jPlayer.timeFormat.padMin = false;
         $.jPlayer.timeFormat.padSec = false;
         $.jPlayer.timeFormat.sepMin = " : ";
         $.jPlayer.timeFormat.sepSec = " ";
-
-        // Initialize the play state text
-        my_playState.text(opt_text_selected);
-
+*/
         // Instance jPlayer
         my_jPlayer.jPlayer({
             ready: function () {
-                $(".track-default").click();
+                //$(".track-default").click();
             },
             timeupdate: function (event) {
                 var percentage = event.jPlayer.status.currentPercentAbsolute,
@@ -95,9 +81,9 @@
                     durationTime = secondsToTime(parseInt(event.jPlayer.status.duration));
                 $('.time_bar_filled').css('width',filled+"px");
                 $('.current-time').html(pad(currentTime.m) +":"+pad(currentTime.s));
-                $('.duration').html(pad(durationTime.m) +":"+pad(durationTime.s));
+                $('.player_duration').html(pad(durationTime.m) +":"+pad(durationTime.s));
             },
-            play: function (event) {
+           /* play: function (event) {
                 my_playState.text(opt_text_playing);
             },
             pause: function (event) {
@@ -105,7 +91,7 @@
             },
             ended: function (event) {
                 my_playState.text(opt_text_selected);
-            },
+            },*/
             swfPath: "/public/vendors/jplayer/jplayer/jquery.jplayer.swf",
             cssSelectorAncestor: "#jp_container",
             supplied: "mp3",
@@ -113,24 +99,33 @@
             volume:1,
             verticalVolume:true
         });
-
-        // Create click handlers for the different tracks
-        $(".songs .track").click(function (e) {
-            my_trackName.text($(this).text());
-            my_jPlayer.jPlayer("setMedia", {
-                mp3: $(this).attr("href")
-            });
-            if ((opt_play_first && first_track) || (opt_auto_play && !first_track)) {
-                my_jPlayer.jPlayer("play");
-            }
-            first_track = false;
-            $(this).blur();
-
-            var image = $(this).find('img')[0];
-            $(".image_container").css('background-image','url("'+image.src+'")');
-            return false;
-        });
     });
+
+    function playTrack(track) {
+        if($(track).hasClass('current_track')){
+            $(track).removeClass('current_track');
+            my_jPlayer.jPlayer("stop");
+            return false;
+        }
+
+        var name = $(track).find('.song_name')[0];
+        my_trackName.text($(name).text());
+
+        my_jPlayer.jPlayer("setMedia", {
+            mp3: $(track).data("source")
+        });
+
+        my_jPlayer.jPlayer("play");
+
+        $(".current_track").removeClass('current_track');
+        $(track).addClass('current_track');
+
+        var image = $(track).find('.song_poster')[0];
+        $(".image_container").css('background-image',$(image).css('background-image'));
+
+        $('.sticky_player_container').addClass('active');
+        return false;
+    }
 
     function secondsToTime(secs)
     {
@@ -154,5 +149,9 @@
         var s = num+"";
         while (s.length < 2) s = "0" + s;
         return s;
+    }
+
+    function showSong(track) {
+        debugger
     }
 </script>

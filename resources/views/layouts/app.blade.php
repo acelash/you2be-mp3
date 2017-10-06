@@ -28,9 +28,6 @@
     <style>{!!file_get_contents(public_path('css/bootstrap.min.css'))!!}</style>
     <style>{!!file_get_contents(public_path('css/palette.css'))!!}</style>
     <style>{!!file_get_contents(public_path('css/general.css'))!!}</style>
-    {{--<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">--}}
-    {{--<link href="{{ asset('public/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('public/css/palette.css') }}" rel="stylesheet">--}}
 
     <script>
                 @if(isset($locales))  var locales = <?=$locales?>;
@@ -67,27 +64,11 @@
                 {{config('app.name')}}</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li class="dropdown multi_ul_dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false">@lang('words.all_movies') <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        @foreach($genres as $genre)
-                            <li>
-                                <a href="{{route('catalog_filtered',['slug'=>'genre','id'=>$genre->id])}}">{{$genre->name}}</a>
-                            </li>
-                        @endforeach
-                        <li><a></a></li>
-                        <li role="separator" class="divider"></li>
-                        <li role="separator" class="divider"></li>
-                        <li role="separator" class="divider"></li>
-                        <li class="last_in_row"><a href="{{route('catalog_filtered',['slug'=>'year','id'=>date("Y",time())])}}">{{date("Y",time())}}</a></li>
-                        <li class="last_in_row"><a href="{{route('catalog_filtered',['slug'=>'year','id'=>date("Y",time())-1])}}">{{date("Y",time())-1}}</a></li>
-                        <li class="last_in_row"><a href="#{{route('catalog_filtered',['slug'=>'year','id'=>date("Y",time())-2])}}">{{date("Y",time())-2}}</a></li>
-                    </ul>
-                </li>
-                <li><a href="{{url('movies')}}">@lang('words.new')</a></li>
-                <li><a href="{{url('movies?sort=popular')}}">@lang('words.popular')</a></li>
+            <ul class="nav navbar-nav" style="padding: 8px;">
+                <li title="{{$total_songs}} songs" style="width: 500px"><input type="text" class="form-control search_input"
+                                                placeholder="Search - enter the name of the song or artist"></li>
+                {{--<li><a href="{{url('movies')}}">@lang('words.new')</a></li>
+                <li><a href="{{url('movies?sort=popular')}}">@lang('words.popular')</a></li>--}}
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 @if(auth()->guest())

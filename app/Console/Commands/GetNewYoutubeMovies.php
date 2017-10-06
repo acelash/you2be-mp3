@@ -35,6 +35,9 @@ class GetNewYoutubeMovies extends Command
         'Official Lyric Video',
         '(Official Lyric Video)',
         'With Lyrics',
+        '(премьера клипа, 2017)',
+        '(Новые Клипы 2017)',
+        '(Новые Клипы 2017)',
     ];
 
     protected $inserted = 0;

@@ -10,15 +10,16 @@ use App\Models\MovieSeen;
 use App\Models\MovieView;
 use App\Models\MovieVote;
 use App\Models\MovieWatchLater;
+use App\Models\Song;
 use Illuminate\Support\Facades\DB;
 
-class MoviesController extends Controller
+class SongsController extends Controller
 {
-    protected $templateDirectory = 'movie.';
+    protected $templateDirectory = 'song.';
 
     public function boot()
     {
-        $this->setModel(new Movie());
+        $this->setModel(new Song());
     }
 
     public function show($slug)
@@ -26,31 +27,31 @@ class MoviesController extends Controller
         $id = getIdFromSlug($slug);
         if (!$id) abort(404);
 
-        $entity = (new Movie())->getById($id)->get()->first();
+        $entity = $this->getModel()->getById($id)->get()->first();
         if (!$entity) abort(404);
 
-        $liked = false;
+        /*$liked = false;
         $disliked = false;
         $seen = false;
-        $watch_later = false;
+        $watch_later = false;*/
 
         // daca e logat, vedem ce a mai facut useru ista cu filmu
-        if (auth()->check()) {
+      /*  if (auth()->check()) {
             $liked = (new MovieVote())->hasLiked(auth()->id(), $entity->id);
             $disliked = (new MovieVote())->hasDisliked(auth()->id(), $entity->id);
             $seen = (new MovieSeen())->hasSeen(auth()->id(), $entity->id);
             $watch_later = (new MovieWatchLater())->hasWatchLater(auth()->id(), $entity->id);
-        }
+        }*/
 
         $viewData = [
-            'liked' => $liked,
+          /*  'liked' => $liked,
             'disliked' => $disliked,
             'seen' => $seen,
-            'watch_later' => $watch_later,
+            'watch_later' => $watch_later,*/
             'entity' => $entity,
             'comments' => (new MovieComment())->getAll()->where('movie_id', $entity->id)->get(),
-            'now_watching' => (new Movie())->getNowWatching($entity)->get(),
-            'similar_movies' => (new Movie())->getSimilar($entity)->get()->take(5),
+            /*'now_watching' => (new Movie())->getNowWatching($entity)->get(),
+            'similar_movies' => (new Movie())->getSimilar($entity)->get()->take(5),*/
         ];
         return $this->customResponse("{$this->templateDirectory}.show", $viewData);
     }

@@ -10,8 +10,8 @@ namespace App\Extensions;
 
 use App\Model\Candidate;
 use App\Model\Settings;
-use App\Models\Genre;
 use App\Models\RoleUser;
+use App\Models\Song;
 
 trait CustomResponse
 {
@@ -45,10 +45,9 @@ trait CustomResponse
                 ->where("role_id", config('constants.ROLE_ADMIN'))
                 ->count();
         }
-
-        $viewData['genres'] = (new Genre())
-            ->orderBy("name", "ASC")
-            ->get();
+        $viewData['total_songs'] = (new Song())->getAll()
+            ->where("state_id",config('constants.STATE_WITH_AUDIO'))
+            ->count();
 
         $viewData["locales"] = json_encode($locales);
 
