@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" serverName="you2be mp3">
+  <component name="PublishConfigData" serverName="you2be mp3" uploadOnCheckin="aaab59e2-a8b5-4320-91a9-f61306997f29">
     <serverData>
       <paths name="actelocale">
         <serverdata>
@@ -227,5 +227,6 @@
         </serverdata>
       </paths>
     </serverData>
+    <option name="myUploadOnCheckinName" value="you2be mp3" />
   </component>
 </project>
