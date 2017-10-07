@@ -7,56 +7,6 @@
     margin-top: 0;
 }
 
-ul.fullstory_info {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    font-size: 19px;
-}
-
-.fullstory_info_label {
-    font-weight: bold;
-}
-
-.fullstory_ratings {
-    text-align: right;
-}
-
-.rating_count {
-    font-size: 18px;
-    font-weight: 500;
-    width: 100%;
-}
-
-.rating_count .likes, .unlikes {
-    text-align: center;
-    width: 49%;
-    display: inline-block;
-}
-
-.rating_bar_container {
-    width: 100%;
-    text-align: center;
-    margin: 0 auto;
-}
-
-.rating_bar {
-    height: 10px;
-    background-color: #c40000;
-    border-radius: 4px;
-    width: 300px;
-    margin: auto;
-    text-align: left;
-    display: inline-block;
-}
-
-.rating_bar_filled {
-    height: 10px;
-    background-color: #689F38;
-    border-radius: 4px 0 0 4px;
-    width: 205px;
-}
-
 .embeded_video_container {
     text-align: center;
     width: 100%;
@@ -79,49 +29,9 @@ ul.fullstory_info {
         height: 240px;
     }
 }
-
-
 .fullstory_header_line {
     width: 97%;
     border-top: 1px solid #e2e2e2;
-}
-
-.fullstory_text {
-    text-indent: 30px;
-    padding-top: 15px;
-}
-
-.original_title {
-    margin-top: 0;
-}
-.procent_container {
-    color: #689F38;
-    font-weight: bold;
-    font-size: 24px;
-    display: inline-block;
-    position: relative;
-    top: 3px;
-    margin-left: 5px;
-}
-
-.similar_movie {
-    width:20%;
-}
-@media screen and (max-width: 1200px) {
-    .similar_movie {
-        width:25%;
-    }
-    .similar_movies > div:last-child {
-        display: none;
-    }
-}
-@media screen and (max-width: 700px) {
-    .similar_movie {
-        width:50%;
-    }
-    .similar_movies > div:last-child {
-        display: none;
-    }
 }
 
 .share_container {
@@ -242,13 +152,7 @@ ul.fullstory_info {
     background-color: #FF5722;
 }
 
-.rating_count div span {
-    font-weight: bold;
-}
 
-.movie_actions a, .movie_actions a:hover {
-    text-decoration: none;
-}
 
 .fullstory_desc {
     margin: 20px 0;
@@ -259,3 +163,4 @@ ul.fullstory_info {
     line-height: 22px;
 
 }
+

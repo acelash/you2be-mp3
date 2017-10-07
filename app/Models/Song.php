@@ -21,6 +21,7 @@ class Song extends Elegant
         'file_url',
         'thumbnail',
         'thumbnail_mini',
+        'duration',
     ];
     /*protected $searchable = [
 
@@ -54,7 +55,7 @@ class Song extends Elegant
 
     public function comments()
     {
-        return $this->hasMany('App\Models\MovieComment', "movie_id", "id");
+        return $this->hasMany('App\Models\SongComment', "song_id", "id");
     }
 
     public function votes()

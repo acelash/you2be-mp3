@@ -1,27 +1,8 @@
-.sticky_player a, .sticky_player a:link, .sticky_player a:visited,
-.sticky_player a:hover, .sticky_player a:focus, .sticky_player a:active {
-    color: #009BE3;
+body {
+    padding-bottom: 60px;
 }
-
-.sticky_player ul {
-    list-style-type: none;
+.track_list {
     padding: 0;
-    margin: 1em 0;
-    width: 100%;
-    overflow: hidden;
-}
-
-.sticky_player ul span {
-    color: #A0A600;
-}
-
-.sticky_player li {
-    float: left;
-    margin-right: 1em;
-}
-
-.sticky_player p span.track-name {
-    color: #CC0090;
 }
 
 .songs {
@@ -36,70 +17,159 @@
     width:100%;
     transition: .3s;
     cursor: pointer;
-    height: 50px;
     padding: 5px;
 }
-.songs li:hover {
+.track:hover {
     background-color: #DCEDC8;
 }
 
-.songs li a,.songs li a:hover {
-    width: 90%;
+.songs li  .track{
+    width: 100%;
     display: inline-block;
     height: inherit;
     text-decoration: none;
     color: #689F38;
+    line-height: 30px;
 }
 
-.songs li a img {
-    height: 40px;
-    display: inline-block;
-    margin: 0 10px 0 0;
+#tabs-container {
+    position: relative;
+    top: -31px;
 }
 
-.sticky_player_container {
-    position: fixed;
-    bottom: 0;
-    color: white;
-    width: 100%;
+.tabs-menu {
+    height: 30px;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    clear: both;
+    position: relative;
+    top: 1px;
+    left: -1px;
+}
+
+.tabs-menu li {
+    height: 30px;
+    line-height: 30px;
+    float: left;
+    min-width: 100px;
     text-align: center;
-    z-index: 2;
-
-
-}
-body {
-    padding-bottom: 70px;
-}
-
-.sticky_player_holder {
-    background: rgba(255, 255, 255, 0.7);
-  /*  border: 1px solid white;*/
-    text-align: left;
-    margin: auto;
-    width:1180px;
-    padding: 5px 5px 0;
-    border-radius: 3px 3px 0 0;
+    margin-right: 10px;
+    background-color: #ccc;
+    border-top: 1px solid #d4d4d1;
+    border-right: 1px solid #d4d4d1;
+    border-left: 1px solid #d4d4d1;
 }
 
-.sticky_player {
-    background: rgba(255, 87, 34, 0.6);
-    text-align: left;
-    margin: auto;
-    width:1170px;
-    height: 70px;
-    padding: 5px;
-    border-radius: 3px 3px 0 0;
+.tabs-menu li.current {
+    position: relative;
+    background-color: #fff;
+    border-bottom: 1px solid #fff;
+    z-index: 5;
 }
 
-.sticky_player .image_container {
-    height: 40px;
-    width:70px;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+.tabs-menu li a {
+    padding: 10px;
+    text-transform: uppercase;
+    color: #fff;
+    text-decoration: none;
 }
 
-.buttons, .image_container,.track_container,.volume_container {
+.tabs-menu .current a {
+    color: #2e7da3;
+}
+
+.tab {
+    width: 100%;
+}
+
+.tab-content {
+    display: none;
+}
+
+#tab-1 {
+    display: block;
+}
+
+.tags {
+    text-align: center;
+}
+.tag {
+    font-size: 21px;
+    margin: 5px 7px;
+}
+
+.song_poster {
     display: inline-block;
-    margin-left: 10px;
+    height: 30px;
+    width: 45px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    float: left;
+    margin-right: 10px;
+    text-align: center;
+    position: relative;
 }
+
+.duration {
+    float: right;
+    margin-right: 10px;
+}
+
+.song_name {
+    display: inline-block;
+}
+
+.song_poster img {
+    width: 25px;
+    display: none;
+    transition: .2s;
+    position: absolute;
+    top: 3px;
+    left: 10px;
+    z-index: 2;
+}
+.song_poster_cover {
+    position: absolute;
+    display: none;
+    background: rgba(150, 167, 129, .8);
+    transition: .2s;
+    width: 100%;
+    height: 100%;
+    top:0;
+    left: 0;
+    z-index: 1;
+}
+.track:not(.current_track):hover > .song_poster img.play, .track:not(.current_track):hover > .song_poster .song_poster_cover  {
+    display: inline-block;
+}
+
+.pause {
+    display: none;
+}
+
+.track.current_track  {
+    background-color: #DCEDC8;
+}
+.track.current_track.playing .pause {
+     display: inline-block;
+ }
+.track.current_track.playing .play {
+    display: none;
+}
+.track.current_track  .song_poster_cover {
+    display: inline-block;
+}
+
+.track.current_track:not(.playing) .play {
+    display: inline-block;
+}
+
+.song_download {
+    width: 25px;
+    margin: 3px 10px 0;
+    cursor: pointer;
+    float: right;
+}
+
