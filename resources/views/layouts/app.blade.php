@@ -50,7 +50,7 @@
 <body>
 <!-- Fixed navbar -->
 <nav class="navbar dark-primary-color">
-    <div class="container" style="    padding-right: 0;">
+    <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
                     aria-expanded="false" aria-controls="navbar">
@@ -63,19 +63,20 @@
                 <img alt="logo" src="{{asset('public/images/logo-min.png')}}">
                 {{config('app.name')}}</a>
         </div>
-        <div id="navbar" class="navbar-collapse collapse" style="    padding-right: 0;">
-            <ul class="nav navbar-nav" style="padding: 8px 0 0 8px;">
-                <li title="{{$total_songs}} songs" style="width: 965px;position: relative;">
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav" style="padding: 8px">
+                <li class="search_container" title="{{$total_songs}} songs">
                     <input type="text" class="form-control search_input"
                                                 placeholder="Search - enter the name of the song or artist">
                 <button class="search_btn">
                     <img src="{{asset('public/images/search.svg')}}">
                     Search</button>
                 </li>
-                {{--<li><a href="{{url('movies')}}">@lang('words.new')</a></li>
-                <li><a href="{{url('movies?sort=popular')}}">@lang('words.popular')</a></li>--}}
+
             </ul>
             <ul class="nav navbar-nav navbar-right">
+                <li><a href="{{url('new')}}">@lang('words.new')</a></li>
+                <li><a href="{{url('popular')}}">@lang('words.popular')</a></li>
                 @if(auth()->check())
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
@@ -85,7 +86,6 @@
                                 <li><a href="{{route('admin_panel')}}">@lang('translate.admin')</a></li>
                             @endif
                             <li role="separator" class="divider"></li>
-                            {{--<li class="dropdown-header">Nav header</li>--}}
                             <li><a href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

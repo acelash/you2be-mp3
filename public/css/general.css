@@ -37,7 +37,7 @@ a.accent-color:hover {
     background-color: inherit;
 }
 
-.nav > li:hover {
+.nav > li:not(.search_container):hover {
     background-color: #FF5722;
 }
 
@@ -53,28 +53,6 @@ a.accent-color:hover {
     margin-top: 0;
 }
 
-.poster {
-    height: 250px;
-    margin: auto;
-}
-
-.movie_info {
-    height: 70px;
-    overflow-y: hidden;
-    text-align: center;
-}
-
-.movie_info a {
-    font-size: 16px;
-    font-weight: bold;
-    display: block;
-
-}
-
-.movie_info small a {
-    font-size: 13px;
-    font-weight: normal;
-}
 
 .footer {
     margin-top: 20px;
@@ -98,60 +76,6 @@ a.accent-color:hover {
 
 .footer_block ul li a {
     color: #689F38;
-}
-
-.movie_list {
-    margin-bottom: 10px;
-    padding: 0;
-}
-
-.poster_container {
-    padding: 0;
-    text-align: left;
-}
-
-.movie_info_list {
-    text-align: left;
-    font-size: 14px;
-    line-height: 20px;
-}
-
-.movie_info_list a{
-    display: inline-block;
-}
-
-.movie_info_list ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-}
-
-.movie_info_list .info_label {
-    font-weight: bold;
-}
-
-.movie_info_list .movie_title {
-
-    font-weight: bold;
-}
-
-.movie_info_list .movie_text {
-    text-indent: 30px;
-    padding-top: 15px;
-}
-
-.movie_info_list .added, .movie_info_list .rating {
-    float: right;
-    font-weight: bold;
-}
-.movie_info_list .rating span {
-    color: #689F38;
-}
-
-@media screen and (max-width: 700px) {
-    .movie_info_list ul {
-        margin: 10px 0 0;
-    }
 }
 
 .watch_btn, .watch_btn:hover {
@@ -202,27 +126,12 @@ a.accent-color:hover {
     top: -7px;
     vertical-align: text-top;
 }
-.multi_ul_dropdown .dropdown-menu>li>a {
-    transition: .3s;
-}
-.multi_ul_dropdown .dropdown-menu>li>a:hover {
-    color: #ff5835;
-    background: #DCEDC8;
-}
 
-.multi_ul_dropdown .dropdown-menu>li.last_in_row {
-    margin-bottom: 10px;
-}
-
-.counter_li {
-    margin: 10px;
-    display: block;
-}
 
 .search_btn {
     border: none;
     background-color: #ff5835;
-    border-radius: 0 3px 3px 60px;2
+    border-radius: 0 3px 3px 60px;
     position: absolute;
     padding-left: 30px;
     right: 0;
@@ -233,6 +142,13 @@ a.accent-color:hover {
 
 .search_btn img {
     width: 20px;
-    /*margin-right: 6px;*/
-    po
+}
+.search_container {
+    width: 740px;
+    position: relative;
+}
+
+li.search_container:hover {
+    background-color: transparent;
+    background: transparent;
 }
