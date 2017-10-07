@@ -20,7 +20,7 @@ body {
     padding: 5px;
 }
 .track:hover {
-    background-color: #DCEDC8;
+    background-color: #e3f4cf;
 }
 
 .songs li  .track{
@@ -166,10 +166,24 @@ body {
     display: inline-block;
 }
 
-.song_download {
+.song_download,.song_video {
     width: 25px;
-    margin: 3px 10px 0;
+    margin: -1px 10px 0;
     cursor: pointer;
     float: right;
+    transition: 200ms;
 }
 
+.song_video img , .song_download img{
+    width: 25px;
+}
+
+img.on {
+    display: none;
+}
+.song_video:hover > .on,.song_download:hover > .on {
+    display: inline-block;
+}
+.song_video:hover > .off, .song_download:hover > .off {
+    display: none;
+}

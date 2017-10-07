@@ -218,3 +218,21 @@ a.accent-color:hover {
     margin: 10px;
     display: block;
 }
+
+.search_btn {
+    border: none;
+    background-color: #ff5835;
+    border-radius: 0 3px 3px 60px;2
+    position: absolute;
+    padding-left: 30px;
+    right: 0;
+    top: 0;
+    width: 140px;
+    height: 100%;
+}
+
+.search_btn img {
+    width: 20px;
+    /*margin-right: 6px;*/
+    po
+}

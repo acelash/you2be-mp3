@@ -26,7 +26,7 @@ class HomeController extends Controller
                 ->orderBy("views","DESC")
                 ->take(50)
                 ->get(),
-            'hot_tags' => (new Tag())->getHotTags()->take(50)->get()
+            'hot_tags' => (new Tag())->getHotTags()->take(80)->get()
 
         ];
         return $this->customResponse("home",$viewData);
