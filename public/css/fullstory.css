@@ -13,8 +13,8 @@
 }
 
 .embeded_video_container iframe {
-    width: 854px;
-    height: 480px;
+    width: 640px;
+    height: 360px;
 }
 
 @media screen and (max-width: 1200px) {
@@ -37,10 +37,12 @@
 .share_container {
     padding: 10px;
     text-align: center;
+    font-size: 18px;
+    line-height: 30px;
 }
-.share_container span {
+.share_container a {
     display: inline-block;
-    margin-right: 15px;
+    margin:5px 10px 0 0;
     font-size: 16px;
 }
 .share_container img {
@@ -48,74 +50,6 @@
 }
 .share_container a, .share_container a:hover {
     text-decoration: none;
-}
-
-.author a {
-    font-weight: bold;
-    color: #FF5722;
-}
-
-.type {
-    color: white;
-    font-size: 12px;
-    padding: 2px 4px;
-    border-radius: 2px;
-    position: relative;
-    top: -1px;
-}
-
-.type.positive {
-    background-color: #689F38;
-}
-
-.type.negative {
-    background-color: #e91e1e;
-}
-
-.comment_single {
-    margin-bottom: 15px;
-    padding: 10px;
-}
-
-.comment_author_avatar {
-    width:100px;
-    text-align: center;
-    display: inline-block;
-    float: left;
-}
-.comment_author_avatar img {
-    margin: auto;
-    width: 90%;
-}
-.comment_single .meta,.comment_single .text, .comment_single .title{
-    margin-left: 105px;
-}
-.comment_single .meta span{
-    margin-right: 7px;
-}
-
-.comment_single .title {
-    font-weight: bold;
-    margin-top: 5px;
-}
-
-.comment_single .text {
-    margin-top: 5px;
-}
-
-.add_comment {
-    margin-top: 20px;
-}
-.add_comment h4 {
-    margin: 0 0 5px;
-    padding: 0;
-    font-weight: normal;
-}
-.add_comment hr {
-    margin-bottom: 10px;
-}
-.add_comment .help-block {
-    color: #e91e1e;
 }
 
 .alert-info a {
@@ -136,31 +70,35 @@
     background-color: rgba(104, 159, 56, 0.75);
 }
 
-.btn.like {
-    border-radius: 3px 0 0 3px;
+.btn img {
+    width: 25px;
 }
 
-.btn.dislike {
-    border-radius: 0 3px 3px 0;
-}
-
-.watch_later, .seen {
-    margin-left: 10px;
-}
-
-.btn.active {
+.btn.current_track.playing {
     background-color: #FF5722;
 }
 
-
-
-.fullstory_desc {
-    margin: 20px 0;
-    /* text-indent: 30px; */
-    font-size: 17px;
-    font-style: italic;
-    color: #777;
-    line-height: 22px;
-
+.btn {
+   margin: 10px 10px 20px 0;
 }
 
+img.pause {
+    display: none;
+}
+
+.current_track.playing img.play {
+    display: none;
+}
+.current_track.playing img.pause {
+    display: inline-block;
+}
+
+
+.song_tags a, .song_tags a:hover {
+    margin-right: 7px;
+    margin-bottom: 5px;
+    padding: 3px 5px;
+    background: #DCEDC8;
+    display: inline-block;
+    border-radius: 12px;
+}

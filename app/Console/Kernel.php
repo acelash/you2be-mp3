@@ -28,7 +28,7 @@ class Kernel extends ConsoleKernel
             ->after(function () {
                 $this->saveLogs('RemoveDrafts');
             });
-        $schedule->command('GetNewYoutubeMovies')->daily()
+        $schedule->command('GetNewYoutubeMovies')->hourly()
             ->sendOutputTo(storage_path($this->outputFile))
             ->after(function () {
                 $this->saveLogs('GetNewYoutubeMovies');

@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-class SongView extends Elegant
+class SongDownload extends Elegant
 {
-    protected $table= 'song_views';
+    protected $table= 'song_download';
      protected $fillable = [
          'entry_id',
          "from_ip"

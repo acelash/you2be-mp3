@@ -13,34 +13,26 @@
 
 Auth::routes();
 
-Route::get('/', 'HomeController@index')->name('home');
-Route::get('/rules', 'HomeController@rules')->name('rules');
 Route::get('/redirect/{provider}', 'SocialAuthController@redirect');
 Route::get('/callback/{provider}', 'SocialAuthController@callback');
 
-Route::get('/song/{slug}', 'SongsController@show')->name('show_song');
-Route::get('/song/store_view/{id}', 'SongsController@storeView');
-Route::get('/movies', 'MoviesController@showCatalog')->name('catalog');
-Route::get('/movies/{slug}/{id}', 'MoviesController@showCatalog')->name('catalog_filtered');
+Route::get('/', 'HomeController@index')->name('home');
 
-Route::group(['middleware' => ['auth']], function () {
+Route::group(
+    [
+        'prefix' => 'en',
+    ],
+    function () {
+        Route::get('/', 'HomeController@index')->name('home_en');
+        Route::get('/rules', 'HomeController@rules')->name('rules_en');
+        Route::get('/song/{slug}', 'SongsController@show')->name('show_song_en');
+        Route::get('/tag/{slug}', 'SongsController@tag')->name('show_tag_en');
+    });
 
-    Route::get('/profile', 'UserController@profile')->name('profile');
-    Route::get('/seen', 'UserController@seen')->name('seen');
-    Route::get('/watch_later', 'UserController@watchLater')->name('watch_later');
 
-    Route::get('/profile_edit', 'UserController@showEditForm')->name('profile_form');
-    Route::post('/update_user', 'UserController@updateProfile')->name('update_user');
 
-    Route::get('/change_password', 'UserController@showPasswordForm')->name('password_form');
-    Route::post('/update_password', 'UserController@updatePassword')->name('update_password');
 
-    Route::post('/comment', 'CommentsController@store')->name('store_comment');
-    Route::get('/movie/toggle_likes/{id}/{type}', 'MoviesController@toggleLikes')->name('toggle_likes');
-    Route::get('/movie/toggle_seen/{id}', 'MoviesController@toggleSeen')->name('toggle_seen');
-    Route::get('/movie/toggle_watch_later/{id}', 'MoviesController@toggleWatchLater')->name('toggle_watch_later');
 
-});
 
 Route::group(
     [

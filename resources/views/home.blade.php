@@ -19,15 +19,7 @@
                 {{$popular->links()}}
 
             </div>
-            <div class="col-lg-4 tags">
-                <h2>Hot Tags</h2>
-                @forelse($hot_tags as $tag)
-                    <a class="tag" href="">{{$tag->name}}</a>
-                @empty
-                    <li>No tags</li>
-                @endforelse
-
-            </div>
+            @include('partials.tags',['tags'=> $hot_tags])
         </div>
         @include("partials.footer")
     </div>
@@ -36,16 +28,4 @@
 
 @section('footer_scripts')
     @include('partials.player')
-    <script>
-        $(document).ready(function () {
-            $(".tabs-menu a").click(function (event) {
-                event.preventDefault();
-                $(this).parent().addClass("current");
-                $(this).parent().siblings().removeClass("current");
-                var tab = $(this).attr("href");
-                $(".tab-content").not(tab).css("display", "none");
-                $(tab).fadeIn();
-            });
-        });
-    </script>
 @endsection

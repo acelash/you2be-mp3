@@ -15,6 +15,7 @@ class Song extends Elegant
         'source_id',
         'title',
         'source_title',
+        'source_created_at',
         'views',
         'likes',
         'dislikes',
@@ -124,133 +125,56 @@ class Song extends Elegant
         return $query;
     }
 
-    public function getNowWatching($movie = false)
+    public function getSimilar($song)
     {
         $query = $this->getAll();
 
-        $query->whereNotIn("movies.state_id", [
-            config('constants.STATE_DRAFT'),
-            config('constants.STATE_UNCHECKED'),
-            config('constants.STATE_SKIPPED'),
+        $query->whereIn("songs.state_id", [
+            config('constants.STATE_WITH_AUDIO'),
         ]);
 
-        if ($movie) $query->where("movies.id", "<>", DB::raw($movie->id));
+        $title = trim($song->title);
 
-        $query->take(config("constants.NOW_WATCHING_TOTAL"));
+        $artists = explode("-",$title)[0];
 
-        return $query;
-    }
+        if($artists) {
+            $artists_list = explode(" ",$artists);
+            if(count($artists_list)){
+                $first = true;
+                foreach ($artists_list as $artist){
+                        if(strlen($artist) > 1){
+                            if($first){
+                                $first = false;
+                                $query->where("songs.title",'like','%'.$artist.'%');
+                            } else {
+                                $query->orWhere("songs.title",'like','%'.$artist.'%');
+                            }
+                        }
+                }
+            }
+        } else {
+            $words = explode(" ",$title);
+            if(count($words)){
+                $first = true;
+                $query->where(function ($query) use ($words,$first){
+                    foreach ($words as $word){
+                        if(strlen($word) > 1){
+                            if($first){
+                                $first = false;
+                                $query->where("songs.title",'like','%'.$word.'%');
+                            } else {
+                                $query->orWhere("songs.title",'like','%'.$word.'%');
+                            }
+                        }
+                    }
 
-    public function getSimilar($movie)
-    {
-        $genres = $movie->genres()->get()->pluck('id')->toArray();
-
-        $query = $this->getAll();
-
-        $query->join(DB::raw("(
-            SELECT 
-                count(movie_genre.id) AS total,
-                movie_genre.movie_id
-            FROM movie_genre
-            WHERE movie_genre.genre_id IN (" . implode(",", $genres) . ")
-            GROUP BY movie_genre.movie_id    
-        ) AS genres"), "genres.movie_id", "=", "movies.id");
-        $query->addSelect("genres.total AS same_genres");
-        $query->orderBy("genres.total", "DESC");
-
-        $query->whereNotIn("movies.state_id", [
-            config('constants.STATE_DRAFT'),
-            config('constants.STATE_UNCHECKED'),
-            config('constants.STATE_SKIPPED'),
-        ]);
-
-        $query->where("movies.id", "<>", DB::raw($movie->id));
-
-        return $query;
-    }
-
-    public function scopeViewsTypes($query, $period = "")
-    {
-        $time = time();
-        $condition = "";
-        switch ($period) {
-            case 1:// 24 ore
-                $diff = 60 * 60 * 24;
-                break;
-            case 2:// 1 saptamina
-                $diff = 60 * 60 * 24 * 7;
-                break;
-            case 3:// 1 luna
-                $diff = 60 * 60 * 24 * 30;
-                break;
-            default:
-                $diff = 0;
-        }
-
-        if ($period) {
-            $timeLimit = $time - $diff;
-            $condition = "WHERE movie_views.updated_at >= '" . date("Y-m-d H:i:s", $timeLimit) . "'";
+                });
+            }
         }
 
 
-        $query->leftJoin(DB::raw("(
-            SELECT 
-                COUNT(movie_views.id) AS total,
-                movie_views.entry_id
-            FROM movie_views
-            " . $condition . "
-            GROUP BY movie_views.entry_id
-        ) AS views{$period}"), "views{$period}.entry_id", "movies.id")
-            ->addSelect("views{$period}.total AS views{$period}");
-        return $query;
-    }
 
-    public function scopeRatingsTypes($query, $period = "")
-    {
-        $time = time();
-        $condition = "";
-        switch ($period) {
-            case 1:// 24 ore
-                $diff = 60 * 60 * 24;
-                break;
-            case 2:// 1 saptamina
-                $diff = 60 * 60 * 24 * 7;
-                break;
-            case 3:// 1 luna
-                $diff = 60 * 60 * 24 * 30;
-                break;
-            default:
-                $diff = 0;
-        }
-
-        if ($period) {
-            $timeLimit = $time - $diff;
-            $condition = " AND movie_vote.updated_at >= '" . date("Y-m-d H:i:s", $timeLimit) . "'";
-        }
-
-        // Positive rating
-        $query->leftJoin(DB::raw("(
-            SELECT 
-                SUM(movie_vote.vote) AS total,
-                movie_vote.movie_id
-            FROM movie_vote
-            WHERE movie_vote.type = 1 /* positive */
-              " . $condition . "
-            GROUP BY movie_vote.movie_id
-        ) AS positive_rating{$period}"), "positive_rating{$period}.movie_id", "movies.id")
-            ->addSelect("positive_rating{$period}.total AS positive_rating{$period}");
-
-        // negative rating
-        $query->leftJoin(DB::raw("(
-            SELECT 
-                SUM(movie_vote.vote) AS total,
-                movie_vote.movie_id
-            FROM movie_vote
-            WHERE movie_vote.type = 2 /* negative */
-              " . $condition . "
-            GROUP BY movie_vote.movie_id
-        ) AS negative_rating{$period}"), "negative_rating{$period}.movie_id", "movies.id")
-            ->addSelect("negative_rating{$period}.total AS negative_rating{$period}");
+        $query->where("songs.id", "<>", DB::raw($song->id));
 
         return $query;
     }

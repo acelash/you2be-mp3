@@ -21,108 +21,77 @@ $seoImg = $entity->thumbnail;
     <style>{!!file_get_contents(public_path('css/fullstory.css'))!!}</style>
     <div class="container page_content">
         <div class="row">
-            <ul class="breadcrumb">
-                <li><a class="accent-color-text" href="{{url('/')}}">Songs</a></li>
-                <li class="active secondary-text-color">{{ $entity->title}}</li>
-            </ul>
-        </div>
-
-        <div class="row">
-            <div class="col-md-12 fullstory_title ">
+            <div class="col-lg-8 ">
                 <h1>{{ $entity->title}}</h1>
-            </div>
-            <hr class="fullstory_header_line divider-color">
-            <div class="col-lg-12 fullstory">
+                <p>@lang('words.fullstory_text')</p>
+
+                <button id="play_song" class="btn listen track" data-source="{{asset($entity->file_url)}}" onclick="return playTrack(this)">
+                    <img class="play" src="{{asset('public/images/play-button-white.svg')}}" alt="Play">
+                    <img class="pause" src="{{asset('public/images/pause-white.svg')}}" alt="Pause">
+                    @lang('words.listen')
+                    <div class="song_poster" style="background-image: url('{{$entity->thumbnail}}');display: none">
+                        <span style="display: none" class="song_name" >{{$entity->title}}</span>
+                    </div>
+                </button>
+
+                <button onclick="download({{$entity->id}})" class="btn">
+                    <img class="download" src="{{asset('public/images/download.svg')}}" alt="download">
+                    @lang('words.download_as_mp3')</button>
+
+                <div class="song_tags">
+                    Song tags:
+                    @foreach($entity->tags()->get() as $tag)
+                        <a> {{$tag->name}} </a>
+                    @endforeach
+                </div>
                 <div class="share_container">
-                    <span>Love this song? Share it with your friends!</span>
-                    <a onclick="Share.vkontakte('{{$seoUrl}}','{{$seoTitle}}','{{$seoImg}}','{{$seoDescription}}')">
-                        <img alt="vk" src="{{asset('public/images/vk.png')}}">
-                    </a>
+                    <div>@lang('words.share_text')</div>
                     <a onclick="Share.facebook('{{$seoUrl}}','{{$seoTitle}}','{{$seoImg}}','{{$seoDescription}}')">
                         <img alt="facebook" src="{{asset('public/images/facebook.png')}}">
-                    </a>
-                    <a onclick="Share.odnoklassniki('{{$seoUrl}}','{{$seoDescription}}')">
-                        <img alt="odnoklassniki" src="{{asset('public/images/odnoklassniki-logo.png')}}">
                     </a>
                     <a onclick="Share.twitter('{{$seoUrl}}','{{$seoTitle}}')">
                         <img alt="twitter" src="{{asset('public/images/twitter.png')}}">
                     </a>
-                </div>
-            </div>
-        </div>
+                    <a onclick="Share.vkontakte('{{$seoUrl}}','{{$seoTitle}}','{{$seoImg}}','{{$seoDescription}}')">
+                        <img alt="vk" src="{{asset('public/images/vk.png')}}">
+                    </a>
 
-        <div class="row">
-            <div class="col-lg-10 col-md-9 col-sm-12 col-xs-12 content_center">
-                <div class="row fullstory">
-                    <div class="col-lg-3 col-md-4 col-sm-5 col-xs-12">
-                        <img alt="{{ $entity->title}} poster" class="img-responsive img-rounded  poster"
-                             src="{{$entity->thumbnail}}">
-                    </div>
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 content_block">
-                        <div><h2>@lang('words.watch_videoclip')</h2>
-                            <hr class="divider-color">
-                        </div>
-
-                        <div class="embeded_video_container">
-                            <iframe src="https://www.youtube-nocookie.com/embed/{{$entity->source_id}}?rel=0&amp;showinfo=0&amp;iv_load_policy=3"
-                                    frameborder="0" allowfullscreen></iframe>
-                        </div>
-                    </div>
+                    <a onclick="Share.odnoklassniki('{{$seoUrl}}','{{$seoDescription}}')">
+                        <img alt="odnoklassniki" src="{{asset('public/images/odnoklassniki-logo.png')}}">
+                    </a>
 
                 </div>
-
-                {{-- comments --}}
                 <div class="content_block">
-                    <div class="block_title"><h2>@lang('words.comments')</h2>
+                    <div><h2>@lang('words.watch_video')</h2>
                         <hr class="divider-color">
-                        <div>Отзывов: {{$comments->count()}}</div>
                     </div>
-                    <div class="row">
-                        @forelse($comments as $comment)
 
-                            @if (!$loop->first)
-                                <div class="col-lg-12">
-                                    <hr>
-                                </div>
-                            @endif
-
-                            @include('comment.single',['comment'=>$comment])
-                        @empty
-                            <div class="col-lg-12">Ваш отзыв будет первым!</div>
-                        @endforelse
+                    <div class="embeded_video_container">
+                        <iframe src="https://www.youtube-nocookie.com/embed/{{$entity->source_id}}?rel=0&amp;showinfo=0&amp;iv_load_policy=3"
+                                frameborder="0" allowfullscreen></iframe>
                     </div>
-                    @if(auth()->check())
-                        @include('comment.add',['movie_id'=>$entity->id])
-                    @else
-                        <div class="col-lg-12 alert alert-info">
-                            Для добавления отзывов, необходимо <a href="{{route('register')}}">зарегистрироваться</a> и
-                            <a href="{{route('login')}}">войти</a> на сайт.
-                        </div>
-                    @endif
                 </div>
+                <div class="content_block">
+                    <div><h2>@lang('words.similar_songs')</h2>
+                        <hr class="divider-color">
+                    </div>
 
+                    <ul class="songs">
+                        @forelse($similar as $song)
+                            @include('song.one',['song'=>$song])
+                        @empty
+                            <li>No songs</li>
+                        @endforelse
+                    </ul>
+                </div>
             </div>
+            @include('partials.tags',['tags'=> $hot_tags])
         </div>
         @include("partials.footer")
     </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // views store
-            setTimeout(function () {
-                $.ajax({
-                    type: "GET",
-                    url: getBaseUrl() + "/song/store_view/{{$entity->id}}",
-                    data: [],
-                    success: function (response) {
-                    },
-                    error: function (request, status, error_message) {
-                        var response = request.responseJSON;
-                    }
-                });
-            },{{config("constants.STORE_VIEW_AFTER")}});
-        });
-    </script>
     <script>{!!file_get_contents(public_path('js/share.js'))!!}</script>
 
+@endsection
+@section('footer_scripts')
+    @include('partials.player-single')
 @endsection

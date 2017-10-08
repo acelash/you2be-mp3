@@ -127,6 +127,10 @@ class GetNewYoutubeMovies extends Command
                     // scoated durata in sec
                     $videoInfo['duration'] = $duration[0]*60+$duration[1];
 
+                    $publishedAt = $details->snippet->publishedAt;
+                    $publishedAt = substr($publishedAt, 0, strpos($publishedAt, 'T'));
+                    $videoInfo['source_created_at'] =  strtotime($publishedAt);
+
                     $thumbnails = $details->snippet->thumbnails;
 
                     // salvam imagine mini

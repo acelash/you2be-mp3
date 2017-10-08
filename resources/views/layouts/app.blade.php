@@ -59,7 +59,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand " href="{{url('/')}}">
+            <a class="navbar-brand " href="{{route('home_'.$locale)}}">
                 <img alt="logo" src="{{asset('public/images/logo-min.png')}}">
                 {{config('app.name')}}</a>
         </div>
