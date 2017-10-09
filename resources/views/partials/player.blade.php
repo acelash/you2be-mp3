@@ -62,7 +62,8 @@
         my_jPlayer = $("#jquery_jplayer"),
         my_trackName = $("#jp_container .track-name"),
         my_playState = $("#jp_container .play-state"),
-        currentPlayingDomElement;
+        currentPlayingDomElement,
+        pageTitle =document.title;
 
     $(document).ready(function () {
         // Instance jPlayer
@@ -92,6 +93,7 @@
                     playTrack(nextTrack);
                 } else {
                     $(".current_track").removeClass('playing');
+                    document.title = pageTitle;
                 }
 
 
@@ -125,6 +127,8 @@
         });
 
         my_jPlayer.jPlayer("play");
+
+        document.title = $(name).text();
 
         $(".current_track").removeClass('current_track playing');
         $(track).addClass('current_track playing');

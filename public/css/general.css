@@ -3,8 +3,9 @@ html {
 }
 
 body {
-    background: #DCEDC8;
-    background: linear-gradient(to bottom, rgba(220, 237, 200, 1) 0%, rgba(104, 159, 56, 1) 100%);
+    background: rgb(232, 232, 232);
+   /* background: linear-gradient(to bottom, rgba(220, 237, 200, 1) 0%, rgba(104, 159, 56, 1) 100%);*/
+    background: linear-gradient(to bottom, rgb(232, 232, 232) 0%, rgb(103, 103, 103) 100%);
 }
 
 a {
@@ -16,13 +17,9 @@ a.accent-color:hover {
     background: rgba(255, 83, 34, 0.64);
 }
 
-.multi_ul_dropdown ul {
-    width: 520px;
-}
-
-.multi_ul_dropdown ul li {
-    display: inline-block;
-    width: 170px;
+.navbar {
+    background: #7e966a;
+    color: white;
 }
 
 .page_content {
@@ -155,18 +152,23 @@ li.search_container:hover {
 
 .tags {
     text-align: center;
-    border: 1px solid #689F38;
+    border: 1px solid #7e966a;
     border-radius: 3px;
-    margin: 10px 0;
-    background: #DCEDC8;
+    margin: 15px 0;
+    background: #e4e4e4;
     color: #FF5722;
-    padding: 5px 0 15px;
+    padding: 0 0 15px;
 }
+
+.tags h2 {
+    margin: 10px 0 0;
+}
+
 .tag {
     font-size: 19px;
     margin: 3px 5px;
     display: inline-block;
-    color: #689F38;
+    color: #354428;
 }
 
 body {
@@ -184,14 +186,14 @@ body {
 .songs li{
     display: block;
     float: none;
-    margin: 5px;
     width:100%;
     transition: .3s;
     cursor: pointer;
-    padding: 5px;
+    margin: 0 5px 5px;
+    height: 40px;
 }
 .track:hover {
-    background-color: #e3f4cf;
+    background-color: rgb(232, 232, 232);
 }
 
 .songs li  .track{
@@ -199,7 +201,7 @@ body {
     display: inline-block;
     height: inherit;
     text-decoration: none;
-    color: #689F38;
+    color: #354428;
     line-height: 30px;
 }
 
@@ -211,7 +213,7 @@ body {
     background-repeat: no-repeat;
     background-position: center;
     float: left;
-    margin-right: 10px;
+    margin: 5px 10px 5px 5px;
     text-align: center;
     position: relative;
 }
@@ -219,10 +221,16 @@ body {
 .duration {
     float: right;
     margin-right: 10px;
+    margin-top: 5px;
 }
 
 .song_name {
     display: inline-block;
+    max-width: 400px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    margin-top: 5px;
 }
 
 .song_poster img {
@@ -254,7 +262,7 @@ body {
 }
 
 .track.current_track  {
-    background-color: #DCEDC8;
+    background-color: rgb(232, 232, 232);
 }
 .track.current_track.playing .pause {
     display: inline-block;
@@ -272,7 +280,7 @@ body {
 
 .song_download,.song_video {
     width: 25px;
-    margin: -1px 10px 0;
+    margin: 5px 10px 0;
     cursor: pointer;
     float: right;
     transition: 200ms;
