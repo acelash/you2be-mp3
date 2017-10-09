@@ -41,7 +41,7 @@ $seoImg = $entity->thumbnail;
                 <div class="song_tags">
                     Song tags:
                     @foreach($entity->tags()->get() as $tag)
-                        <a> {{$tag->name}} </a>
+                        <a href="{{route('show_tag_'.$locale,[ 'slug' => prepareSlugUrl($tag->id,$tag->name)])}}"> {{$tag->name}} </a>
                     @endforeach
                 </div>
                 <div class="share_container">

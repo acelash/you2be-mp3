@@ -96,8 +96,7 @@ class SongsController extends Controller
 
         $entry = $this->getModel()->getById($id,true)->get()->first();
         $viewData = [
-            "genres" => (new Genre())->getAll()->orderBy("name")->get(),
-            "countries" => (new Country())->getAll()->orderBy("name")->get(),
+
         ];
         $viewData['entry'] = $entry;
 

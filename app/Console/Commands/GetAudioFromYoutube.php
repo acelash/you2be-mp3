@@ -26,7 +26,7 @@ class GetAudioFromYoutube extends Command
             ->get();
         echo "songs found:".$songs->count()." \n";
         foreach ($songs as $song){
-            echo "proccessing: ".$songs->id." \n";
+            echo "proccessing: ".$song->id." \n";
             $filename  = $path.$song->id.".%(ext)s";
            // $command = 'youtube-dl -o "/home/admin/web/mp3.cardeon.ru/public_html/'.$filename.'"  -f "bestaudio"  https://www.youtube.com/watch?v='.$song->source_id;
             $command = 'youtube-dl -o "/home/admin/web/mp3.cardeon.ru/public_html/'.$filename.'"  --extract-audio --audio-format mp3 --audio-quality 160K https://www.youtube.com/watch?v='.$song->source_id;
@@ -53,7 +53,7 @@ class GetAudioFromYoutube extends Command
 
         }
         $endTime = time();
-        echo "end (".($startTime - $endTime)." sec). \n";
+        echo "end (".($endTime - $startTime)." sec). \n";
     }
 
 }

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('pageTitle', "TUNE-TUBE")
+@section('pageTitle', $entity->name." - hot tag TUNE-TUBE")
 @section('pageDescription', "")
 
 @section('content')
@@ -8,18 +8,12 @@
     <div class="container page_content">
         <div class="row">
             <div class="col-lg-8 track_list">
-                <h1 style="    padding: 0 30px;">
-                    @if(isset($sorted) && $sorted == 'new')
-                        @lang('words.new_songs')
-                    @else
-                        @lang('words.popular_songs')
-                    @endif
-                </h1>
+                <h1 style="    padding: 0 30px;">{{$entity->name}} - Download mp3 or listen online</h1>
                 <ul class="songs">
                     @forelse($songs as $song)
                         @include('song.one',['song'=>$song,'loop'=>$loop])
                     @empty
-                        <li>No songs</li>
+                        <li>No results</li>
                     @endforelse
                 </ul>
                 {{$songs->links()}}

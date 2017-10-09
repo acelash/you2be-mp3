@@ -18,13 +18,13 @@
 
     <title>@yield('pageTitle') | Вся музыка мира, для тебя</title>
     <link rel="shortcut icon" href="{{asset('public/images/logo-min.png')}}" type="image/x-icon">
-    <meta name="description" content="@yield('pageDescription')" />
-    <meta name="keywords" content="смотреть,онлайн,фильмы,бесплатно,без рекламы,в хорошем качестве,полностью" />
-    <meta name="yandex-verification" content="f2453e15ef8d6260" />
+    <meta name="description" content="@yield('pageDescription')"/>
+    <meta name="keywords" content="смотреть,онлайн,фильмы,бесплатно,без рекламы,в хорошем качестве,полностью"/>
+    <meta name="yandex-verification" content="f2453e15ef8d6260"/>
 
-    @yield('pageMeta')
+@yield('pageMeta')
 
-    <!-- Styles -->
+<!-- Styles -->
     <style>{!!file_get_contents(public_path('css/bootstrap.min.css'))!!}</style>
     <style>{!!file_get_contents(public_path('css/palette.css'))!!}</style>
     <style>{!!file_get_contents(public_path('css/general.css'))!!}</style>
@@ -66,17 +66,21 @@
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav" style="padding: 8px">
                 <li class="search_container" title="{{$total_songs}} songs">
-                    <input type="text" class="form-control search_input"
-                                                placeholder="Search - enter the name of the song or artist">
-                <button class="search_btn">
-                    <img src="{{asset('public/images/search.svg')}}">
-                    Search</button>
+                    <form method="get" action="{{route('search_'.$locale)}}">
+                        <input onkeyup="searchBtnToggle()" type="text" class="form-control search_input" name="q"
+                               @if(isset($query))value="{{$query}}" @endif
+                               placeholder="Search - enter the name of the song or artist">
+                        <button class="search_btn">
+                            <img src="{{asset('public/images/search.svg')}}">
+                            Search
+                        </button>
+                    </form>
                 </li>
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="{{url('new')}}">@lang('words.new')</a></li>
-                <li><a href="{{url('popular')}}">@lang('words.popular')</a></li>
+                <li><a href="{{route('new_'.$locale)}}">@lang('words.new')</a></li>
+                <li><a href="{{route('popular_'.$locale)}}">@lang('words.popular')</a></li>
                 @if(auth()->check())
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
@@ -114,5 +118,18 @@
 {{--<script src="{{ asset('public/js/app.js') }}"></script>--}}
 <script type="text/javascript" src="{{asset('public/vendors/jplayer/jplayer/jquery.jplayer.min.js')}}"></script>
 @yield('footer_scripts')
+<script>
+    function searchBtnToggle() {
+        if($.trim($('.search_input').val()).length > 1){
+            $('.search_btn').prop('disabled',false);
+        } else {
+            $('.search_btn').prop('disabled',true);
+        }
+    }
+
+    $(document).ready(function () {
+        searchBtnToggle();
+    });
+</script>
 </body>
 </html>

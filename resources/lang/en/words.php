@@ -15,6 +15,8 @@ return [
     'share_text' => 'Love this song? Share it with your friends!',
     'fullstory_text' => 'You can download this song as mp3 or to listen it directly in your browser. Absolutely free. Enjoy ;)',
     'similar_songs' => 'Similar songs',
+    'new_songs' => 'New music',
+    'popular_songs' => 'Popular songs',
     '' => '',
     '' => '',
 ];

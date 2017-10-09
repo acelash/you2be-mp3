@@ -24,23 +24,33 @@ class Song extends Elegant
         'thumbnail_mini',
         'duration',
     ];
-    /*protected $searchable = [
+    protected $searchable = [
 
         'columns' => [
-            'movies.title' => 15,
-            'movies.seo_title' => 10,
+            'songs.title' => 15,
+           /* 'songs.seo_title' => 10,
             'movies.seo_description' => 10,
-            'movies.year' => 5,
+            'movies.year' => 5,*/
         ],
         'groupBy' => [
-            'movies.id',
-            'movies.user_id',
-            "movies.title",
-            "movies.seo_title",
-            "movies.seo_description",
-            "movies.year",
+            'songs.id',
+            'songs.state_id',
+            'songs.user_id',
+            'songs.source_id',
+            'songs.title',
+            'songs.source_title',
+            'songs.source_created_at',
+            'songs.views',
+            'songs.likes',
+            'songs.dislikes',
+            'songs.file_url',
+            'songs.thumbnail',
+            'songs.thumbnail_mini',
+            'songs.duration',
+            'songs.created_at',
+            'songs.updated_at',
         ]
-    ];*/
+    ];
 
     protected $dates = ['created_at', 'updated_at'];
 
@@ -174,7 +184,7 @@ class Song extends Elegant
 
 
 
-        $query->where("songs.id", "<>", DB::raw($song->id));
+          $query->where("songs.id", "<>", DB::raw($song->id));
 
         return $query;
     }

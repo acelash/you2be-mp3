@@ -78,7 +78,7 @@ class GetNewYoutubeMovies extends Command
         }
 
         $endTime = time();
-        echo "end (".($startTime - $endTime)." sec). \n";
+        echo "end (".($endTime - $startTime)." sec). \n";
     }
     protected function processSearchResults($results){
             foreach ($results as $video) {

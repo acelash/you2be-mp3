@@ -16,7 +16,7 @@ class HomeController extends Controller
     public function index()
     {
         $viewData = [
-            'popular' => (new Song())->getAll()
+            'songs' => (new Song())->getAll()
                 ->where("state_id",config('constants.STATE_WITH_AUDIO'))
                 ->orderBy("views","DESC")
                 ->paginate(50),

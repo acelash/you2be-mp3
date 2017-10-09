@@ -24,6 +24,9 @@ Route::group(
     ],
     function () {
         Route::get('/', 'HomeController@index')->name('home_en');
+        Route::get('/search', 'SongsController@search')->name('search_en');
+        Route::get('/popular', 'SongsController@popular')->name('popular_en');
+        Route::get('/new', 'SongsController@newSongs')->name('new_en');
         Route::get('/rules', 'HomeController@rules')->name('rules_en');
         Route::get('/song/{slug}', 'SongsController@show')->name('show_song_en');
         Route::get('/tag/{slug}', 'SongsController@tag')->name('show_tag_en');
