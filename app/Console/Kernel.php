@@ -2,8 +2,10 @@
 
 namespace App\Console;
 
+use App\Models\Admin\TaskLog;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Illuminate\Support\Facades\File;
 
 class Kernel extends ConsoleKernel
 {
@@ -28,17 +30,17 @@ class Kernel extends ConsoleKernel
             ->after(function () {
                 $this->saveLogs('RemoveDrafts');
             });
-        $schedule->command('GetNewYoutubeMovies')->hourly()
+        $schedule->command('getmovies')->hourly()
             ->sendOutputTo(storage_path($this->outputFile))
             ->after(function () {
                 $this->saveLogs('GetNewYoutubeMovies');
             });
-        $schedule->command('GetAudioFromYoutube')->hourly()
+        $schedule->command('getmp3')->hourly()
             ->sendOutputTo(storage_path($this->outputFile))
             ->after(function () {
                 $this->saveLogs('GetAudioFromYoutube');
             });
-        $schedule->command('OptimizeImages')->daily()
+        $schedule->command('optimage')->daily()
             ->sendOutputTo(storage_path($this->outputFile))
             ->after(function () {
                 $this->saveLogs('OptimizeImages');
@@ -47,17 +49,15 @@ class Kernel extends ConsoleKernel
 
     protected function saveLogs($scheduleName)
     {
-       /* $output = File::get(storage_path($this->outputFile));
-        $logModel = (new ScheduleLog())->newInstance();
+        $output = File::get(storage_path($this->outputFile));
+        $logModel = (new TaskLog())->newInstance();
         $logData = [
-            'schedule' => $scheduleName,
-            'schedule_output' => trim($output)
+            'job' => $scheduleName,
+            'output' => trim($output),
+            'created_at' => time()
         ];
-        if ($logModel->validate($logData)) {
-            $logModel->fill($logData);
-            $logModel->save();
-        } else
-            echo 'invalid data for logs';*/
+        $logModel->fill($logData);
+        $logModel->save();
     }
 
     protected function commands()

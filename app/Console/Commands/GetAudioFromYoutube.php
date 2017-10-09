@@ -17,6 +17,7 @@ class GetAudioFromYoutube extends Command
     public function handle()
     {
         echo "starting...\n";
+        $startTime = time();
         $path = "public/audio/";
 
         $songs = (new Song())->getAll(true)
@@ -25,12 +26,13 @@ class GetAudioFromYoutube extends Command
             ->get();
         echo "songs found:".$songs->count()." \n";
         foreach ($songs as $song){
+            echo "proccessing: ".$songs->id." \n";
             $filename  = $path.$song->id.".%(ext)s";
            // $command = 'youtube-dl -o "/home/admin/web/mp3.cardeon.ru/public_html/'.$filename.'"  -f "bestaudio"  https://www.youtube.com/watch?v='.$song->source_id;
             $command = 'youtube-dl -o "/home/admin/web/mp3.cardeon.ru/public_html/'.$filename.'"  --extract-audio --audio-format mp3 --audio-quality 160K https://www.youtube.com/watch?v='.$song->source_id;
             //echo "command: ".$command." \n";
             $output = shell_exec($command);
-            echo "output: ".$output." \n";
+            //echo "output: ".$output." \n";
 
             $files = glob (base_path($path.$song->id.".*"));
             //if file exists, save
@@ -40,14 +42,18 @@ class GetAudioFromYoutube extends Command
                     'state_id' => config("constants.STATE_WITH_AUDIO"),
                     'file_url' => asset($path.$filename)
                 ]);
+                echo "done.  \n";
             } else {
                 $song->update([
                     'state_id' => config("constants.STATE_SKIPPED")
                 ]);
+                echo "skipped.  \n";
             }
 
 
         }
+        $endTime = time();
+        echo "end (".($startTime - $endTime)." sec). \n";
     }
 
 }

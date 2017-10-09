@@ -17,6 +17,9 @@ class GetNewYoutubeMovies extends Command
     protected $signature = 'getmovies';
 
     protected $wordsToReplace = [
+        '(премьера клипа, 2017)',
+        '(Новые Клипы 2017)',
+        '(Новые Клипы 2017)',
         'Official Music Video',
         'Official Video',
         'Official Video 2017',
@@ -35,9 +38,7 @@ class GetNewYoutubeMovies extends Command
         'Official Lyric Video',
         '(Official Lyric Video)',
         'With Lyrics',
-        '(премьера клипа, 2017)',
-        '(Новые Клипы 2017)',
-        '(Новые Клипы 2017)',
+
     ];
 
     protected $inserted = 0;
@@ -47,6 +48,7 @@ class GetNewYoutubeMovies extends Command
     public function handle()
     {
         echo "starting...\n";
+        $startTime = time();
 
         $goal = config("constants.YOUTUBE_GRABBER_PORTION");
         $pagesPassed = 0;
@@ -64,7 +66,6 @@ class GetNewYoutubeMovies extends Command
             $this->processSearchResults($search['results']);
             $pagesPassed++;
         }
-        echo "page passed. \n";
 
         // Check if we have a pageToken
         while(isset($search['info']['nextPageToken']) && $this->inserted <= $goal) {
@@ -73,9 +74,11 @@ class GetNewYoutubeMovies extends Command
             if (array_key_exists('results', $search)) {
                 $this->processSearchResults($search['results']);
             }
-            echo "page passed. \n";
             $pagesPassed++;
         }
+
+        $endTime = time();
+        echo "end (".($startTime - $endTime)." sec). \n";
     }
     protected function processSearchResults($results){
             foreach ($results as $video) {
@@ -84,9 +87,11 @@ class GetNewYoutubeMovies extends Command
                 // ne uitam daca nu a fost parsat deja
                 $source_id = $video->id->videoId;
 
+                echo "processing " . $source_id . " . \n";
+
                 $existing = (new Song())->where('source_id', $source_id)->count();
                 if ($existing) {
-                    echo "video " . $source_id . " skipped. \n";
+                    echo "skipped. \n";
                     continue;
                 }
                 //pregatim informatiile despre video
@@ -107,7 +112,7 @@ class GetNewYoutubeMovies extends Command
                         $details->snippet->categoryId !== '10' // музыка
                         &&
                         $details->snippet->categoryId !== '24'){ //развлечения
-                        echo "video " . $source_id . " skipped. wrong category: ".$details->snippet->categoryId." \n";
+                        echo  $source_id . " skipped. wrong category: ".$details->snippet->categoryId." \n";
                         continue;
                     }
 
@@ -115,12 +120,12 @@ class GetNewYoutubeMovies extends Command
                     preg_match_all('/(\d+)/',$details->contentDetails->duration,$parts);
                     $duration = $parts[0];
                     if(count($duration) !== 2) {
-                        echo "video " . $source_id . " skipped. >1h duration \n";
+                        echo  $source_id . " skipped. >1h duration \n";
                         continue;
                     }
                     // nu salvam daca are mai mult de n minute
                     if($duration[count($duration)-2] > 8) {
-                        echo "video " . $source_id . " skipped. >8 min duration \n";
+                        echo  $source_id . " skipped. >8 min duration \n";
                         continue;
                     }
 
@@ -179,13 +184,13 @@ class GetNewYoutubeMovies extends Command
                     $this->inserted++;
 
                     DB::commit();
-                    echo "video " . $source_id . " saved. \n";
+                    echo   " saved. \n";
 
                 } catch (\Exception $e) {
                     DB::rollback();
                     if(File::exists($thumbnail_path)) unlink($thumbnail_path);
                     if(File::exists($thumbnail_mini_path)) unlink($thumbnail_mini_path);
-                    echo "video " . $source_id . " not saved:{$e->getMessage()} \n";
+                    echo  $source_id . " not saved:{$e->getMessage()} \n";
                 }
             }
 
@@ -201,7 +206,6 @@ class GetNewYoutubeMovies extends Command
 
         return trim($title);
     }
-
     protected function prepareTagsIds($tags){
         $ids = [];
         foreach ($tags as $tag){
