@@ -5,6 +5,7 @@
 
 @section('content')
     <style>{!!file_get_contents(public_path('css/homepage.css'))!!}</style>
+    @include('partials.functions')
     <div class="container page_content">
         <div class="row">
             <div class="col-lg-8 track_list">

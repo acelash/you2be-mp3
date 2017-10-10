@@ -163,11 +163,4 @@
         while (s.length < 2) s = "0" + s;
         return s;
     }
-
-    function showSong(track) {
-        window.location.href = track.href;
-    }
-    function download(track_id) {
-
-    }
 </script>
