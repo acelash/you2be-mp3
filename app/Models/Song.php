@@ -59,29 +59,14 @@ class Song extends Elegant
         return $this->belongsTo('App\User', "user_id");
     }
 
-    public function views()
+    public function downloads()
     {
-        return $this->hasMany('App\Models\MovieView', "entry_id", "id");
-    }
-
-    public function comments()
-    {
-        return $this->hasMany('App\Models\SongComment', "song_id", "id");
-    }
-
-    public function votes()
-    {
-        return $this->hasMany('App\Models\MovieVote', "vote_id", "id");
+        return $this->hasMany('App\Models\SongDownload', "entry_id", "id");
     }
 
     public function tags()
     {
         return $this->belongsToMany(Tag::class, 'song_tag', 'song_id', 'tag_id');
-    }
-
-    public function countries()
-    {
-        return $this->belongsToMany(Country::class, 'movie_country', 'movie_id', 'country_id');
     }
 
     public function getAll($all_states = false)

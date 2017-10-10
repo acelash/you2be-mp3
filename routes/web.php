@@ -17,7 +17,7 @@ Route::get('/redirect/{provider}', 'SocialAuthController@redirect');
 Route::get('/callback/{provider}', 'SocialAuthController@callback');
 
 Route::get('/', 'HomeController@index')->name('home');
-Route::get('/download_song/{id}', 'SongsController@download')->name('download_song');
+Route::get('/song/store_download/{id}', 'SongsController@storeDownload')->name('store_download');
 
 Route::group(
     [

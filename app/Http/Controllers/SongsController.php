@@ -12,6 +12,7 @@ use App\Models\MovieVote;
 use App\Models\MovieWatchLater;
 use App\Models\Song;
 use App\Models\SongComment;
+use App\Models\SongDownload;
 use App\Models\SongView;
 use App\Models\Tag;
 use Illuminate\Support\Facades\DB;
@@ -32,10 +33,6 @@ class SongsController extends Controller
 
         $entity = $this->getModel()->getById($id)->get()->first();
         if (!$entity) abort(404);
-
-        /*$similar = (new Song())->getSimilar($entity)
-            ->take(10);
-        $similar = $similar->get();*/
 
         $similar = (new Song())->getAll()
             ->whereIn("songs.state_id", [
@@ -125,14 +122,14 @@ class SongsController extends Controller
         return $this->customResponse("home",$viewData);
     }
 
-    /*public function storeView($id)
+    public function storeDownload($id)
     {
         $entity = $this->getModel()->find($id);
         if (!$entity) return ['status' => 'invalid id'];
 
         $ip = $this->request->ip();
 
-        $viewExists = (new SongView())
+        $viewExists = (new SongDownload())
             ->where("entry_id", $id)
             ->where("from_ip", $ip)
             ->get()
@@ -142,7 +139,7 @@ class SongsController extends Controller
             return ['status' => 'view already Exists'];
         }
 
-        $new = (new SongView())->newInstance();
+        $new = (new SongDownload())->newInstance();
         $new->fill([
             "entry_id" => $id,
             "from_ip" => $ip,
@@ -152,7 +149,7 @@ class SongsController extends Controller
         return [
             'status' => 'ok'
         ];
-    }*/
+    }
 
 
 }

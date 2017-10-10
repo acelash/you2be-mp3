@@ -8,7 +8,7 @@
 
         </div>
         <span class="song_name" >{{$song->title}}</span>
-        <a class="song_download" onclick="downloadSong(this)" download="{{$song->title}}.mp3" target="_blank" href="{{asset($song->file_url)}}">
+        <a class="song_download" onclick="downloadSong(this,{{$song->id}})" download="{{$song->title}}.mp3" target="_blank" href="{{asset($song->file_url)}}">
             <img class="off" src="{{asset('public/images/down-arrow.svg')}}" alt="Download">
             <img class="on"  src="{{asset('public/images/down-arrow2.svg')}}" alt="Download">
         </a>

@@ -19,25 +19,28 @@ $seoImg = $entity->thumbnail;
 @endsection
 @section('content')
     <style>{!!file_get_contents(public_path('css/fullstory.css'))!!}</style>
+    @include('partials.functions')
     <div class="container page_content">
         <div class="row">
             <div class="col-lg-8 ">
                 <h1>{{ $entity->title}}</h1>
                 <p>@lang('words.fullstory_text')</p>
 
-                <button id="play_song" class="btn listen track" data-source="{{asset($entity->file_url)}}" onclick="return playTrack(this)">
+                <button id="play_song" class="btn listen track" data-source="{{asset($entity->file_url)}}"
+                        onclick="return playTrack(this)">
                     <img class="play" src="{{asset('public/images/play-button-white.svg')}}" alt="Play">
                     <img class="pause" src="{{asset('public/images/pause-white.svg')}}" alt="Pause">
                     @lang('words.listen')
                     <div class="song_poster" style="background-image: url('{{$entity->thumbnail}}');display: none">
-                        <span style="display: none" class="song_name" >{{$entity->title}}</span>
+                        <span style="display: none" class="song_name">{{$entity->title}}</span>
                     </div>
                 </button>
 
-                <button onclick="download({{$entity->id}})" class="btn">
-                    <img class="download" src="{{asset('public/images/download.svg')}}" alt="download">
-                    @lang('words.download_as_mp3')</button>
-
+                <a download="{{$entity->title}}.mp3" target="_blank" href="{{asset($entity->file_url)}}">
+                    <button class="btn">
+                        <img class="download" src="{{asset('public/images/download.svg')}}" alt="download">
+                        @lang('words.download_as_mp3')</button>
+                </a>
                 <div class="song_tags">
                     Song tags:
                     @foreach($entity->tags()->get() as $tag)
