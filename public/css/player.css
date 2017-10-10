@@ -38,12 +38,11 @@
     color: #CC0090;
 }
 
-
 .sticky_player {
-   /* background: #ffffff;*/
+    /* background: #ffffff;*/
     text-align: left;
     margin: auto;
-    width:1170px;
+    width: 1170px;
     height: 50px;
 }
 
@@ -52,20 +51,18 @@
     display: inline-block;
     margin: 0 10px 0 0;
 }
-.buttons ul li img, .volume_container ul li img{
+
+.buttons ul li img, .volume_container ul li img {
     width: 30px;
     cursor: pointer;
 }
-.buttons ul li:hover > img{
-   opacity: .7;
-}
 
-.timeline_container,.buttons,.volume_container ,.track_container{
+.timeline_container, .buttons, .volume_container, .track_container {
     display: inline-block;
     margin-right: 10px;
 }
 
-.timeline_container{
+.timeline_container {
     position: relative;
     top: -6px;
 
@@ -88,17 +85,19 @@
     top: -4px;
     cursor: pointer;
 }
+
 .time_bar_filled {
     height: 30px;
     position: absolute;
     border-bottom: 1px solid #FF5722;
-    width:1%;
+    width: 1%;
     transition: .3s;
 }
 
 .volume_container {
     position: relative;
 }
+
 .volume_bar_container {
     opacity: 0;
     width: 30px;
@@ -116,6 +115,7 @@
     cursor: pointer;
     padding: 9px 0 0;
 }
+
 .volume_container:hover > .volume_bar_container {
     opacity: 1;
 
@@ -165,7 +165,7 @@
 .track_title {
     position: relative;
     top: 7px;
-    width:250px;
+    width: 270px;
     margin-left: 5px;
     height: 30px;
     white-space: nowrap; /* Запрещаем перенос строк */
@@ -176,7 +176,7 @@
 .actions_container {
     display: inline-block;
     text-align: right;
-    min-width: 70px;
+    min-width: 50px;
 }
 
 .actions_container ul li {
@@ -184,18 +184,37 @@
     margin-right: 10px;
     cursor: pointer;
 }
+
 .actions_container ul li:last-child {
     margin-right: 0;
 }
 
 .actions_container ul li img {
-    width:30px;
+    width: 30px;
+}
+
+.actions_container ul li:hover > .on, .buttons ul li:hover > .on, .volume:hover > .on {
+    display: inline-block;
+}
+
+.actions_container ul li:hover > .off, .buttons ul li:hover > .off, .volume:hover > .off {
+    display: none;
+}
+
+.jp-shuffle.active .on, .jp-replay.active .on {
+    display: inline-block;
+}
+
+.jp-shuffle.active .off, .jp-replay.active .off {
+    display: none;
 }
 
 /* responsive */
 @media screen and (max-width: 700px) {
-    .sticky_player_container,.sticky_player {
+    .sticky_player_container, .sticky_player {
         height: 110px;
     }
 }
+
 /* end responsive */
+

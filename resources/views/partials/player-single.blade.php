@@ -4,8 +4,13 @@
     <div id="jp_container" class="sticky_player">
         <div class="buttons">
             <ul>
-                <li class="jp-play"><img src="{{asset('public/images/play-button.svg')}}" alt="Play"></li>
-                <li style="display: none;" class="jp-pause"><img src="{{asset('public/images/pause.svg')}}" alt="Pause">
+                <li class="jp-play">
+                    <img class="off" src="{{asset('public/images/play-button.svg')}}" alt="Play">
+                    <img class="on" src="{{asset('public/images/play-button2.svg')}}" alt="Play">
+                </li>
+                <li style="display: none;" class="jp-pause">
+                    <img class="off" src="{{asset('public/images/pause.svg')}}" alt="Pause">
+                    <img class="on" src="{{asset('public/images/pause2.svg')}}" alt="Pause">
                 </li>
             </ul>
         </div>
@@ -30,10 +35,12 @@
             </div>
             <ul>
                 <li class="volume jp-mute">
-                    <img src="{{asset('public/images/speaker.svg')}}" alt="Mute">
+                    <img class="off" src="{{asset('public/images/speaker.svg')}}" alt="Mute">
+                    <img class="on" src="{{asset('public/images/speaker2.svg')}}" alt="Mute">
                 </li>
                 <li style="display: none" class="volume jp-unmute">
-                    <img src="{{asset('public/images/mute.svg')}}" alt="Unmute">
+                    <img class="off" src="{{asset('public/images/mute.svg')}}" alt="Unmute">
+                    <img class="on" src="{{asset('public/images/mute2.svg')}}" alt="Unmute">
                 </li>
             </ul>
         </div>
@@ -41,13 +48,6 @@
             <ul>
                 <li class="image_container"></li>
                 <li class="track_title track-name"></li>
-            </ul>
-        </div>
-        <div class="actions_container">
-            <ul>
-                <li class="option" title="Download">
-                    <img onclick="download()" src="{{asset('public/images/down-arrow.svg')}}" alt="Download">
-                </li>
             </ul>
         </div>
     </div>

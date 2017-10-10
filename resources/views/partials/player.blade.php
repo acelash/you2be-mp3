@@ -4,14 +4,30 @@
     <div id="jp_container" class="sticky_player">
         <div class="buttons">
             <ul>
-                <li class="jp-back"><img src="{{asset('public/images/back.svg')}}" alt="Back"></li>
-                <li class="jp-play"><img src="{{asset('public/images/play-button.svg')}}" alt="Play"></li>
-                <li style="display: none;" class="jp-pause"><img src="{{asset('public/images/pause.svg')}}" alt="Pause">
+                <li onclick="previousSong()" class="jp-back">
+                    <img class="off" src="{{asset('public/images/back.svg')}}" alt="Back">
+                    <img class="on" src="{{asset('public/images/back2.svg')}}" alt="Back">
                 </li>
-                <li class="jp-next"><img src="{{asset('public/images/next.svg')}}" alt="Next"></li>
-                <li class="jp-shuffle"><img src="{{asset('public/images/shuffle.svg')}}" alt="Shuffle"></li>
-                <li class="jp-replay"><img src="{{asset('public/images/replay.svg')}}" alt="Replay"></li>
-                {{--<li class="jp-stop"><img src="{{asset('public/images/stop.svg')}}"  alt="Stop"></li>--}}
+                <li class="jp-play">
+                    <img class="off" src="{{asset('public/images/play-button.svg')}}" alt="Play">
+                    <img class="on" src="{{asset('public/images/play-button2.svg')}}" alt="Play">
+                </li>
+                <li style="display: none;" class="jp-pause">
+                    <img class="off" src="{{asset('public/images/pause.svg')}}" alt="Pause">
+                    <img class="on" src="{{asset('public/images/pause2.svg')}}" alt="Pause">
+                </li>
+                <li onclick="nextSong()" class="jp-next">
+                    <img class="off" src="{{asset('public/images/next.svg')}}" alt="Next">
+                    <img class="on" src="{{asset('public/images/next2.svg')}}" alt="Next">
+                </li>
+                <li onclick="toggleShuffle(this)" class="jp-shuffle">
+                    <img class="off" src="{{asset('public/images/shuffle.svg')}}" alt="Shuffle">
+                    <img class="on" src="{{asset('public/images/shuffle2.svg')}}" alt="Shuffle">
+                </li>
+                <li onclick="toggleLoop(this)" class="jp-replay">
+                    <img class="off" src="{{asset('public/images/replay.svg')}}" alt="Replay">
+                    <img class="on" src="{{asset('public/images/replay2.svg')}}" alt="Replay">
+                </li>
             </ul>
         </div>
         <div class="timeline_container">
@@ -35,10 +51,12 @@
             </div>
             <ul>
                 <li class="volume jp-mute">
-                    <img src="{{asset('public/images/speaker.svg')}}" alt="Mute">
+                    <img class="off" src="{{asset('public/images/speaker.svg')}}" alt="Mute">
+                    <img class="on" src="{{asset('public/images/speaker2.svg')}}" alt="Mute">
                 </li>
                 <li style="display: none" class="volume jp-unmute">
-                    <img src="{{asset('public/images/mute.svg')}}" alt="Unmute">
+                    <img class="off" src="{{asset('public/images/mute.svg')}}" alt="Unmute">
+                    <img class="on" src="{{asset('public/images/mute2.svg')}}" alt="Unmute">
                 </li>
             </ul>
         </div>
@@ -51,7 +69,13 @@
         <div class="actions_container">
             <ul>
                 <li class="option" title="Download">
-                    <img onclick="download()" src="{{asset('public/images/down-arrow.svg')}}" alt="Download">
+                    <a id="player_download" onclick="downloadCurrentTrack()" download="" target="_blank" href="">
+                        <img class="off" src="{{asset('public/images/download1.svg')}}"
+                             alt="Download">
+                        <img class="on" src="{{asset('public/images/download2.svg')}}"
+                             alt="Download">
+                    </a>
+
                 </li>
             </ul>
         </div>
@@ -63,7 +87,9 @@
         my_trackName = $("#jp_container .track-name"),
         my_playState = $("#jp_container .play-state"),
         currentPlayingDomElement,
-        pageTitle =document.title;
+        pageTitle = document.title,
+        shuffleMode = false,
+        loopMode = false;
 
     $(document).ready(function () {
         // Instance jPlayer
@@ -87,16 +113,26 @@
              my_playState.text(opt_text_selected);
              },*/
             ended: function (event) {
-                // play next if exits
-                var nextTrack = $(currentPlayingDomElement).parent().next().find('div')[0];
-                if (nextTrack) {
-                    playTrack(nextTrack);
+
+                // if loop mode, play again
+                if (loopMode) {
+                    $(".current_track").removeClass('current_track playing');
+                    playTrack(currentPlayingDomElement);
                 } else {
-                    $(".current_track").removeClass('playing');
-                    document.title = pageTitle;
+                    // id shuffle, play a random song
+                    if (shuffleMode) {
+                        playRandomSong();
+                    } else {
+                        // play next if exits
+                        var nextTrack = $(currentPlayingDomElement).parent().next().find('div')[0];
+                        if (nextTrack) {
+                            playTrack(nextTrack);
+                        } else {
+                            $(".current_track").removeClass('playing');
+                            document.title = pageTitle;
+                        }
+                    }
                 }
-
-
             },
             swfPath: "/public/vendors/jplayer/jplayer/jquery.jplayer.swf",
             cssSelectorAncestor: "#jp_container",
@@ -119,8 +155,9 @@
             return false;
         }
 
-        var name = $(track).find('.song_name')[0];
-        my_trackName.text($(name).text());
+        var name = $(track).find('.song_name')[0],
+            name_text = $(name).text();
+        my_trackName.text(name_text);
 
         my_jPlayer.jPlayer("setMedia", {
             mp3: $(track).data("source")
@@ -128,7 +165,10 @@
 
         my_jPlayer.jPlayer("play");
 
-        document.title = $(name).text();
+        document.title = name_text;
+
+        $('#player_download').prop('download', name_text + ".mp3");
+        $('#player_download').prop('href', $(track).data("source"));
 
         $(".current_track").removeClass('current_track playing');
         $(track).addClass('current_track playing');
@@ -138,6 +178,9 @@
         $(".image_container").css('background-image', $(image).css('background-image'));
 
         $('.sticky_player_container').addClass('active');
+
+        scrollIfNotVisible(track);
+
         return false;
     }
 
@@ -162,5 +205,77 @@
         var s = num + "";
         while (s.length < 2) s = "0" + s;
         return s;
+    }
+
+    function toggleShuffle(btn) {
+        if (shuffleMode) {
+            $(btn).removeClass('active');
+            shuffleMode = false;
+        } else {
+            $(btn).addClass('active');
+            shuffleMode = true;
+        }
+    }
+
+    function toggleLoop(btn) {
+        if (loopMode) {
+            $(btn).removeClass('active');
+            loopMode = false;
+        } else {
+            $(btn).addClass('active');
+            loopMode = true;
+        }
+    }
+
+    function downloadCurrentTrack() {
+        storeDownload($(currentPlayingDomElement).data('song_id'));
+    }
+
+    function playRandomSong() {
+        var otherSongs = $(currentPlayingDomElement).parent().siblings();
+        $(".current_track").removeClass('current_track playing');
+        playTrack($(randomSong(otherSongs)).find('div')[0]);
+    }
+
+    function nextSong() {
+        if (!currentPlayingDomElement) return false;
+        if (shuffleMode) {
+            playRandomSong();
+        } else {
+            var nextTrack = $(currentPlayingDomElement).parent().next().find('div')[0];
+            if (nextTrack) {
+                playTrack(nextTrack);
+            }
+        }
+    }
+
+    function previousSong() {
+        if (!currentPlayingDomElement) return false;
+        var previousTrack = $(currentPlayingDomElement).parent().prev().find('div')[0];
+        if (previousTrack) {
+            playTrack(previousTrack);
+        }
+    }
+
+    var randomSong = function (obj) {
+        var keys = Object.keys(obj);
+        keys = keys.filter(function (el) {
+            return el.length && el == +el;
+        });
+        var randomIndex = keys.length * Math.random() << 0;
+        return obj[keys[randomIndex]];
+    };
+
+    function scrollIfNotVisible(element){
+        var offset = $(element).offset().top - $(window).scrollTop();
+        console.log('offset=',offset,'window.innerHeight=',window.innerHeight);
+        if(offset > window.innerHeight){
+            $('html,body').animate({scrollTop: offset}, 1000);
+            return false;
+        } else if(offset < 0){
+            $('html,body').animate({scrollTop: $(element).offset().top}, 1000);
+            return false;
+        }
+        return true;
     }
 </script>

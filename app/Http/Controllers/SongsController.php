@@ -110,10 +110,22 @@ class SongsController extends Controller
     }
     public function popular()
     {
+        $month = 60*60*24*30;
+        $monthAgo = time() - $month;
+
         $viewData = [
             'sorted' => 'popular',
             'songs' => (new Song())->getAll()
                 ->where("state_id",config('constants.STATE_WITH_AUDIO'))
+                ->leftJoin(DB::raw("(
+                    SELECT 
+                        entry_id,
+                        count(id) as total
+                    FROM song_download
+                    WHERE created_at >= '".date('Y-m-d',$monthAgo)."'
+                    GROUP BY entry_id    
+                ) as downloads"),"downloads.entry_id","=","songs.id")
+                ->orderBy("downloads.total","DESC")
                 ->orderBy("views","DESC")
                 ->paginate(50),
             'hot_tags' => (new Tag())->getHotTags()->take(80)->get()
