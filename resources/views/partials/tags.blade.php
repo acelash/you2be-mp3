@@ -1,4 +1,4 @@
-<div class="col-lg-4 ">
+<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
     <div class="tags">
         <h2>Hot Tags</h2>
         @forelse($tags as $tag)

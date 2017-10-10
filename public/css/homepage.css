@@ -1,0 +1,29 @@
+/* responsive */
+@media screen and (max-width: 700px) {
+    .duration{
+        display: none;
+    }
+    .song_name {
+        max-width: 230px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .duration{
+        display: none;
+    }
+    .song_name {
+        max-width: 175px;
+    }
+    .song_download, .song_video {
+        width: 20px;
+        margin: 5px 7px 0;
+    }
+    .song_poster {
+        margin: 8px 6px 5px 5px;
+        height: 24px;
+        width: 35px;
+    }
+}
+
+/* end responsive */

@@ -8,7 +8,7 @@
     @include('partials.functions')
     <div class="container page_content">
         <div class="row">
-            <div class="col-lg-8 track_list">
+            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 track_list">
                 <h1 style="    padding: 0 30px;">
                     @if(isset($sorted) && $sorted == 'new')
                         @lang('words.new_songs')
