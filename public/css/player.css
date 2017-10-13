@@ -210,11 +210,73 @@
 }
 
 /* responsive */
-@media screen and (max-width: 700px) {
-    .sticky_player_container, .sticky_player {
-        height: 110px;
+@media screen and (max-width: 1200px) {
+    .sticky_player_container,.sticky_player {
+        height: 85px;
+    }
+    .sticky_player {
+        width: 700px;
+        padding-top: 30px;
+        position: relative;
+    }
+    .timeline {
+        width: 320px;
+    }
+    .volume_container {
+        margin-right: 0;
+    }
+    .track_container {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    .track_container ul {
+        margin: 5px 0;
+    }
+    .actions_container {
+        position: absolute;
+        top: 0;
+        right: 15px;
+    }
+    .track_title {
+        width: 560px;
     }
 }
 
+@media screen and (max-width: 700px) {
+    .sticky_player_container,.sticky_player {
+        height: 85px;
+    }
+    .sticky_player {
+        width: 320px;
+        padding-top: 30px;
+        position: relative;
+    }
+    .timeline {
+        width: 220px;
+    }
+    .volume_container {
+        margin-right: 0;
+        position: absolute;
+        top: 1px;
+        right: 40px;
+    }
+    .track_container {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    .track_container ul {
+        margin: 5px 0;
+    }
+    .actions_container {
+        position: absolute;
+        top: 0;
+        right: 15px;
+    }
+    .track_title {
+        width: 160px;
+    }
+}
 /* end responsive */
 
