@@ -5,12 +5,12 @@
         <div class="buttons">
             <ul>
                 <li class="jp-play">
-                    <img class="off" src="{{asset('public/images/play-button.svg')}}" alt="Play">
-                    <img class="on" src="{{asset('public/images/play-button2.svg')}}" alt="Play">
+                    <img class="off" src="{{asset('public/images/play-button.png')}}" alt="Play">
+                    <img class="on" src="{{asset('public/images/play-button_orange.png')}}" alt="Play">
                 </li>
                 <li style="display: none;" class="jp-pause">
-                    <img class="off" src="{{asset('public/images/pause.svg')}}" alt="Pause">
-                    <img class="on" src="{{asset('public/images/pause2.svg')}}" alt="Pause">
+                    <img class="off" src="{{asset('public/images/pause.png')}}" alt="Pause">
+                    <img class="on" src="{{asset('public/images/pause_orange.png')}}" alt="Pause">
                 </li>
             </ul>
         </div>
@@ -35,12 +35,12 @@
             </div>
             <ul>
                 <li class="volume jp-mute">
-                    <img class="off" src="{{asset('public/images/speaker.svg')}}" alt="Mute">
-                    <img class="on" src="{{asset('public/images/speaker2.svg')}}" alt="Mute">
+                    <img class="off" src="{{asset('public/images/speaker.png')}}" alt="Mute">
+                    <img class="on" src="{{asset('public/images/speaker2.png')}}" alt="Mute">
                 </li>
                 <li style="display: none" class="volume jp-unmute">
-                    <img class="off" src="{{asset('public/images/mute.svg')}}" alt="Unmute">
-                    <img class="on" src="{{asset('public/images/mute2.svg')}}" alt="Unmute">
+                    <img class="off" src="{{asset('public/images/mute.png')}}" alt="Unmute">
+                    <img class="on" src="{{asset('public/images/mute2.png')}}" alt="Unmute">
                 </li>
             </ul>
         </div>

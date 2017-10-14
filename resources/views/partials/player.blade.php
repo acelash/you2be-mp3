@@ -5,8 +5,8 @@
         <div class="buttons">
             <ul>
                 <li onclick="previousSong()" class="jp-back">
-                    <img class="off" src="{{asset('public/images/back.svg')}}" alt="Back">
-                    <img class="on" src="{{asset('public/images/back2.svg')}}" alt="Back">
+                    <img class="off" src="{{asset('public/images/back.png')}}" alt="Back">
+                    <img class="on" src="{{asset('public/images/back2.png')}}" alt="Back">
                 </li>
                 <li class="jp-play">
                     <img class="off" src="{{asset('public/images/play-button.png')}}" alt="Play">
@@ -17,16 +17,16 @@
                     <img class="on" src="{{asset('public/images/pause_orange.png')}}" alt="Pause">
                 </li>
                 <li onclick="nextSong()" class="jp-next">
-                    <img class="off" src="{{asset('public/images/next.svg')}}" alt="Next">
-                    <img class="on" src="{{asset('public/images/next2.svg')}}" alt="Next">
+                    <img class="off" src="{{asset('public/images/next.png')}}" alt="Next">
+                    <img class="on" src="{{asset('public/images/next2.png')}}" alt="Next">
                 </li>
                 <li onclick="toggleShuffle(this)" class="jp-shuffle">
-                    <img class="off" src="{{asset('public/images/shuffle.svg')}}" alt="Shuffle">
-                    <img class="on" src="{{asset('public/images/shuffle2.svg')}}" alt="Shuffle">
+                    <img class="off" src="{{asset('public/images/shuffle.png')}}" alt="Shuffle">
+                    <img class="on" src="{{asset('public/images/shuffle2.png')}}" alt="Shuffle">
                 </li>
                 <li onclick="toggleLoop(this)" class="jp-replay">
-                    <img class="off" src="{{asset('public/images/replay.svg')}}" alt="Replay">
-                    <img class="on" src="{{asset('public/images/replay2.svg')}}" alt="Replay">
+                    <img class="off" src="{{asset('public/images/replay.png')}}" alt="Replay">
+                    <img class="on" src="{{asset('public/images/replay2.png')}}" alt="Replay">
                 </li>
             </ul>
         </div>
@@ -51,12 +51,12 @@
             </div>
             <ul>
                 <li class="volume jp-mute">
-                    <img class="off" src="{{asset('public/images/speaker.svg')}}" alt="Mute">
-                    <img class="on" src="{{asset('public/images/speaker2.svg')}}" alt="Mute">
+                    <img class="off" src="{{asset('public/images/speaker.png')}}" alt="Mute">
+                    <img class="on" src="{{asset('public/images/speaker2.png')}}" alt="Mute">
                 </li>
                 <li style="display: none" class="volume jp-unmute">
-                    <img class="off" src="{{asset('public/images/mute.svg')}}" alt="Unmute">
-                    <img class="on" src="{{asset('public/images/mute2.svg')}}" alt="Unmute">
+                    <img class="off" src="{{asset('public/images/mute.png')}}" alt="Unmute">
+                    <img class="on" src="{{asset('public/images/mute2.png')}}" alt="Unmute">
                 </li>
             </ul>
         </div>
@@ -70,9 +70,9 @@
             <ul>
                 <li class="option" title="Download">
                     <a id="player_download" onclick="downloadCurrentTrack()" download="" target="_blank" href="">
-                        <img class="off" src="{{asset('public/images/download1.svg')}}"
+                        <img class="off" src="{{asset('public/images/download.png')}}"
                              alt="Download">
-                        <img class="on" src="{{asset('public/images/download2.svg')}}"
+                        <img class="on" src="{{asset('public/images/download2.png')}}"
                              alt="Download">
                     </a>
 

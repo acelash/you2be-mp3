@@ -193,11 +193,11 @@
     width: 30px;
 }
 
-.actions_container ul li:hover > .on, .buttons ul li:hover > .on, .volume:hover > .on {
+.actions_container ul li:hover > .on, .buttons ul li:hover > .on, .volume:hover > .on ,#player_download:hover > .on {
     display: inline-block;
 }
 
-.actions_container ul li:hover > .off, .buttons ul li:hover > .off, .volume:hover > .off {
+.actions_container ul li:hover > .off, .buttons ul li:hover > .off, .volume:hover > .off ,#player_download:hover > .off {
     display: none;
 }
 
