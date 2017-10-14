@@ -2,8 +2,8 @@
     <div data-song_id="{{$song->id}}" data-source="{{asset($song->file_url)}}" onclick="return playTrack(this)"
        class="track @if($loop->first) track-default @endif ">
         <div class="song_poster" style="background-image: url('{{$song->thumbnail_mini}}')">
-            <img class="play" src="{{asset('public/images/play-button-white.svg')}}" alt="Play">
-            <img class="pause" src="{{asset('public/images/pause-white.svg')}}" alt="Pause">
+            <img class="play" src="{{asset('public/images/play-button_white.png')}}" alt="Play">
+            <img class="pause" src="{{asset('public/images/pause_white.png')}}" alt="Pause">
             <div class="song_poster_cover"></div>
 
         </div>

@@ -220,10 +220,12 @@
         position: relative;
     }
     .timeline {
-        width: 320px;
+        width: 365px;
     }
     .volume_container {
-        margin-right: 0;
+        position: absolute;
+        top: 1px;
+        right: 40px;
     }
     .track_container {
         position: absolute;
@@ -239,7 +241,7 @@
         right: 15px;
     }
     .track_title {
-        width: 560px;
+        width: 550px;
     }
 }
 
@@ -252,8 +254,12 @@
         padding-top: 30px;
         position: relative;
     }
+    .timeline_container {
+        position: relative;
+        top: -2px;
+    }
     .timeline {
-        width: 220px;
+        width: 36px;
     }
     .volume_container {
         margin-right: 0;
@@ -275,7 +281,13 @@
         right: 15px;
     }
     .track_title {
-        width: 160px;
+        width: 195px;
+    }
+    .buttons ul li img, .volume_container ul li img, .actions_container ul li img {
+        width: 25px;
+    }
+    .buttons ul li {
+        margin: 0 5px 0 0;
     }
 }
 /* end responsive */

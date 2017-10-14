@@ -9,12 +9,12 @@
                     <img class="on" src="{{asset('public/images/back2.svg')}}" alt="Back">
                 </li>
                 <li class="jp-play">
-                    <img class="off" src="{{asset('public/images/play-button.svg')}}" alt="Play">
-                    <img class="on" src="{{asset('public/images/play-button2.svg')}}" alt="Play">
+                    <img class="off" src="{{asset('public/images/play-button.png')}}" alt="Play">
+                    <img class="on" src="{{asset('public/images/play-button_orange.png')}}" alt="Play">
                 </li>
                 <li style="display: none;" class="jp-pause">
-                    <img class="off" src="{{asset('public/images/pause.svg')}}" alt="Pause">
-                    <img class="on" src="{{asset('public/images/pause2.svg')}}" alt="Pause">
+                    <img class="off" src="{{asset('public/images/pause.png')}}" alt="Pause">
+                    <img class="on" src="{{asset('public/images/pause_orange.png')}}" alt="Pause">
                 </li>
                 <li onclick="nextSong()" class="jp-next">
                     <img class="off" src="{{asset('public/images/next.svg')}}" alt="Next">
