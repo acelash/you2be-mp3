@@ -58,14 +58,14 @@ class SongsController extends Controller
         if (!$entity) abort(404);
 
         $songs = (new Song())->getAll()
-            ->join("song_tag",function($join) use ($id){
-                $join->on('song_tag.song_id','=','songs.id');
-                $join->on('song_tag.tag_id','=',DB::raw($id));
+            ->join("song_tag", function ($join) use ($id) {
+                $join->on('song_tag.song_id', '=', 'songs.id');
+                $join->on('song_tag.tag_id', '=', DB::raw($id));
             })
             ->whereIn("songs.state_id", [
                 config('constants.STATE_WITH_AUDIO'),
             ])
-          ->paginate(50);
+            ->paginate(50);
 
         $viewData = [
             'entity' => $entity,
@@ -75,17 +75,27 @@ class SongsController extends Controller
         return $this->customResponse("{$this->templateDirectory}.tag", $viewData);
     }
 
-    public function search()
+    public function preSearch()
     {
         $query = trim($this->request->get('q'));
+        if (strlen($query) > 1)
+           return redirect()->route('search_' . app()->getLocale(), ['q' => $query]);
+        else
+            return  redirect()->route('home_' . app()->getLocale());
+    }
 
-        if (strlen($query) < 2) redirect()->route('home_' . app()->getLocale());
+    public function search($q)
+    {
+        $query = trim($q);
+
+        if (strlen($query) < 1)
+            redirect()->route('home_' . app()->getLocale());
 
         $songs = (new Song())->getAll()
             ->whereIn("songs.state_id", [
                 config('constants.STATE_WITH_AUDIO'),
             ])
-            ->search($query)->paginate(50);
+            ->search($query)->paginate(10);
 
         $viewData = [
             'query' => $query,
@@ -100,38 +110,39 @@ class SongsController extends Controller
         $viewData = [
             'sorted' => 'new',
             'songs' => (new Song())->getAll()
-                ->where("state_id",config('constants.STATE_WITH_AUDIO'))
-                ->orderBy("source_created_at","DESC")
+                ->where("state_id", config('constants.STATE_WITH_AUDIO'))
+                ->orderBy("source_created_at", "DESC")
                 ->paginate(50),
             'hot_tags' => (new Tag())->getHotTags()->take(80)->get()
 
         ];
-        return $this->customResponse("home",$viewData);
+        return $this->customResponse("home", $viewData);
     }
+
     public function popular()
     {
-        $month = 60*60*24*30;
+        $month = 60 * 60 * 24 * 30;
         $monthAgo = time() - $month;
 
         $viewData = [
             'sorted' => 'popular',
             'songs' => (new Song())->getAll()
-                ->where("state_id",config('constants.STATE_WITH_AUDIO'))
+                ->where("state_id", config('constants.STATE_WITH_AUDIO'))
                 ->leftJoin(DB::raw("(
                     SELECT 
                         entry_id,
                         count(id) as total
                     FROM song_download
-                    WHERE created_at >= '".date('Y-m-d',$monthAgo)."'
+                    WHERE created_at >= '" . date('Y-m-d', $monthAgo) . "'
                     GROUP BY entry_id    
-                ) as downloads"),"downloads.entry_id","=","songs.id")
-                ->orderBy("downloads.total","DESC")
-                ->orderBy("views","DESC")
+                ) as downloads"), "downloads.entry_id", "=", "songs.id")
+                ->orderBy("downloads.total", "DESC")
+                ->orderBy("views", "DESC")
                 ->paginate(50),
             'hot_tags' => (new Tag())->getHotTags()->take(80)->get()
 
         ];
-        return $this->customResponse("home",$viewData);
+        return $this->customResponse("home", $viewData);
     }
 
     public function storeDownload($id)

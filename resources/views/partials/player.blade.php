@@ -35,9 +35,9 @@
                 <li class="time_played current-time"></li>
                 <li class="timeline">
                     <div class="time_bar jp-seek-bar">
+                        <div class="time_bar_empty"></div>
                         <div class="time_bar_filled jp-play-bar"></div>
                     </div>
-
                 </li>
                 <li class="time_total player_duration"></li>
             </ul>
@@ -102,6 +102,8 @@
                     filled = parseInt(percentage * timeBarWidth / 100),
                     currentTime = secondsToTime(parseInt(event.jPlayer.status.currentTime)),
                     durationTime = secondsToTime(parseInt(event.jPlayer.status.duration));
+                console.log('percentage=',percentage);
+                console.log('filled=',filled);
                 $('.time_bar_filled').css('width', filled + "px");
                 $('.current-time').html(pad(currentTime.m) + ":" + pad(currentTime.s));
                 $('.player_duration').html(pad(durationTime.m) + ":" + pad(durationTime.s));

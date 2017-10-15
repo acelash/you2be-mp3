@@ -24,6 +24,11 @@
         height: 24px;
         width: 35px;
     }
+    .song_poster img {
+        top: 1px;
+        width: 22px;
+        left: 6px;
+    }
 }
 
 /* end responsive */

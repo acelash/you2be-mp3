@@ -17,7 +17,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>@yield('pageTitle') | Вся музыка мира, для тебя</title>
-    <link rel="shortcut icon" href="{{asset('public/images/logo-min.png')}}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{asset('public/images/logo3.png')}}" type="image/x-icon">
     <meta name="description" content="@yield('pageDescription')"/>
     <meta name="keywords" content="смотреть,онлайн,фильмы,бесплатно,без рекламы,в хорошем качестве,полностью"/>
     <meta name="yandex-verification" content="f2453e15ef8d6260"/>
@@ -60,13 +60,13 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand " href="{{route('home_'.$locale)}}">
-                <img alt="logo" src="{{asset('public/images/logo-min.png')}}">
+                <img alt="logo" src="{{asset('public/images/logo3.png')}}">
                 {{config('app.name')}}</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav" style="padding: 8px">
                 <li class="search_container" title="{{$total_songs}} songs">
-                    <form method="get" action="{{route('search_'.$locale)}}">
+                    <form method="get" action="{{route('pre_search_'.$locale)}}">
                         <input onkeyup="searchBtnToggle()" type="text" class="form-control search_input" name="q"
                                @if(isset($query))value="{{$query}}" @endif
                                placeholder="Search - enter the name of the song or artist">
@@ -119,7 +119,7 @@
 <script type="text/javascript" src="{{asset('public/vendors/jplayer/jplayer/jquery.jplayer.min.js')}}"></script>
 @yield('footer_scripts')
 <script>
-    function searchBtnToggle() {
+    /*function searchBtnToggle() {
         if($.trim($('.search_input').val()).length > 1){
             $('.search_btn').prop('disabled',false);
         } else {
@@ -129,7 +129,7 @@
 
     $(document).ready(function () {
         searchBtnToggle();
-    });
+    });*/
 </script>
 </body>
 </html>

@@ -29,6 +29,12 @@
         height: 240px;
     }
 }
+@media screen and (max-width: 320px) {
+    .embeded_video_container iframe {
+        width: 280px;
+        height: 157px;
+    }
+}
 .fullstory_header_line {
     width: 97%;
     border-top: 1px solid #e2e2e2;

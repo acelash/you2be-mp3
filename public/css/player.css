@@ -11,7 +11,7 @@
     height: 55px;
     text-align: center;
     z-index: 2;
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.9);
     border-top: 1px solid #cecece;
     transition: .3s;
 }
@@ -20,6 +20,7 @@
     opacity: 1;
     bottom: 0;
     top: auto;
+    z-index: 4;
 }
 
 .sticky_player ul {
@@ -64,34 +65,49 @@
 
 .timeline_container {
     position: relative;
-    top: -6px;
-
+    vertical-align: top;
+    margin-top: 10px;
+    height: 40px;
 }
-
+.timeline_container ul {
+    margin: 0;
+}
 .timeline_container ul li {
+    padding: 10px;
     transition: .2s;
     display: inline-block;
     margin: 0 5px 0 0;
+    height: 40px;
+    vertical-align:bottom;
+    position: relative;
 }
 
 .timeline {
     width: 400px;
+    height: 40px;
 }
 
 .time_bar {
     border-bottom: 1px solid #e2e2e2;
-    height: 30px;
-    position: relative;
-    top: -4px;
+    height: 40px;
+    position: absolute;
+    top: 0;
+    width: inherit;
     cursor: pointer;
 }
 
-.time_bar_filled {
-    height: 30px;
+.time_bar_filled,.time_bar_empty {
+    height: 1px;
+    top: 49%;
     position: absolute;
-    border-bottom: 1px solid #FF5722;
+    background: #FF5722;
     width: 1%;
     transition: .3s;
+}
+
+.time_bar_empty {
+    background: #bfbfbf;
+    width: 100%;
 }
 
 .volume_container {
@@ -220,7 +236,7 @@
         position: relative;
     }
     .timeline {
-        width: 365px;
+        width: 325px;
     }
     .volume_container {
         position: absolute;
