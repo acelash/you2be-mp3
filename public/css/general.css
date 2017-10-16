@@ -34,7 +34,7 @@ a.accent-color:hover {
     background-color: inherit;
 }
 
-.nav > li:not(.search_container):hover {
+.nav > li:not(.search_container,.languages):hover {
     background-color: #ff5b06;
 }
 
@@ -324,4 +324,13 @@ img.on {
     .search_container{
         width: 100%;
     }
+}
+
+.nav li.languages {
+    margin-left: 25px;
+}
+
+.nav li.languages a {
+    display: inline-block;
+    padding: 15px 3px;
 }

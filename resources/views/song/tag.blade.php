@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('pageTitle', $entity->name." - hot tag TUNE-TUBE")
+@section('pageTitle', $entity->name.trans('words.download_listen'))
 @section('pageDescription', "")
 
 @section('content')
@@ -9,12 +9,12 @@
     <div class="container page_content">
         <div class="row">
             <div class="col-lg-8 track_list">
-                <h1 style="    padding: 0 30px;">{{$entity->name}} - Download mp3 or listen online</h1>
+                <h1 style="    padding: 0 30px;">{{$entity->name}} - @lang('words.download_listen')</h1>
                 <ul class="songs">
                     @forelse($songs as $song)
                         @include('song.one',['song'=>$song,'loop'=>$loop])
                     @empty
-                        <li>No results</li>
+                        <li>@lang('words.no_results')</li>
                     @endforelse
                 </ul>
                 {{$songs->links()}}

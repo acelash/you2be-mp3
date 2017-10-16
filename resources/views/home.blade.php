@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('pageTitle', "TUNE-TUBE")
-@section('pageDescription', "")
+@section('pageTitle', trans('words.home_title')." | mp3cloud.su")
+@section('pageDescription', trans('words.home_description'))
 
 @section('content')
     <style>{!!file_get_contents(public_path('css/homepage.css'))!!}</style>

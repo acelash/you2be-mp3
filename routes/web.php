@@ -17,6 +17,7 @@ Route::get('/redirect/{provider}', 'SocialAuthController@redirect');
 Route::get('/callback/{provider}', 'SocialAuthController@callback');
 
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('/lang/{slug}', 'HomeController@switchLang')->name('lang');
 Route::get('/song/store_download/{id}', 'SongsController@storeDownload')->name('store_download');
 
 Route::group(
@@ -34,6 +35,20 @@ Route::group(
         Route::get('/tag/{slug}', 'SongsController@tag')->name('show_tag_en');
     });
 
+Route::group(
+    [
+        'prefix' => 'ru',
+    ],
+    function () {
+        Route::get('/', 'HomeController@index')->name('home_ru');
+        Route::get('/pre_search', 'SongsController@preSearch')->name('pre_search_ru');
+        Route::get('/search/{q}', 'SongsController@search')->name('search_ru');
+        Route::get('/popular', 'SongsController@popular')->name('popular_ru');
+        Route::get('/new', 'SongsController@newSongs')->name('new_ru');
+        Route::get('/rules', 'HomeController@rules')->name('rules_ru');
+        Route::get('/song/{slug}', 'SongsController@show')->name('show_song_ru');
+        Route::get('/tag/{slug}', 'SongsController@tag')->name('show_tag_ru');
+    });
 
 
 

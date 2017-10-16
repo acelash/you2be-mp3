@@ -16,11 +16,10 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>@yield('pageTitle') | Вся музыка мира, для тебя</title>
+    <title>@yield('pageTitle')</title>
     <link rel="shortcut icon" href="{{asset('public/images/logo3.png')}}" type="image/x-icon">
     <meta name="description" content="@yield('pageDescription')"/>
-    <meta name="keywords" content="смотреть,онлайн,фильмы,бесплатно,без рекламы,в хорошем качестве,полностью"/>
-    <meta name="yandex-verification" content="f2453e15ef8d6260"/>
+    <meta name="keywords" content="@lang('words.keywords')"/>
 
 @yield('pageMeta')
 
@@ -69,10 +68,10 @@
                     <form method="get" action="{{route('pre_search_'.$locale)}}">
                         <input onkeyup="searchBtnToggle()" type="text" class="form-control search_input" name="q"
                                @if(isset($query))value="{{$query}}" @endif
-                               placeholder="Search - enter the name of the song or artist">
+                               placeholder="@lang('words.search_placeholder')">
                         <button class="search_btn">
                             <img src="{{asset('public/images/search.svg')}}">
-                            Search
+                            @lang('words.search')
                         </button>
                     </form>
                 </li>
@@ -81,6 +80,10 @@
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="{{route('new_'.$locale)}}">@lang('words.new')</a></li>
                 <li><a href="{{route('popular_'.$locale)}}">@lang('words.popular')</a></li>
+                <li class="languages">
+                    <a href="{{route('lang',['slug'=>'en'])}}"><img alt="EN" src="{{asset('public/images/en.png')}}"></a>
+                    <a href="{{route('lang',['slug'=>'ru'])}}"><img alt="RU" src="{{asset('public/images/ru.png')}}"></a>
+                </li>
                 @if(auth()->check())
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
@@ -115,22 +118,10 @@
 <!-- Scripts -->
 <script src="{{ asset('public/js/jquery-3.2.1.min.js') }}"></script>
 <script src="{{ asset('public/js/bootstrap.min.js') }}"></script>
-{{--<script src="{{ asset('public/js/app.js') }}"></script>--}}
 <script type="text/javascript" src="{{asset('public/vendors/jplayer/jplayer/jquery.jplayer.min.js')}}"></script>
 <script>{!!file_get_contents(public_path('js/share.js'))!!}</script>
 @yield('footer_scripts')
-<script>
-    /*function searchBtnToggle() {
-        if($.trim($('.search_input').val()).length > 1){
-            $('.search_btn').prop('disabled',false);
-        } else {
-            $('.search_btn').prop('disabled',true);
-        }
-    }
 
-    $(document).ready(function () {
-        searchBtnToggle();
-    });*/
-</script>
+
 </body>
 </html>

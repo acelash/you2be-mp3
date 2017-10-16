@@ -6,7 +6,7 @@
  * Time: 12:14
  */
 return [
-    'watch_video' => 'Watch video',
+    'watch_video' => 'Watch the video',
     'download' => 'Download',
     'download_as_mp3' => 'Download as MP3',
     'listen' => 'Listen',
@@ -18,5 +18,14 @@ return [
     'new_songs' => 'New music',
     'popular_songs' => 'Popular songs',
     'share_description_prefix' => 'Listen online or download as mp3 for free - ',
+    'keywords' => 'download,mp3,music,online,listen,song,free',
+    'search' => 'Search',
+    'search_placeholder' => 'Search - enter the name of the song or artist',
+    'tags_header' => 'Hot Tags',
+    'song_tags' => 'Song tags:',
+    'download_listen' => 'Download mp3 or listen online',
+    'no_results' => 'No results',
+    'home_description' => 'Download mp3 or listen online all the songs you love',
+    'home_title' => 'All the music of the world, for you',
     '' => '',
 ];

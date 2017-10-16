@@ -24,6 +24,13 @@ class Controller extends BaseController
     {
         $this->request = $request;
 
+        $uri = $this->request->path();
+        $arr = explode("/", $uri, 2);
+        $locale = $arr[0];
+        if(strlen($locale) > 1 && in_array($locale,config('app.locales'))){
+            app()->setLocale($locale);
+        }
+
         date_default_timezone_set('Europe/Chisinau');
 
         if (method_exists($this, 'boot')) {

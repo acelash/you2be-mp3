@@ -43,7 +43,7 @@ $seoImg = $entity->thumbnail;
                         @lang('words.download_as_mp3')</button>
                 </a>
                 <div class="song_tags">
-                    Song tags:
+                    @lang('words.song_tags')
                     @foreach($entity->tags()->get() as $tag)
                         <a href="{{route('show_tag_'.$locale,[ 'slug' => prepareSlugUrl($tag->id,$tag->name)])}}"> {{$tag->name}} </a>
                     @endforeach
