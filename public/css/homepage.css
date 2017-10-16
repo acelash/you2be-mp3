@@ -1,14 +1,25 @@
 /* responsive */
+
+@media screen and (max-width: 1200px) {
+
+    .song_name {
+        max-width: 340px;
+    }
+}
+
 @media screen and (max-width: 700px) {
     .duration{
         display: none;
     }
     .song_name {
-        max-width: 230px;
+        max-width: 185px;
     }
 }
 
 @media screen and (max-width: 320px) {
+    .inline_share {
+        display: none !important;
+    }
     .duration{
         display: none;
     }
@@ -32,3 +43,28 @@
 }
 
 /* end responsive */
+
+
+.inline_share {
+    height: 30px;
+    float: right;
+    width: 115px;
+    margin: 4px 5px 0;
+    display: none;
+    transition: 300ms;
+}
+.current_track > .duration , .track:hover > .duration {
+    display: none;
+}
+.current_track > .inline_share , .track:hover > .inline_share {
+    display: inline-block;
+}
+.inline_share a {
+    display: inline-block;
+}
+.inline_share a img {
+    width: 25px;
+}
+.inline_share a:hover > img {
+    opacity: .8;
+}

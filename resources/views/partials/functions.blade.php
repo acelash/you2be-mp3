@@ -10,6 +10,12 @@
         window.location.href = track.href;
     }
 
+    function shareSong(track) {
+        var event = track.onclick.arguments[0];
+        event.stopPropagation();
+        window.location.href = track.href;
+    }
+
     function storeDownload(track_id) {
         $.ajax({
             type: "GET",

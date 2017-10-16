@@ -140,7 +140,7 @@ a.accent-color:hover {
     width: 20px;
 }
 .search_container {
-    width: 740px;
+    width: 550px;
     position: relative;
 }
 
@@ -314,4 +314,14 @@ img.on {
     background-color: #fff;
     border: 1px solid #ddd;
     margin-left: -1px;
+}
+
+.navbar.collapsed {
+    display: inline-block;
+}
+
+@media screen and (max-width: 700px) {
+    .search_container{
+        width: 100%;
+    }
 }

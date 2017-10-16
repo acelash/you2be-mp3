@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 <?php
-$seoTitle = $entity->title;
+$seoTitle = $entity->title ." | ".config('app.name');
 
-$seoDescription = $seoTitle;//str_limit(strip_tags($entity->text), 160);
+$seoDescription = trans("words.share_description_prefix")." ". $seoTitle;
 $seoUrl = Request::url();
 $seoImg = $entity->thumbnail;
 ?>
@@ -37,7 +37,7 @@ $seoImg = $entity->thumbnail;
                     </div>
                 </button>
 
-                <a download="{{$entity->title}}.mp3" target="_blank" href="{{asset($entity->file_url)}}">
+                <a download="{{$entity->title}} [mp3cloud.su].mp3" target="_blank" href="{{asset($entity->file_url)}}">
                     <button class="btn">
                         <img class="download" src="{{asset('public/images/download_white.png')}}" alt="download">
                         @lang('words.download_as_mp3')</button>
@@ -93,8 +93,6 @@ $seoImg = $entity->thumbnail;
         </div>
         @include("partials.footer")
     </div>
-    <script>{!!file_get_contents(public_path('js/share.js'))!!}</script>
-
 @endsection
 @section('footer_scripts')
     @include('partials.player-single')

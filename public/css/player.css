@@ -31,16 +31,7 @@
     overflow: hidden;
 }
 
-.sticky_player ul span {
-    color: #A0A600;
-}
-
-.sticky_player p span.track-name {
-    color: #CC0090;
-}
-
 .sticky_player {
-    /* background: #ffffff;*/
     text-align: left;
     margin: auto;
     width: 1170px;
@@ -60,7 +51,6 @@
 
 .timeline_container, .buttons, .volume_container, .track_container {
     display: inline-block;
-    margin-right: 10px;
 }
 
 .timeline_container {
@@ -235,6 +225,9 @@
         padding-top: 30px;
         position: relative;
     }
+    .timeline_container {
+        margin-top: 4px;
+    }
     .timeline {
         width: 325px;
     }
@@ -265,6 +258,11 @@
     .sticky_player_container,.sticky_player {
         height: 85px;
     }
+
+    .sticky_player_container {
+        padding-left: 7px;
+    }
+
     .sticky_player {
         width: 320px;
         padding-top: 30px;
@@ -272,10 +270,15 @@
     }
     .timeline_container {
         position: relative;
-        top: -2px;
+        width: 140px;
+        margin-top: 3px;
+    }
+    .timeline_container ul li {
+        margin: 0;
+        padding: 10px 0;
     }
     .timeline {
-        width: 36px;
+        width: 60px;
     }
     .volume_container {
         margin-right: 0;
@@ -295,9 +298,10 @@
         position: absolute;
         top: 0;
         right: 15px;
+        min-width:auto;
     }
     .track_title {
-        width: 195px;
+        width: 230px;
     }
     .buttons ul li img, .volume_container ul li img, .actions_container ul li img {
         width: 25px;

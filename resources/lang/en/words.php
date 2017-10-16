@@ -17,6 +17,6 @@ return [
     'similar_songs' => 'Similar songs',
     'new_songs' => 'New music',
     'popular_songs' => 'Popular songs',
-    '' => '',
+    'share_description_prefix' => 'Listen online or download as mp3 for free - ',
     '' => '',
 ];

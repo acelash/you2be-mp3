@@ -169,7 +169,7 @@
 
         document.title = name_text;
 
-        $('#player_download').prop('download', name_text + ".mp3");
+        $('#player_download').prop('download', name_text + " [mp3cloud.su].mp3");
         $('#player_download').prop('href', $(track).data("source"));
 
         $(".current_track").removeClass('current_track playing');

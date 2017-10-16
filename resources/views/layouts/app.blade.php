@@ -63,7 +63,7 @@
                 <img alt="logo" src="{{asset('public/images/logo3.png')}}">
                 {{config('app.name')}}</a>
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
+        <div id="navbar" class="navbar-collapse">
             <ul class="nav navbar-nav" style="padding: 8px">
                 <li class="search_container" title="{{$total_songs}} songs">
                     <form method="get" action="{{route('pre_search_'.$locale)}}">
@@ -117,6 +117,7 @@
 <script src="{{ asset('public/js/bootstrap.min.js') }}"></script>
 {{--<script src="{{ asset('public/js/app.js') }}"></script>--}}
 <script type="text/javascript" src="{{asset('public/vendors/jplayer/jplayer/jquery.jplayer.min.js')}}"></script>
+<script>{!!file_get_contents(public_path('js/share.js'))!!}</script>
 @yield('footer_scripts')
 <script>
     /*function searchBtnToggle() {
