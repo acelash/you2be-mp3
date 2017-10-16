@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('pageTitle', $query." - ".trans('words.download_listen'))
-@section('pageDescription', "")
+@section('pageDescription', trans('words.home_description'))
+
 
 @section('content')
     <style>{!!file_get_contents(public_path('css/homepage.css'))!!}</style>

@@ -6,12 +6,15 @@ $seoTitle = $entity->title ." | ".config('app.name');
 $seoDescription = trans("words.share_description_prefix")." ". $seoTitle;
 $seoUrl = Request::url();
 $seoImg = $entity->thumbnail;
+if($locale == "ru") $metaLocale = 'RU_ru';
+else $metaLocale = "En_en";
+
 ?>
 @section('pageTitle', $seoTitle)
 @section('pageDescription', $seoDescription)
 @section('pageMeta')
     <meta property="og:url" content="{{$seoUrl}}"/>
-    <meta property="og:locale" content="RU_ru"/>
+    <meta property="og:locale" content="{{$metaLocale}}"/>
     <meta property="og:type" content="article"/>
     <meta property="og:title" content="{{$seoTitle}}"/>
     <meta property="og:description" content="{{$seoDescription}}"/>
