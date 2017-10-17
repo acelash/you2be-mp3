@@ -19,6 +19,7 @@ Route::get('/callback/{provider}', 'SocialAuthController@callback');
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/lang/{slug}', 'HomeController@switchLang')->name('lang');
 Route::get('/song/store_download/{id}', 'SongsController@storeDownload')->name('store_download');
+Route::get('/copyrights', 'HomeController@copyrights')->name('copyrights');
 
 Route::group(
     [
@@ -26,6 +27,7 @@ Route::group(
     ],
     function () {
         Route::get('/', 'HomeController@index')->name('home_en');
+        Route::get('/copyrights', 'HomeController@copyrights')->name('copyrights_en');
         Route::get('/pre_search', 'SongsController@preSearch')->name('pre_search_en');
         Route::get('/search/{q}', 'SongsController@search')->name('search_en');
         Route::get('/popular', 'SongsController@popular')->name('popular_en');
@@ -41,6 +43,7 @@ Route::group(
     ],
     function () {
         Route::get('/', 'HomeController@index')->name('home_ru');
+        Route::get('/copyrights', 'HomeController@copyrights')->name('copyrights_ru');
         Route::get('/pre_search', 'SongsController@preSearch')->name('pre_search_ru');
         Route::get('/search/{q}', 'SongsController@search')->name('search_ru');
         Route::get('/popular', 'SongsController@popular')->name('popular_ru');

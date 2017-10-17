@@ -1,4 +1,3 @@
 User-agent: *
-Disallow:
-sitemap: https://mandarin-kino.ru/sitemap.xml
-sitemap: https://mandarin-kino.ru/sitemap.xml.gz
+Disallow: /public/*
+sitemap: https://mp3cloud.su/sitemap.xml

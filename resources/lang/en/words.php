@@ -27,5 +27,8 @@ return [
     'no_results' => 'No results',
     'home_description' => 'Download mp3 or listen online all the songs you love',
     'home_title' => 'All the music of the world, for you',
+    'copyrights' => 'Copyright Claims',
+    '' => '',
+    '' => '',
     '' => '',
 ];

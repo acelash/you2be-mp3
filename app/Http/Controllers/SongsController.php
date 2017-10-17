@@ -95,7 +95,7 @@ class SongsController extends Controller
             ->whereIn("songs.state_id", [
                 config('constants.STATE_WITH_AUDIO'),
             ])
-            ->search($query)->paginate(10);
+            ->search($query)->paginate(50);
 
         $viewData = [
             'query' => $query,

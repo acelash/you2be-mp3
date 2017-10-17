@@ -14,12 +14,8 @@
             <li><a href="{{route('rules')}}">Правила сайта</a></li>
             <li><a>Карта сайта</a></li>
         </ul>
-    </div>
-    <div class="col-md-4 footer_block">
-        <div class="title">Mandarin-kino</div>
-        &copy; 2017 MANDARIN-KINO.RU
-        <br>
-        mandarin.kino.ru&nbsp;@&nbsp;gmail.com
+    </div>--}}
+    <span class="contacts"><a href="{{route('copyrights_'.$locale)}}">@lang('words.copyrights')</a></span>
 
         <!--LiveInternet counter-->
         <script type="text/javascript">
@@ -32,6 +28,6 @@
                 "' alt='' title='LiveInternet' "+
                 "border='0' width='31' height='31'><\/a>")
         </script><!--/LiveInternet-->
-    </div>--}}
+    <span class="copyrights">&copy; 2017 mp3cloud.su</span>
 
 </div>

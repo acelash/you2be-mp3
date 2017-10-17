@@ -39,9 +39,9 @@ class HomeController extends Controller
         return $this->customResponse("home", $viewData);
     }
 
-    public function rules()
+    public function copyrights()
     {
-        return $this->customResponse("rules");
+        return $this->customResponse("copyrights");
     }
 
     public function switchLang($locale)

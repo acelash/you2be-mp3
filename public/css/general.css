@@ -52,8 +52,7 @@ a.accent-color:hover {
 
 
 .footer {
-    margin-top: 20px;
-    padding-bottom: 15px;
+    padding: 5px;
 }
 
 .footer_block {
@@ -333,4 +332,20 @@ img.on {
 .nav li.languages a {
     display: inline-block;
     padding: 15px 3px;
+}
+
+.counter_li {
+    float: right;
+    display: inline-block;
+}
+
+.copyrights {
+    float: right;
+    display: inline-block;
+    margin: 5px;
+}
+
+.contacts {
+    display: inline-block;
+    margin: 5px;
 }
