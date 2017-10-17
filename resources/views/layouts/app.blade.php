@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
 <head>
-    {{--<!-- Global Site Tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-107288343-1"></script>
+    <!-- Global Site Tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-108246525-1"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments)};
         gtag('js', new Date());
-        gtag('config', 'UA-107288343-1');
-    </script>--}}
+        gtag('config', 'UA-108246525-1');
+    </script>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,7 +17,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>@yield('pageTitle')</title>
-    <link rel="shortcut icon" href="{{asset('public/images/logo3.png')}}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{asset('public/images/logo.png')}}" type="image/x-icon">
     <meta name="description" content="@yield('pageDescription')"/>
     <meta name="keywords" content="@lang('words.keywords')"/>
 
@@ -59,7 +59,7 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand " href="{{route('home_'.$locale)}}">
-                <img alt="logo" src="{{asset('public/images/logo3.png')}}">
+                <img alt="logo" src="{{asset('public/images/logo.png')}}">
                 {{config('app.name')}}</a>
         </div>
         <div id="navbar" class="navbar-collapse">

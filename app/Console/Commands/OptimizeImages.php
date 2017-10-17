@@ -23,6 +23,7 @@ class OptimizeImages extends Command
 
         $songs = (new Song())
             ->where("state_id", config("constants.STATE_CHECKED"))
+           // ->orWhere("state_id", config("constants.STATE_WITH_AUDIO"))
             ->get();
 
         if ($songs) {

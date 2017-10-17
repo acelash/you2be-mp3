@@ -324,6 +324,11 @@ img.on {
         width: 100%;
     }
 }
+@media screen and (max-width: 1200px) {
+    .search_container{
+        width: 450px;
+    }
+}
 
 .nav li.languages {
     margin-left: 25px;
