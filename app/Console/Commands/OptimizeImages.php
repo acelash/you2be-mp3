@@ -22,7 +22,7 @@ class OptimizeImages extends Command
         $totalBlanks = 0;
 
         $songs = (new Song())
-            ->where("state_id", config("constants.STATE_CHECKED"))
+            ->where("state_id", config("constants.STATE_WITH_AUDIO"))
            // ->orWhere("state_id", config("constants.STATE_WITH_AUDIO"))
             ->get();
 

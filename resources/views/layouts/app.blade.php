@@ -20,7 +20,7 @@
     <link rel="shortcut icon" href="{{asset('public/images/logo.png')}}" type="image/x-icon">
     <meta name="description" content="@yield('pageDescription')"/>
     <meta name="keywords" content="@lang('words.keywords')"/>
-
+    <meta name='wmail-verification' content='429a1142b5e041cc8aa8ba8616c58508' />
 @yield('pageMeta')
 
 <!-- Styles -->

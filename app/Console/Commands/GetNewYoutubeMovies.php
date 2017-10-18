@@ -38,7 +38,8 @@ class GetNewYoutubeMovies extends Command
         'Official Lyric Video',
         '(Official Lyric Video)',
         'With Lyrics',
-
+        'Официальный Клип',
+        'Клип',
     ];
 
     protected $inserted = 0;
@@ -57,7 +58,9 @@ class GetNewYoutubeMovies extends Command
             'q' => config("constants.YOUTUBE_GRABBER_QUERY"),
             'type' => 'video',
             'part' => 'id',//snippet
-            'maxResults' => config("constants.YOUTUBE_GRABBER_PAGE")
+            'maxResults' => config("constants.YOUTUBE_GRABBER_PAGE"),
+            'order' => "date",
+            'videoCategoryId'=> '10' // music
         );
 
         $search = Youtube::searchAdvanced($params, true);
@@ -97,7 +100,7 @@ class GetNewYoutubeMovies extends Command
                 //pregatim informatiile despre video
                 $videoInfo = [
                     'user_id' => config("constants.ROBOT_USER_ID"),
-                    'state_id' => config("constants.STATE_UNCHECKED"),
+                    'state_id' => config("constants.STATE_DRAFT"),
                     'source_id' => $source_id,
                 ];
 
@@ -109,9 +112,7 @@ class GetNewYoutubeMovies extends Command
                     // salvam doar din categoria muzica
                     if(property_exists($details->snippet, 'categoryId')
                         &&
-                        $details->snippet->categoryId !== '10' // музыка
-                        &&
-                        $details->snippet->categoryId !== '24'){ //развлечения
+                        $details->snippet->categoryId !== '10' ){// музыка
                         echo  $source_id . " skipped. wrong category: ".$details->snippet->categoryId." \n";
                         continue;
                     }

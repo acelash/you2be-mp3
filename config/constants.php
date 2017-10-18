@@ -13,10 +13,12 @@ return [
     "STATE_UNCHECKED" => 3,
     "STATE_CHECKED" => 5,
     "STATE_WITH_AUDIO" => 6,
+    "STATE_MOVED" => 7,
+    "STATE_HIDDEN" => 8,
     "STATE_SKIPPED" => 4,
     "YOUTUBE_GRABBER_PAGE" => 50,
     "YOUTUBE_GRABBER_PORTION" => 20,
-    'YOUTUBE_GRABBER_QUERY' => "miyagi, basta, imagine dragons, music",
+    'YOUTUBE_GRABBER_QUERY' => "official,video,клип",
     'STORE_VIEW_AFTER' => 2000, // milisecunde
     'LIKED_MOVIES_ON_PAGE' => 12,
     'MOVIES_CATALOG_ON_PAGE' => 24,
