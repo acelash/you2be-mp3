@@ -4,7 +4,7 @@
     <style>{!!file_get_contents(public_path('css/auth.css'))!!}</style>
 <div class="container">
     <div class="row">
-        <div class="col-md-4 col-md-offset-4 page_content">
+        {{--<div class="col-md-4 col-md-offset-4 page_content">
             <div class="panel panel-default">
                 <div class="panel-heading">@lang('words.register')</div>
                 <div class="panel-body">
@@ -79,7 +79,7 @@
                     </form>
                 </div>
             </div>
-        </div>
+        </div>--}}
     </div>
 </div>
 @endsection

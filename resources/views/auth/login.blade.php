@@ -21,18 +21,6 @@
                         @endif
 
                         <div class="or_div">@lang('words.login_with')</div>
-                        <div class="soc_icons">
-                            <a href="{{url('redirect/vkontakte')}}">
-                                <img src="{{asset('public/images/vk-social-logotype.png')}}">
-                            </a>
-                            <a href="{{url('redirect/google')}}">
-                                <img src="{{asset('public/images/Google-Plus-icon.png')}}">
-                            </a>
-                            <a href="{{url('redirect/facebook')}}">
-                                <img src="{{asset('public/images/Facebook-icon.png')}}">
-                            </a>
-                        </div>
-                        <div class="or_div">или</div>
                         <form class="form auth" method="POST" action="{{ route('login') }}">
                             {{ csrf_field() }}
 
@@ -80,9 +68,9 @@
                                 <button type="submit" class="form_submit_btn">
                                     @lang('words.login')
                                 </button>
-                                <div class="signup_hint">
+                               {{-- <div class="signup_hint">
                                     Не зарегистрированы еще? Вам <a href="{{route('register')}}">сюда</a>.
-                                </div>
+                                </div>--}}
                             </div>
                         </form>
                     </div>

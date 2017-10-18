@@ -39,8 +39,7 @@ class SongsController extends Controller
         $columns = [
             "$table.id",
             "$table.title",
-            "$table.thumbnail_medium",
-            "$table.year",
+            "$table.thumbnail",
             "$table.created_at",
             "state",
         ];
@@ -59,7 +58,6 @@ class SongsController extends Controller
 
             $query->where(function ($q) use ($search, $table) {
                 $q->where("$table.title", 'like', "%{$search['value']}%");
-                $q->orWhere("$table.year", 'like', "%{$search['value']}%");
                 $q->orWhere("states.name", 'like', "%{$search['value']}%");
             });
         }
@@ -132,7 +130,7 @@ class SongsController extends Controller
             DB::commit();
 
             if (($input['save_mode'] == "check_and_next") || ($input['save_mode'] == "skip_and_next")) {
-                $nextUnchecked = (new Song())->where("state_id", config('constants.STATE_UNCHECKED'))->get(["id"])->first();
+                $nextUnchecked = (new Song())->where("state_id", config('constants.STATE_MOVED'))->get(["id"])->first();
                 if ($nextUnchecked) {
                     return redirect()->action(
                         'Admin\SongsController@show',
@@ -208,7 +206,7 @@ class SongsController extends Controller
         }
     }
     public function check(){
-        $nextUnchecked = (new Song())->where("state_id", config('constants.STATE_UNCHECKED'))->get(["id"])->first();
+        $nextUnchecked = (new Song())->where("state_id", config('constants.STATE_MOVED'))->get(["id"])->first();
         if($nextUnchecked){
             return redirect()->action(
                 'Admin\SongsController@show',

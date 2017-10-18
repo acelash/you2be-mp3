@@ -106,7 +106,8 @@ class Song extends Elegant
     {
         $query = $this->select(
             "songs.id",
-            "songs.source_title",
+            "songs.title",
+            "songs.thumbnail",
             "songs.created_at"
         )
             ->addSelect("states.name AS state")

@@ -6,13 +6,13 @@
  */--}}
 @extends('admin.layouts.admin')
 
-@section('pageTitle', trans("translate.movies") )
+@section('pageTitle', 'Songs' )
 
 @section('content')
     <div class="">
         <div class="page-title">
             <div class="title_left">
-                <h3>@lang("translate.movies")</h3>
+                <h3>Songs</h3>
             </div>
         </div>
 
@@ -27,11 +27,10 @@
                             <thead>
                             <tr>
                                 <th>Actiuni</th>
-                                <th>Name</th>
+                                <th>Title</th>
                                 <th>Medium thumb</th>
-                                <th>Year</th>
                                 <th>Data creare</th>
-                                <th>Stare</th>
+                                <th>State</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -68,28 +67,20 @@
                             return '<a target="_blank" href="'+data+'"><img src="'+data+'" class="mini-avatar-preview"></a>';
                         }
                     },
-                    null,
                     {"width": "50px"},
                     {"width": "50px"}
                 ],
                 "processing": true,
                 "serverSide": true,
-                "ajax": getBaseUrl() + "/admin/movies/datatable",
+                "ajax": getBaseUrl() + "admin/songs/datatable",
                 "iDisplayLength": 50,
-                "order": [[ 4,'desc' ]],
-                "createdRow": function (row, data, index) {
-                    var css_class = "state_active";
-                    if (data[5] == "Unchecked") {
-                        css_class = 'state_unchecked';
-                    }
-                    $('td', row).eq(5).addClass(css_class);
-                },
+                "order": [[ 4,'desc' ]]
             });
         });
 
         function renderActionsColumn (id) {
-            var html = '<a target="_blank" href="'+getBaseUrl()+"admin/movies/"+id+'"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</button></a>';
-            html += '<a onclick="return confirm(\'This can be undone. Are you sure ?\')" href="'+getBaseUrl()+"admin/movies/delete/"+id+'"><button class="btn btn-warning btn-xs"><i class="fa fa-remove" aria-hidden="true"></i> Remove</button></a>';
+            var html = '<a target="_blank" href="'+getBaseUrl()+"admin/songs/"+id+'"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</button></a>';
+            html += '<a onclick="return confirm(\'This can be undone. Are you sure ?\')" href="'+getBaseUrl()+"admin/songs/delete/"+id+'"><button class="btn btn-warning btn-xs"><i class="fa fa-remove" aria-hidden="true"></i> Remove</button></a>';
             return html;
         };
 

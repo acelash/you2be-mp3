@@ -32,7 +32,7 @@
                 @if(isset($locales))  var locales = <?=$locales?>;
         @endif
         function getBaseUrl() {
-            return "{{url('/')}}";
+            return "{{env('APP_URL')}}";
         }
         function trans(key) {
             var keys = key.split("."),
