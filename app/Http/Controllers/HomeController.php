@@ -21,7 +21,10 @@ class HomeController extends Controller
 
         $viewData = [
             'songs' => (new Song())->getAll()
-                ->where("state_id", config('constants.STATE_WITH_AUDIO'))
+                ->whereIn("state_id", [
+                    config('constants.STATE_WITH_AUDIO'),
+                    config('constants.STATE_MOVED'),
+                ])
                 ->leftJoin(DB::raw("(
                     SELECT 
                         entry_id,

@@ -19,6 +19,7 @@ class Kernel extends ConsoleKernel
         Commands\GetNewYoutubeMovies::class,
         Commands\GetAudioFromYoutube::class,
         Commands\OptimizeImages::class,
+        Commands\MoveFiles::class,
     ];
 
     protected $outputFile = 'app/schedules.txt';

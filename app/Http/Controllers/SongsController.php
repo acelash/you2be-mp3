@@ -37,6 +37,7 @@ class SongsController extends Controller
         $similar = (new Song())->getAll()
             ->whereIn("songs.state_id", [
                 config('constants.STATE_WITH_AUDIO'),
+                config('constants.STATE_MOVED')
             ])
             ->where("songs.id", "<>", DB::raw($entity->id))
             ->search($entity->title)->take(10)->get();
@@ -64,6 +65,7 @@ class SongsController extends Controller
             })
             ->whereIn("songs.state_id", [
                 config('constants.STATE_WITH_AUDIO'),
+                config('constants.STATE_MOVED')
             ])
             ->paginate(50);
 
@@ -94,6 +96,7 @@ class SongsController extends Controller
         $songs = (new Song())->getAll()
             ->whereIn("songs.state_id", [
                 config('constants.STATE_WITH_AUDIO'),
+                config('constants.STATE_MOVED')
             ])
             ->search($query)->paginate(50);
 
@@ -110,7 +113,10 @@ class SongsController extends Controller
         $viewData = [
             'sorted' => 'new',
             'songs' => (new Song())->getAll()
-                ->where("state_id", config('constants.STATE_WITH_AUDIO'))
+                ->whereIn("state_id", [
+                    config('constants.STATE_WITH_AUDIO'),
+                    config('constants.STATE_MOVED'),
+                ])
                 ->orderBy("source_created_at", "DESC")
                 ->paginate(50),
             'hot_tags' => (new Tag())->getHotTags()->take(config("constants.HOT_TAGS_TOTAL"))->get()
@@ -127,7 +133,10 @@ class SongsController extends Controller
         $viewData = [
             'sorted' => 'popular',
             'songs' => (new Song())->getAll()
-                ->where("state_id", config('constants.STATE_WITH_AUDIO'))
+                ->whereIn("state_id", [
+                    config('constants.STATE_WITH_AUDIO'),
+                    config('constants.STATE_MOVED'),
+                ])
                 ->leftJoin(DB::raw("(
                     SELECT 
                         entry_id,
