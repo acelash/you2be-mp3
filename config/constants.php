@@ -18,7 +18,7 @@ return [
     "STATE_SKIPPED" => 4,
     "YOUTUBE_GRABBER_PAGE" => 50,
     "YOUTUBE_GRABBER_PORTION" => 20,
-    'YOUTUBE_GRABBER_QUERY' => "official,video,клип",
+    'YOUTUBE_GRABBER_QUERY' => "official video",
     'STORE_VIEW_AFTER' => 2000, // milisecunde
     'LIKED_MOVIES_ON_PAGE' => 12,
     'MOVIES_CATALOG_ON_PAGE' => 24,
