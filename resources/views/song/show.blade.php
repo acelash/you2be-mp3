@@ -47,7 +47,7 @@ else $metaLocale = "En_en";
                 </a>
                 <div class="song_tags">
                     @lang('words.song_tags')
-                    @foreach($entity->tags()->get() as $tag)
+                    @foreach($entity->tags()->take(7)->get() as $tag)
                         <a href="{{route('show_tag_'.$locale,[ 'slug' => prepareSlugUrl($tag->id,$tag->name)])}}"> {{$tag->name}} </a>
                     @endforeach
                 </div>

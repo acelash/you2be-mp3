@@ -25,6 +25,5 @@ return [
     'THUMBNAIL_MINI_HEIGHT' => 50, // px, facem resize la postere
     'THUMBNAIL_HEIGHT' => 200, // px, facem resize la postere
     'MOVIE_TEXT_PREVIEW' => 300, // cite litere din text se arata in preview
-    'NOW_WATCHING_TOTAL' => 15,
-    'DEFAULT_VIEW_MODE' => 1, // blocuri
+    'HOT_TAGS_TOTAL' => 50,
 ];

@@ -25,11 +25,11 @@ class Kernel extends ConsoleKernel
 
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('RemoveDrafts')->dailyAt('05:30')
+        /*$schedule->command('RemoveDrafts')->dailyAt('05:30')
             ->sendOutputTo(storage_path($this->outputFile))
             ->after(function () {
                 $this->saveLogs('RemoveDrafts');
-            });
+            });*/
         $schedule->command('getmovies')->hourly()
             ->sendOutputTo(storage_path($this->outputFile))
             ->after(function () {

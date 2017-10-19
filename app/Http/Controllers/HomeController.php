@@ -33,7 +33,7 @@ class HomeController extends Controller
                 ->orderBy("downloads.total", "DESC")
                 ->orderBy("views", "DESC")
                 ->paginate(50),
-            'hot_tags' => (new Tag())->getHotTags()->take(80)->get()
+            'hot_tags' => (new Tag())->getHotTags()->take(config("constants.HOT_TAGS_TOTAL"))->get()
 
         ];
         return $this->customResponse("home", $viewData);

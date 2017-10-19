@@ -44,7 +44,7 @@ class SongsController extends Controller
         $viewData = [
             'entity' => $entity,
             'similar' => $similar,
-            'hot_tags' => (new Tag())->getHotTags()->take(80)->get()
+            'hot_tags' => (new Tag())->getHotTags()->take(config("constants.HOT_TAGS_TOTAL"))->get()
         ];
         return $this->customResponse("{$this->templateDirectory}.show", $viewData);
     }
@@ -70,7 +70,7 @@ class SongsController extends Controller
         $viewData = [
             'entity' => $entity,
             'songs' => $songs,
-            'hot_tags' => (new Tag())->getHotTags()->take(50)->get()
+            'hot_tags' => (new Tag())->getHotTags()->take(config("constants.HOT_TAGS_TOTAL"))->get()
         ];
         return $this->customResponse("{$this->templateDirectory}.tag", $viewData);
     }
@@ -100,7 +100,7 @@ class SongsController extends Controller
         $viewData = [
             'query' => $query,
             'songs' => $songs,
-            'hot_tags' => (new Tag())->getHotTags()->take(80)->get()
+            'hot_tags' => (new Tag())->getHotTags()->take(config("constants.HOT_TAGS_TOTAL"))->get()
         ];
         return $this->customResponse("{$this->templateDirectory}.search", $viewData);
     }
@@ -113,7 +113,7 @@ class SongsController extends Controller
                 ->where("state_id", config('constants.STATE_WITH_AUDIO'))
                 ->orderBy("source_created_at", "DESC")
                 ->paginate(50),
-            'hot_tags' => (new Tag())->getHotTags()->take(80)->get()
+            'hot_tags' => (new Tag())->getHotTags()->take(config("constants.HOT_TAGS_TOTAL"))->get()
 
         ];
         return $this->customResponse("home", $viewData);
@@ -139,7 +139,7 @@ class SongsController extends Controller
                 ->orderBy("downloads.total", "DESC")
                 ->orderBy("views", "DESC")
                 ->paginate(50),
-            'hot_tags' => (new Tag())->getHotTags()->take(80)->get()
+            'hot_tags' => (new Tag())->getHotTags()->take(config("constants.HOT_TAGS_TOTAL"))->get()
 
         ];
         return $this->customResponse("home", $viewData);
