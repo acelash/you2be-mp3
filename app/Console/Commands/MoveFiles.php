@@ -16,48 +16,56 @@ class MoveFiles extends Command
 
     public function handle()
     {
+        //ini_set('display_errors', 1);
         echo "starting...\n";
         $startTime = time();
         $path = "/public/audio/";
-        $remotePath = "/www/s73204.smrtp.ru/songs/";
-
-        $ftp_server = config("constants.REMOTE_FTP_SERVER");
-        $ftp_username = config("constants.REMOTE_FTP_USERNAME");
-        $ftp_password = config("constants.REMOTE_FTP_PASSWORD");
 
         $songs = (new Song())
             ->where("state_id", config("constants.STATE_WITH_AUDIO"))
-            ->take(20)
+            ->take(30)
             ->get();
 
         if ($songs) {
 
             try {
-                // set up basic connection
-                $conn_id = ftp_connect($ftp_server);
-                ftp_pasv($conn_id, true);
-                // login with username and password
-                $login_result = ftp_login($conn_id, $ftp_username, $ftp_password);
 
                 foreach ($songs AS $song) {
-                    echo "processing " . $song->id." \n";
                     $file = base_path() .$path.basename($song->file_url);
-                    $remote_file = $remotePath.basename($song->file_url);
+                    echo "processing " . $file." \n";
 
-                    // upload a file
-                    if (ftp_put($conn_id, $remote_file, $file, FTP_ASCII)) {
+                    if (function_exists('curl_file_create')) { // php 5.5+
+                        $cFile = curl_file_create($file);
+                    } else { //
+                        $cFile = '@' . realpath($file);
+                    }
+                    $post =  array(
+                        'file' => $cFile,
+                        'key'  => md5(config("constants.REMOTE_SERVER_KEY").basename($song->file_url)),
+                        'name'  => $song->id,
+                    );
+                    $ch = curl_init();
+                    curl_setopt($ch, CURLOPT_URL,'http://s73204.smrtp.ru/move.php');
+                    curl_setopt($ch, CURLOPT_POST,1);
+                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                    curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+                    $result=curl_exec ($ch);
+                    curl_close ($ch);
+
+                    if($result == "done"){
                         $song->update([
                             'state_id'=> config("constants.STATE_MOVED"),
                             'file_url' => "http://s73204.smrtp.ru/songs/".basename($song->file_url)
                         ]);
+                        unlink($file);
                         echo "successfully uploaded {$song->id}\n";
                     } else {
                         echo "There was a problem while uploading {$song->id}\n";
+                        var_dump($result);
                     }
+                    sleep(3);
                 }
 
-                // close the connection
-                ftp_close($conn_id);
             } catch (Exception  $e) {
                 echo 'Error occurred: ', $e->getMessage(), "\n";
             }

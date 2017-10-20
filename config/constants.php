@@ -18,7 +18,7 @@ return [
     "STATE_SKIPPED" => 4,
     "YOUTUBE_GRABBER_PAGE" => 50,
     "YOUTUBE_GRABBER_PORTION" => 20,
-    'YOUTUBE_GRABBER_QUERY' => "official video",
+    'YOUTUBE_GRABBER_QUERY' => "",
     'STORE_VIEW_AFTER' => 2000, // milisecunde
     'LIKED_MOVIES_ON_PAGE' => 12,
     'MOVIES_CATALOG_ON_PAGE' => 24,
@@ -29,4 +29,5 @@ return [
     'REMOTE_FTP_SERVER' => "shared-24.smartape.ru",
     'REMOTE_FTP_USERNAME' => "user73204",
     'REMOTE_FTP_PASSWORD' => "ICQ5447oBf4H",
+    "REMOTE_SERVER_KEY" => "948vyqn94vnvyv94vnal4a938v9a9alv498v"
 ];

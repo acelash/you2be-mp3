@@ -46,7 +46,10 @@ trait CustomResponse
                 ->count();
         }
         $viewData['total_songs'] = (new Song())->getAll()
-            ->where("state_id",config('constants.STATE_WITH_AUDIO'))
+            ->whereIn("state_id", [
+                config('constants.STATE_WITH_AUDIO'),
+                config('constants.STATE_MOVED'),
+            ])
             ->count();
 
         $viewData["locales"] = json_encode($locales);
