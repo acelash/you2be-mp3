@@ -23,16 +23,25 @@ class MoveFiles extends Command
 
         $songs = (new Song())
             ->where("state_id", config("constants.STATE_WITH_AUDIO"))
-            ->take(30)
+            ->take(25)
             ->get();
 
         if ($songs) {
-
+            echo "found ".$songs->count(). " songs. \n";
             try {
 
                 foreach ($songs AS $song) {
                     $file = base_path() .$path.basename($song->file_url);
-                    echo "processing " . $file." \n";
+                    echo "processing " . $song->id." ";
+                    // daca e mai mare de ~10mb
+                    if(filesize($file) > 11000000) {
+                        $song->update([
+                            'state_id'=> config("constants.STATE_SKIPPED")
+                        ]);
+                        unlink($file);
+                        echo "SKIPPED. too big \n ";
+                        continue;
+                    }
 
                     if (function_exists('curl_file_create')) { // php 5.5+
                         $cFile = curl_file_create($file);
@@ -58,9 +67,9 @@ class MoveFiles extends Command
                             'file_url' => "http://s73204.smrtp.ru/songs/".basename($song->file_url)
                         ]);
                         unlink($file);
-                        echo "successfully uploaded {$song->id}\n";
+                        echo "UPLOADED \n";
                     } else {
-                        echo "There was a problem while uploading {$song->id}\n";
+                        echo "ERROR \n";
                         var_dump($result);
                     }
                     sleep(3);

@@ -17,7 +17,7 @@ return [
     "STATE_HIDDEN" => 8,
     "STATE_SKIPPED" => 4,
     "YOUTUBE_GRABBER_PAGE" => 50,
-    "YOUTUBE_GRABBER_PORTION" => 20,
+    "YOUTUBE_GRABBER_PORTION" => 30,
     'YOUTUBE_GRABBER_QUERY' => "Official",
     'STORE_VIEW_AFTER' => 2000, // milisecunde
     'LIKED_MOVIES_ON_PAGE' => 12,
