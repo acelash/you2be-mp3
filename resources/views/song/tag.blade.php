@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('pageTitle', " ".$entity->name.trans('words.download_listen'))
+@section('pageTitle', $entity->name." | ".trans('words.download_listen'))
 @section('pageDescription', trans('words.home_description'))
 
 

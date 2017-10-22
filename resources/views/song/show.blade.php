@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 <?php
-$seoTitle = $entity->title ." | ".config('app.name');
+$seoTitle = $entity->title ." | ".trans('words.download_listen');
 
-$seoDescription = trans("words.share_description_prefix")." ". $seoTitle;
+$seoDescription = trans("words.share_description_prefix")." ". $entity->title;
 $seoUrl = Request::url();
 $seoImg = $entity->thumbnail;
 if($locale == "ru") $metaLocale = 'RU_ru';
