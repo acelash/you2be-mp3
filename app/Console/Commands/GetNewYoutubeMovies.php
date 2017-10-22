@@ -16,6 +16,9 @@ class GetNewYoutubeMovies extends Command
 
     protected $signature = 'getmovies';
 
+    protected $chars  = 'qwertyuiopasdfghjklzxcvbnm';
+    protected $ru_chars  = 'йцукенгшщзхфывапролджэячсмитьбю';
+
     protected $wordsToReplace = [
         '(премьера клипа, 2017)',
         '(Новые Клипы 2017)',
@@ -35,9 +38,12 @@ class GetNewYoutubeMovies extends Command
         '[]',
         '[ ]',
         'Music Video',
-        'Official Lyric Video',
+        '(Official Lyrics Video)',
         '(Official Lyric Video)',
+        'Official Lyrics Video',
+        'Official Lyric Video',
         'With Lyrics',
+        'Lyrics',
         'Официальный Клип',
         'Клип',
     ];
@@ -45,6 +51,13 @@ class GetNewYoutubeMovies extends Command
     protected $inserted = 0;
 
     protected $description = '...';
+
+    private function getRandomQuery(){
+        $rand = rand(1,3);
+        $chars = $rand !== 1 ? $this->chars : $this->ru_chars;
+
+        return $chars[rand(0, strlen($chars)-1)].$chars[rand(0, strlen($chars)-1)];
+    }
 
     public function handle()
     {
@@ -54,20 +67,32 @@ class GetNewYoutubeMovies extends Command
         $goal = config("constants.YOUTUBE_GRABBER_PORTION");
         $pagesPassed = 0;
 
+        $randomQuery = $this->getRandomQuery();
+        echo "query = ".$randomQuery."\n";
+
         $params = array(
-            'q' => config("constants.YOUTUBE_GRABBER_QUERY"),
+            'q' => $randomQuery,//config("constants.YOUTUBE_GRABBER_QUERY"),
             'type' => 'video',
             'part' => 'id',//snippet
             'maxResults' => config("constants.YOUTUBE_GRABBER_PAGE"),
-            'order' => "date",
+            //'order' => "date",
             'videoCategoryId'=> '10' // music
         );
 
         $search = Youtube::searchAdvanced($params, true);
 
-        if (array_key_exists('results', $search)) {
+        if (array_key_exists('results', $search) && is_array($search['results'])) {
             $this->processSearchResults($search['results']);
             $pagesPassed++;
+        } else {
+            $randomQuery = $this->getRandomQuery();
+            $params['q'] = $randomQuery;
+            echo "no results, try again . query= ".$randomQuery." \n";
+            $search = Youtube::searchAdvanced($params, true);
+            if (array_key_exists('results', $search) && is_array($search['results'])) {
+                $this->processSearchResults($search['results']);
+                $pagesPassed++;
+            }
         }
 
         // Check if we have a pageToken
@@ -75,7 +100,14 @@ class GetNewYoutubeMovies extends Command
             $params['pageToken'] = $search['info']['nextPageToken'];
             $search = Youtube::searchAdvanced($params, true);
             if (array_key_exists('results', $search)) {
+                if(is_array($search['results']))
                 $this->processSearchResults($search['results']);
+                else {
+                    /*print_r($search);
+                    die('ERROR*****');*/
+                    echo "empty page. no more results.\n inserted: ".$this->inserted."videos \n";
+                    die();
+                }
             }
             $pagesPassed++;
         }
@@ -90,7 +122,7 @@ class GetNewYoutubeMovies extends Command
                 // ne uitam daca nu a fost parsat deja
                 $source_id = $video->id->videoId;
 
-                echo "processing " . $source_id . " . \n";
+                echo "processing " . $source_id . "... ";
 
                 $existing = (new Song())->where('source_id', $source_id)->count();
                 if ($existing) {
@@ -107,13 +139,13 @@ class GetNewYoutubeMovies extends Command
                 // votes
                 $details = Youtube::getVideoInfo($source_id);
                 if ($details) {
-                    echo "processing video ".$source_id." \n";
+                    //echo "processing ".$source_id." \n";
 
                     // salvam doar din categoria muzica
                     if(property_exists($details->snippet, 'categoryId')
                         &&
                         $details->snippet->categoryId !== '10' ){// музыка
-                        echo  $source_id . " skipped. wrong category: ".$details->snippet->categoryId." \n";
+                        echo  " skipped. wrong category: ".$details->snippet->categoryId." \n";
                         continue;
                     }
 
@@ -121,12 +153,12 @@ class GetNewYoutubeMovies extends Command
                     preg_match_all('/(\d+)/',$details->contentDetails->duration,$parts);
                     $duration = $parts[0];
                     if(count($duration) !== 2) {
-                        echo  $source_id . " skipped. >1h duration \n";
+                        echo  " skipped. >1h duration \n";
                         continue;
                     }
                     // nu salvam daca are mai mult de n minute
                     if($duration[count($duration)-2] > 8) {
-                        echo  $source_id . " skipped. >8 min duration \n";
+                        echo  " skipped. >8 min duration \n";
                         continue;
                     }
 
@@ -185,7 +217,7 @@ class GetNewYoutubeMovies extends Command
                     $this->inserted++;
 
                     DB::commit();
-                    echo   " saved. \n";
+                    echo   " SAVED. \n";
 
                 } catch (\Exception $e) {
                     DB::rollback();
