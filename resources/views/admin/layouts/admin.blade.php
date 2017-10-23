@@ -98,9 +98,9 @@
                         <ul class="nav side-menu">
                             <li><a><i class="fa fa-file-movie-o"></i> {{trans('translate.songs')}} <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
-                                    <li><a href="{{url('admin/songs/check')}}">{{trans('translate.check_new_song')}}</a></li>
-                                    <li><a href="{{url('admin/songs/new')}}">{{trans('translate.add')}}</a></li>
-                                    <li><a href="{{url('admin/songs')}}">{{trans('translate.all_songs')}}</a></li>
+                                    <li><a href="{{url('admin/songs/approve')}}">Approve songs</a></li>
+                                 {{--   <li><a href="{{url('admin/songs/new')}}">{{trans('translate.add')}}</a></li>
+                                    <li><a href="{{url('admin/songs')}}">{{trans('translate.all_songs')}}</a></li>--}}
                                 </ul>
                             </li>
                             <li><a><i class="fa fa-users"></i> {{trans('translate.users')}} <span class="fa fa-chevron-down"></span></a>
@@ -108,18 +108,18 @@
                                     <li><a href="{{url('admin/users')}}">{{trans('translate.all_users')}}</a></li>
                                 </ul>
                             </li>
-                            <li><a><i class="fa fa-list"></i> @lang('translate.nomenclatures') <span class="fa fa-chevron-down"></span></a>
+                          {{--  <li><a><i class="fa fa-list"></i> @lang('translate.nomenclatures') <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
                                     <li><a href="{{url('admin/genres')}}">@lang('translate.genres')</a></li>
                                     <li><a href="{{url('admin/countries')}}">@lang('translate.countries')</a></li>
                                 </ul>
-                            </li>
+                            </li>--}}
 
-                            <li><a><i class="fa fa-comment"></i> {{trans('translate.comments')}} <span class="fa fa-chevron-down"></span></a>
+                            {{--<li><a><i class="fa fa-comment"></i> {{trans('translate.comments')}} <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
                                     <li><a href="{{url('admin/comments/moderate')}}">{{trans('translate.moderate')}}</a></li>
                                 </ul>
-                            </li>
+                            </li>--}}
                            {{-- <li><a><i class="fa  fa-file-text-o"></i> Pagini <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
                                     <li><a href="{{url('admin/pages')}}">Toate paginile</a></li>

@@ -92,7 +92,7 @@ class SongsController extends Controller
     {
         if (!$id) abort(404, "Entry not found.");
 
-        $entry = $this->getModel()->getById($id,true)->get()->first();
+        $entry = $this->getModel()->getById($id, true)->get()->first();
         $viewData = [
 
         ];
@@ -103,7 +103,7 @@ class SongsController extends Controller
 
     public function update(StoreSong $request, $id)
     {
-        $entry = $this->getModel()->getById($id,true)
+        $entry = $this->getModel()->getById($id, true)
             ->get()
             ->first();
 
@@ -116,7 +116,7 @@ class SongsController extends Controller
         DB::beginTransaction();
         try {
 
-            switch ($input['save_mode']){
+            switch ($input['save_mode']) {
                 case "skip_and_next":
                     $data['state_id'] = config('constants.STATE_SKIPPED');
                     break;
@@ -173,7 +173,7 @@ class SongsController extends Controller
     public function destroy($id)
     {
         $entry = $this->getModel()->find($id);
-        if(!$entry)  return redirect()->back()->with(["success" => false, "message" => "not found "]);
+        if (!$entry) return redirect()->back()->with(["success" => false, "message" => "not found "]);
 
         DB::beginTransaction();
         try {
@@ -182,9 +182,9 @@ class SongsController extends Controller
             DB::commit();
             if ($count) {
                 if ($this->request->get('no_return')) {
-                    if($this->request->get('next_unckecked')){
+                    if ($this->request->get('next_unckecked')) {
                         $nextUnchecked = (new Movie())->where("state_id", config('constants.STATE_UNCHECKED'))->get(["id"])->first();
-                        if($nextUnchecked){
+                        if ($nextUnchecked) {
                             return redirect()->action(
                                 'Admin\SongsController@show',
                                 ['id' => $nextUnchecked->id]
@@ -202,18 +202,41 @@ class SongsController extends Controller
             }
         } catch (\Exception $e) {
             DB::rollback();
-            return redirect()->back()->with(["success" => false, "message" =>$e->getMessage()]);
+            return redirect()->back()->with(["success" => false, "message" => $e->getMessage()]);
         }
     }
-    public function check(){
-        $nextUnchecked = (new Song())->where("state_id", config('constants.STATE_MOVED'))->get(["id"])->first();
-        if($nextUnchecked){
-            return redirect()->action(
-                'Admin\SongsController@show',
-                ['id' => $nextUnchecked->id]
-            );
+
+    public function approve()
+    {
+        $viewData = [];
+        $viewData['songs'] = (new Song())
+            ->getAll()
+            ->whereIn("state_id", [
+                config('constants.STATE_MOVED'),
+                config('constants.STATE_WITH_AUDIO')
+            ])
+            ->where("approved", 0)
+            ->orderBy("songs.id", "ASC")
+            ->take(50)
+            ->get();
+
+        return $this->customResponse($this->templateDirectory . "approve", $viewData);
+    }
+
+    public function storeApprove($id, $type)
+    {
+        $song = (new Song())->find($id);
+        if ($type == 1) {
+            $song->update(['approved' => 1]);
+            return [
+                'status' => 'skipped'
+            ];
         } else {
-            return redirect("admin/movies")->with(["success" => true, "message" => "No unchecked songs."]);
+            $song->update(['approved' => 1, "state_id" => config('constants.STATE_SKIPPED')]);
+            return [
+                'status' => 'approved'
+            ];
         }
     }
+
 }

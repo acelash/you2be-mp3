@@ -72,49 +72,14 @@ Route::group(
         Route::get('users/delete/{id}', 'UsersController@destroy')->where('id', '[0-9]+');
         Route::get('users/datatable', 'UsersController@datatable');
 
-        Route::get('pages', 'PagesController@index');
-        Route::post('pages', 'PagesController@store');
-        Route::get('pages/new', 'PagesController@showAddForm');
-        Route::get('pages/{id}', 'PagesController@show')->where('id', '[0-9]+');
-        Route::post('pages/{id}', 'PagesController@update')->where('id', '[0-9]+');
-        Route::get('pages/delete/{id}', 'PagesController@destroy')->where('id', '[0-9]+');
-        Route::get('pages/datatable', 'PagesController@datatable');
-
-        Route::get('genres', 'GenresController@index');
-        Route::post('genres', 'GenresController@store');
-        Route::get('genres/new', 'GenresController@showAddForm');
-        Route::get('genres/{id}', 'GenresController@show')->where('id', '[0-9]+');
-        Route::post('genres/{id}', 'GenresController@update')->where('id', '[0-9]+');
-        Route::get('genres/delete/{id}', 'GenresController@destroy')->where('id', '[0-9]+');
-        Route::get('genres/datatable', 'GenresController@datatable');
-
-        Route::get('countries', 'CountriesController@index');
-        Route::post('countries', 'CountriesController@store');
-        Route::get('countries/new', 'CountriesController@showAddForm');
-        Route::get('countries/{id}', 'CountriesController@show')->where('id', '[0-9]+');
-        Route::post('countries/{id}', 'CountriesController@update')->where('id', '[0-9]+');
-        Route::get('countries/delete/{id}', 'CountriesController@destroy')->where('id', '[0-9]+');
-        Route::get('countries/datatable', 'CountriesController@datatable');
-
-        Route::get('banners', 'BannersController@index');
-        Route::post('banners/{slug}', 'BannersController@update');
-
-        Route::get('prices', 'PricesController@index');
-        Route::post('prices/{slug}', 'PricesController@update');
-
         Route::get('songs', 'SongsController@index');
-        Route::get('songs/check', 'SongsController@check');
+        Route::get('songs/approve', 'SongsController@approve');
+        Route::get('songs/store_approve/{id}/{type}', 'SongsController@storeApprove');
         Route::get('songs/new', 'SongsController@storeDraft');
         Route::get('songs/{id}', 'SongsController@show')->where('id', '[0-9]+');
         Route::post('songs/{id}', 'SongsController@update')->where('id', '[0-9]+');
         Route::get('songs/delete/{id}', 'SongsController@destroy')->where('id', '[0-9]+');
         Route::get('songs/datatable', 'SongsController@datatable');
-
-        Route::get('comments/moderate', 'CommentsController@moderate');
-        Route::get('comments/approve/{id}', 'CommentsController@approve')->where('id', '[0-9]+');
-        Route::get('comments/delete/{id}', 'CommentsController@destroy')->where('id', '[0-9]+');
-        Route::get('comments/block/{id}', 'CommentsController@block')->where('id', '[0-9]+');
-
     }
 );
 
