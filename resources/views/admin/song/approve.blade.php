@@ -6,10 +6,12 @@
 @section('content')
     <style>{!!file_get_contents(public_path('css/homepage.css'))!!}</style>
     <style>
-        .songs {
+       /* .songs {
             margin-top: 20px;
-        }
-
+        }*/
+       .song_name {
+           max-width: 700px;
+       }
         .song_approve, .song_skip {
             width: 90px;
             margin: 0 10px 0;
@@ -27,9 +29,37 @@
         .song_skip {
             background: orangered;
         }
+        .song_poster { float: none;}
+        .approve_box,.approve_label {
+            margin: 15px 0;
+            padding: 0;
+            vertical-align: top;
+        }
+        .approve_box {
+            /*display: none;*/
+        }
+        .approve_label {
+           /* width: 50px;
+            height: 35px;
+            background: gray;*/
+        }
+        .approve_all {
+            margin: 5px;
+            color: white;
+            background: green;
+            padding: 6px 12px;
+            text-align: center;
+            outline: none;
+            border: none;
+        }
     </style>
     @include('partials.functions')
     <script>
+        function select4approving(track) {
+            var event = track.onclick.arguments[0];
+            event.stopPropagation();
+            return true;
+        }
         function approveSong(track, track_id) {
             var event = track.onclick.arguments[0];
             event.stopPropagation();
@@ -55,17 +85,26 @@
                 }
             });
         }
+        function approveChecked() {
+            var checkedSongs = $(".songs input[type='checkbox']:checked");
+            $.each(checkedSongs,function (i,e) {
+                storeModeration($(e).val(), 1);
+            });
+        }
     </script>
     <div class="container page_content">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 track_list">
+                <button class="approve_all" onclick="approveChecked()">Approve checked</button>
                 <ul class="songs">
                     @forelse($songs as $song)
                         <li id="song_{{$song->id}}">
-                            <div data-song_id="{{$song->id}}" data-source="{{asset($song->file_url)}}"
-                                 onclick="return playTrack(this)"
+                            <div data-song_id="{{$song->id}}"  data-source="{{asset($song->file_url)}}" onclick="return playTrack(this)"
                                  class="track @if($loop->first) track-default @endif ">
-                                <div class="song_poster" style="background-image: url('{{$song->thumbnail_mini}}')">
+                                <label onclick="return select4approving(this)" class="approve_label" for="song_{{$song->id}}">
+                                    <input checked onclick="return select4approving(this)" id="song_{{$song->id}}" type="checkbox" class="approve_box" value="{{$song->id}}">
+                                </label>
+                                <div class="song_poster"  style="background-image: url('{{$song->thumbnail_mini}}')">
                                     <img class="play" src="{{asset('public/images/play-button_white.png')}}" alt="Play">
                                     <img class="pause" src="{{asset('public/images/pause_white.png')}}" alt="Pause">
                                     <div class="song_poster_cover"></div>
@@ -93,7 +132,7 @@
                         <li>No songs</li>
                     @endforelse
                 </ul>
-
+                <button class="approve_all" onclick="approveChecked()">Approve checked</button>
             </div>
         </div>
         @include("partials.footer")

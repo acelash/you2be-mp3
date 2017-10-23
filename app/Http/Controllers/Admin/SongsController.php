@@ -216,7 +216,7 @@ class SongsController extends Controller
                 config('constants.STATE_WITH_AUDIO')
             ])
             ->where("approved", 0)
-            ->orderBy("songs.id", "ASC")
+            ->orderBy("songs.title", "ASC")
             ->take(50)
             ->get();
 
