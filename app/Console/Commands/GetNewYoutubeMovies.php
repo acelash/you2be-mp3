@@ -46,6 +46,13 @@ class GetNewYoutubeMovies extends Command
         'Lyrics',
         'Официальный Клип',
         'Клип',
+        '(Audio)',
+        '(Audio )',
+        '( Audio )',
+        '[Audio]',
+        '[Audio ]',
+        '[ Audio ]',
+
     ];
 
     protected $inserted = 0;
@@ -61,21 +68,22 @@ class GetNewYoutubeMovies extends Command
 
     public function handle()
     {
-        echo "starting...\n";
+        //echo "starting...\n";
         $startTime = time();
 
         $goal = config("constants.YOUTUBE_GRABBER_PORTION");
         $pagesPassed = 0;
 
         $randomQuery = $this->getRandomQuery();
-        echo "query = ".$randomQuery."\n";
+        echo "q=".$randomQuery." \n";
 
         $params = array(
             'q' => $randomQuery,//config("constants.YOUTUBE_GRABBER_QUERY"),
             'type' => 'video',
             'part' => 'id',//snippet
+            //'videoDuration' => 'long',// medium 4 .. 20 min
             'maxResults' => config("constants.YOUTUBE_GRABBER_PAGE"),
-            //'order' => "date",
+            'order' => "date",
             'videoCategoryId'=> '10' // music
         );
 
@@ -87,7 +95,7 @@ class GetNewYoutubeMovies extends Command
         } else {
             $randomQuery = $this->getRandomQuery();
             $params['q'] = $randomQuery;
-            echo "no results, try again . query= ".$randomQuery." \n";
+            echo "no results, try again . q= ".$randomQuery." \n";
             $search = Youtube::searchAdvanced($params, true);
             if (array_key_exists('results', $search) && is_array($search['results'])) {
                 $this->processSearchResults($search['results']);
@@ -103,9 +111,7 @@ class GetNewYoutubeMovies extends Command
                 if(is_array($search['results']))
                 $this->processSearchResults($search['results']);
                 else {
-                    /*print_r($search);
-                    die('ERROR*****');*/
-                    echo "empty page. no more results.\n inserted: ".$this->inserted."videos \n";
+                    echo "no results.\n inserted: ".$this->inserted."videos \n";
                     die();
                 }
             }
@@ -122,11 +128,11 @@ class GetNewYoutubeMovies extends Command
                 // ne uitam daca nu a fost parsat deja
                 $source_id = $video->id->videoId;
 
-                echo "processing " . $source_id . "... ";
+                echo $source_id . " ";
 
                 $existing = (new Song())->where('source_id', $source_id)->count();
                 if ($existing) {
-                    echo "skipped. \n";
+                    echo "skip. \n";
                     continue;
                 }
                 //pregatim informatiile despre video
@@ -142,23 +148,33 @@ class GetNewYoutubeMovies extends Command
                     //echo "processing ".$source_id." \n";
 
                     // salvam doar din categoria muzica
-                    if(property_exists($details->snippet, 'categoryId')
+                   /* if(property_exists($details->snippet, 'categoryId')
                         &&
                         $details->snippet->categoryId !== '10' ){// музыка
                         echo  " skipped. wrong category: ".$details->snippet->categoryId." \n";
+                        continue;
+                    }*/
+
+                    if(strpos($details->contentDetails->duration,"H")){
+                        echo  " skip. > 1h \n";
+                        continue;
+                    }
+
+                    if(!strpos($details->contentDetails->duration,"M")){
+                        echo  " skip. < 1m \n";
                         continue;
                     }
 
                     //duration
                     preg_match_all('/(\d+)/',$details->contentDetails->duration,$parts);
                     $duration = $parts[0];
-                    if(count($duration) !== 2) {
+                    /*if(count($duration) !== 2) {
                         echo  " skipped. >1h duration \n";
                         continue;
-                    }
+                    }*/
                     // nu salvam daca are mai mult de n minute
-                    if($duration[count($duration)-2] > 8) {
-                        echo  " skipped. >8 min duration \n";
+                    if($duration[0] > 8) {
+                        echo  " skip. > 8 min \n";
                         continue;
                     }
 

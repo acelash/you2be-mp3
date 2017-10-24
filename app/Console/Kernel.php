@@ -46,11 +46,11 @@ class Kernel extends ConsoleKernel
             ->after(function () {
                 $this->saveLogs('GetAudioFromYoutube');
             });
-        $schedule->command('optimage')->daily()
+       /* $schedule->command('optimage')->daily()
             ->sendOutputTo(storage_path($this->outputFile))
             ->after(function () {
                 $this->saveLogs('OptimizeImages');
-            });
+            });*/
     }
 
     protected function saveLogs($scheduleName)

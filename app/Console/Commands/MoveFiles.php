@@ -17,7 +17,7 @@ class MoveFiles extends Command
     public function handle()
     {
         //ini_set('display_errors', 1);
-        echo "starting...\n";
+        //echo "starting...\n";
         $startTime = time();
         $path = "/public/audio/";
 
@@ -27,19 +27,19 @@ class MoveFiles extends Command
             ->get();
 
         if ($songs) {
-            echo "found ".$songs->count(). " songs. \n";
+            echo "found ".$songs->count(). ". \n";
             try {
 
                 foreach ($songs AS $song) {
                     $file = base_path() .$path.basename($song->file_url);
-                    echo "processing " . $song->id." ";
+                    echo  $song->id." ";
                     // daca e mai mare de ~10mb
                     if(filesize($file) > 11000000) {
                         $song->update([
                             'state_id'=> config("constants.STATE_SKIPPED")
                         ]);
                         unlink($file);
-                        echo "SKIPPED. too big \n ";
+                        echo "SKIP, too big. \n ";
                         continue;
                     }
 
@@ -64,10 +64,10 @@ class MoveFiles extends Command
                     if($result == "done"){
                         $song->update([
                             'state_id'=> config("constants.STATE_MOVED"),
-                            'file_url' => "http://s73204.smrtp.ru/songs/".basename($song->file_url)
+                            'file_url' => "http://s73204.smrtp.ru/get.php?id=".$song->id."&name=".$song->title
                         ]);
                         unlink($file);
-                        echo "UPLOADED \n";
+                        echo "UPLOADED. \n";
                     } else {
                         echo "ERROR \n";
                         var_dump($result);
