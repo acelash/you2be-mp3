@@ -26,16 +26,31 @@ class Kernel extends ConsoleKernel
 
     protected function schedule(Schedule $schedule)
     {
-        /*$schedule->command('RemoveDrafts')->dailyAt('05:30')
-            ->sendOutputTo(storage_path($this->outputFile))
-            ->after(function () {
-                $this->saveLogs('RemoveDrafts');
-            });*/
         $schedule->command('getmovies')->hourly()//->cron("*/15 * * * *")
             ->sendOutputTo(storage_path($this->outputFile))
             ->after(function () {
                 $this->saveLogs('GetNewYoutubeMovies');
             });
+
+        $schedule->command('getmovies "Official Audio"')->dailyAt('23:20')
+        ->sendOutputTo(storage_path($this->outputFile))
+            ->after(function () {
+                $this->saveLogs('GetNewYoutubeMovies');
+            });
+        $schedule->command('getmovies "Official Video"')->dailyAt('22:20')
+            ->sendOutputTo(storage_path($this->outputFile))
+            ->after(function () {
+                $this->saveLogs('GetNewYoutubeMovies');
+            });
+        $schedule->command('getmovies "Клип"')->dailyAt('21:20')
+            ->sendOutputTo(storage_path($this->outputFile))
+            ->after(function () {
+                $this->saveLogs('GetNewYoutubeMovies');
+            });
+
+
+
+
         $schedule->command('movemp3')->hourly()
             ->sendOutputTo(storage_path($this->outputFile))
             ->after(function () {
@@ -46,6 +61,8 @@ class Kernel extends ConsoleKernel
             ->after(function () {
                 $this->saveLogs('GetAudioFromYoutube');
             });
+
+
        /* $schedule->command('optimage')->daily()
             ->sendOutputTo(storage_path($this->outputFile))
             ->after(function () {

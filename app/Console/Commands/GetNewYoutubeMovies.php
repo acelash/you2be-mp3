@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\File;
 class GetNewYoutubeMovies extends Command
 {
 
-    protected $signature = 'getmovies';
+    protected $signature = "getmovies {search}";
 
     protected $chars  = 'qwertyuiopasdfghjklzxcvbnm';
     protected $ru_chars  = 'йцукенгшщзхфывапролджэячсмитьбю';
@@ -74,7 +74,7 @@ class GetNewYoutubeMovies extends Command
         $goal = config("constants.YOUTUBE_GRABBER_PORTION");
         $pagesPassed = 0;
 
-        $randomQuery = $this->getRandomQuery();
+        $randomQuery = $this->argument('search') ?: $this->getRandomQuery();
         echo "q=".$randomQuery." \n";
 
         $params = array(
@@ -147,14 +147,6 @@ class GetNewYoutubeMovies extends Command
                 if ($details) {
                     //echo "processing ".$source_id." \n";
 
-                    // salvam doar din categoria muzica
-                   /* if(property_exists($details->snippet, 'categoryId')
-                        &&
-                        $details->snippet->categoryId !== '10' ){// музыка
-                        echo  " skipped. wrong category: ".$details->snippet->categoryId." \n";
-                        continue;
-                    }*/
-
                     if(strpos($details->contentDetails->duration,"H")){
                         echo  " skip. > 1h \n";
                         continue;
@@ -168,18 +160,20 @@ class GetNewYoutubeMovies extends Command
                     //duration
                     preg_match_all('/(\d+)/',$details->contentDetails->duration,$parts);
                     $duration = $parts[0];
-                    /*if(count($duration) !== 2) {
-                        echo  " skipped. >1h duration \n";
-                        continue;
-                    }*/
+
                     // nu salvam daca are mai mult de n minute
                     if($duration[0] > 8) {
                         echo  " skip. > 8 min \n";
                         continue;
                     }
 
+
                     // scoated durata in sec
-                    $videoInfo['duration'] = $duration[0]*60+$duration[1];
+                    $videoInfo['duration'] = $duration[0]*60;
+
+                    if(count($duration) < 2) {
+                        $videoInfo['duration'] = $videoInfo['duration'] + $duration[1];
+                    }
 
                     $publishedAt = $details->snippet->publishedAt;
                     $publishedAt = substr($publishedAt, 0, strpos($publishedAt, 'T'));
