@@ -217,7 +217,7 @@ class SongsController extends Controller
             ])
             ->where("approved", 0)
             ->orderBy("songs.title", "ASC")
-            ->take(50)
+            ->take(100)
             ->get();
 
         return $this->customResponse($this->templateDirectory . "approve", $viewData);

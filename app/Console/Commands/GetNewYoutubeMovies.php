@@ -74,7 +74,7 @@ class GetNewYoutubeMovies extends Command
         $goal = config("constants.YOUTUBE_GRABBER_PORTION");
         $pagesPassed = 0;
 
-        $randomQuery = $this->argument('search') ?: $this->getRandomQuery();
+        $randomQuery = ($this->argument('search') !=='0')  ? $this->argument('search') : $this->getRandomQuery();
         echo "q=".$randomQuery." \n";
 
         $params = array(
