@@ -52,6 +52,10 @@ class GetNewYoutubeMovies extends Command
         '[Audio]',
         '[Audio ]',
         '[ Audio ]',
+        '[Official Audio]',
+        '(Official Audio)',
+        '( Official Audio )',
+        'Official Audio',
 
     ];
 
