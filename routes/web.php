@@ -61,7 +61,7 @@ Route::group(
     [
         'namespace' => 'Admin',
         'prefix' => 'admin',
-        'middleware' => ['auth', 'admin']
+        'middleware' => ['auth', 'admin','doNotCacheResponse']
     ],
     function () {
 

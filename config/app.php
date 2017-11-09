@@ -184,6 +184,7 @@ return [
         Intervention\Image\ImageServiceProvider::class,
 
         \SocialiteProviders\Manager\ServiceProvider::class, // pentru vk
+        Spatie\ResponseCache\ResponseCacheServiceProvider::class,
     ],
 
     /*
@@ -236,7 +237,7 @@ return [
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'Youtube' => Alaouy\Youtube\Facades\Youtube::class,
         'Image' => Intervention\Image\Facades\Image::class,
-
+        'ResponseCache' => Spatie\ResponseCache\ResponseCacheFacade::class,
     ],
 
 ];
