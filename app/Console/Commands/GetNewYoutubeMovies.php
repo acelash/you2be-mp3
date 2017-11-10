@@ -171,6 +171,12 @@ class GetNewYoutubeMovies extends Command
                         continue;
                     }
 
+                    // nu salvam daca are mai putin de n minute
+                    if($duration[0] < 2) {
+                        echo  " skip. < 2 min \n";
+                        continue;
+                    }
+
 
                     // scoated durata in sec
                     $videoInfo['duration'] = $duration[0]*60;

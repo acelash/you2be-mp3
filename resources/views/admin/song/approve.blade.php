@@ -12,7 +12,7 @@
        .song_name {
            max-width: 700px;
        }
-        .song_approve, .song_skip {
+        .song_approve, .song_skip,.song_duration {
             width: 90px;
             margin: 0 10px 0;
             cursor: pointer;
@@ -21,7 +21,9 @@
             text-align: center;
             color: white;
         }
-
+        .song_duration {
+            color: #0f0f0f;
+        }
         .song_approve {
             background: green;
         }
@@ -112,12 +114,7 @@
                                 </div>
                                 <span class="song_name">{{$song->title}}</span>
 
-                                <a class="song_download" onclick="downloadSong(this,{{$song->id}})"
-                                   download="{{$song->title}} [mp3cloud.su].mp3"
-                                   {{--target="_blank"--}} href="{{asset($song->file_url)}}">
-                                    <img class="off" src="{{asset('public/images/download.png')}}" alt="Download">
-                                    <img class="on" src="{{asset('public/images/download2.png')}}" alt="Download">
-                                </a>
+
                                 <a class="song_video" onclick="showSong(this)"
                                    href="{{route('show_song_'.$locale,[ 'slug' => prepareSlugUrl($song->id,$song->title)])}}">
                                     <img class="off" src="{{asset('public/images/video.png')}}" alt="Watch video">
@@ -126,6 +123,7 @@
 
                                 <a class="song_approve" onclick="approveSong(this,{{$song->id}})"> APPROVE </a>
                                 <a class="song_skip" onclick="skipSong(this,{{$song->id}})"> SKIP </a>
+                                <a class="song_duration" >{{gmdate("i:s", $song->duration)}} </a>
                             </div>
                         </li>
                     @empty
