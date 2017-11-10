@@ -13,8 +13,8 @@
 
 Auth::routes();
 
-Route::get('/redirect/{provider}', 'SocialAuthController@redirect');
-Route::get('/callback/{provider}', 'SocialAuthController@callback');
+/*Route::get('/redirect/{provider}', 'SocialAuthController@redirect');
+Route::get('/callback/{provider}', 'SocialAuthController@callback');*/
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/lang/{slug}', 'HomeController@switchLang')->name('lang');

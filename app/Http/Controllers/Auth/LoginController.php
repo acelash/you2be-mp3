@@ -30,7 +30,7 @@ class LoginController extends Controller
      */
     protected $maxLoginAttempts = 3;
     protected $lockoutTime = 1;
-    protected $redirectTo = '/';
+    protected $redirectTo = '/admin/home';
 
     /**
      * Create a new controller instance.
