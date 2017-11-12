@@ -177,11 +177,10 @@ class GetNewYoutubeMovies extends Command
                         continue;
                     }
 
-
                     // scoated durata in sec
                     $videoInfo['duration'] = $duration[0]*60;
 
-                    if(count($duration) < 2) {
+                    if(count($duration) > 1) {
                         $videoInfo['duration'] = $videoInfo['duration'] + $duration[1];
                     }
 
