@@ -212,9 +212,19 @@ class GetNewYoutubeMovies extends Command
                         if(property_exists($details->statistics, 'likeCount')){
                             $videoInfo['likes'] = $details->statistics->likeCount;
                             $videoInfo['dislikes'] = $details->statistics->dislikeCount;
+
+                            if($videoInfo['likes'] < 1) {
+                                echo  " skip. 0 likes \n";
+                                continue;
+                            }
                         }
                         if(property_exists($details->statistics, 'viewCount')){
                             $videoInfo['views'] = $details->statistics->viewCount;
+
+                            if($videoInfo['views'] < 20) {
+                                echo  " skip. < 20 views \n";
+                                continue;
+                            }
                         }
                     }
                 }
