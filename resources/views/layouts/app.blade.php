@@ -21,6 +21,7 @@
     <meta name="description" content="@yield('pageDescription')"/>
     <meta name="keywords" content="@lang('words.keywords')"/>
     <meta name='wmail-verification' content='429a1142b5e041cc8aa8ba8616c58508' />
+    <meta name="propeller" content="b34a9b4d77318c3433713099e6cc8e02" />
 @yield('pageMeta')
 
 <!-- Styles -->

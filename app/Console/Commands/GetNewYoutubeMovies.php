@@ -87,7 +87,7 @@ class GetNewYoutubeMovies extends Command
             'part' => 'id',//snippet
             //'videoDuration' => 'long',// medium 4 .. 20 min
             'maxResults' => config("constants.YOUTUBE_GRABBER_PAGE"),
-            'order' => "date",
+            'order' => "viewCount", //date,rating
             'videoCategoryId'=> '10' // music
         );
 
@@ -213,16 +213,16 @@ class GetNewYoutubeMovies extends Command
                             $videoInfo['likes'] = $details->statistics->likeCount;
                             $videoInfo['dislikes'] = $details->statistics->dislikeCount;
 
-                            if($videoInfo['likes'] < 1) {
-                                echo  " skip. 0 likes \n";
+                            if($videoInfo['likes'] < config("constants.MINIM_LIKES")) {
+                                echo  " skip. <".config("constants.MINIM_LIKES")." likes \n";
                                 continue;
                             }
                         }
                         if(property_exists($details->statistics, 'viewCount')){
                             $videoInfo['views'] = $details->statistics->viewCount;
 
-                            if($videoInfo['views'] < 20) {
-                                echo  " skip. < 20 views \n";
+                            if($videoInfo['views'] < config("constants.MINIM_VIEWS")) {
+                                echo  " skip. < ".config("constants.MINIM_VIEWS")." views \n";
                                 continue;
                             }
                         }
