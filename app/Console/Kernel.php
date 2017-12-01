@@ -26,7 +26,7 @@ class Kernel extends ConsoleKernel
 
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('getmovies 0')->hourly()//->cron("*/15 * * * *")
+        $schedule->command('getmovies 0')->dailyAt('01:20')//->cron("*/15 * * * *")
             ->sendOutputTo(storage_path($this->outputFile))
             ->after(function () {
                 $this->saveLogs('GetNewYoutubeMovies');
@@ -51,12 +51,12 @@ class Kernel extends ConsoleKernel
 
 
 
-        $schedule->command('movemp3')->hourly()
+        $schedule->command('movemp3')->dailyAt('02:20')
             ->sendOutputTo(storage_path($this->outputFile))
             ->after(function () {
                 $this->saveLogs('MoveFiles');
             });
-        $schedule->command('getmp3')->hourly()
+        $schedule->command('getmp3')->dailyAt('03:20')
             ->sendOutputTo(storage_path($this->outputFile))
             ->after(function () {
                 $this->saveLogs('GetAudioFromYoutube');
