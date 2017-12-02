@@ -79,6 +79,7 @@ class Song extends Elegant
                 config('constants.STATE_DRAFT'),
                 config('constants.STATE_UNCHECKED'),
                 config('constants.STATE_SKIPPED'),
+                config('constants.STATE_HIDDEN'),
             ]);
         }
 
@@ -96,6 +97,7 @@ class Song extends Elegant
                 config('constants.STATE_DRAFT'),
                 config('constants.STATE_UNCHECKED'),
                 config('constants.STATE_SKIPPED'),
+                config('constants.STATE_HIDDEN'),
             ]);
         }
 
@@ -115,7 +117,8 @@ class Song extends Elegant
             ->join("states", "states.id", "=", "songs.state_id")
             ->whereNotIn("songs.state_id", [
                 config('constants.STATE_DRAFT'),
-                config('constants.STATE_SKIPPED')
+                config('constants.STATE_SKIPPED'),
+                config('constants.STATE_HIDDEN')
             ]);
 
 
@@ -128,6 +131,7 @@ class Song extends Elegant
 
         $query->whereIn("songs.state_id", [
             config('constants.STATE_WITH_AUDIO'),
+            config('constants.STATE_MOVED'),
         ]);
 
         $title = trim($song->title);

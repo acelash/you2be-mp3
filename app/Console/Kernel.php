@@ -20,6 +20,7 @@ class Kernel extends ConsoleKernel
         Commands\GetAudioFromYoutube::class,
         Commands\OptimizeImages::class,
         Commands\MoveFiles::class,
+        Commands\RemoveSkippedFiles::class,
     ];
 
     protected $outputFile = 'app/schedules.txt';
