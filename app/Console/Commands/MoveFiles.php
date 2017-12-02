@@ -6,6 +6,7 @@ namespace App\Console\Commands;
 use App\Models\Movie;
 use App\Models\Song;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\File;
 
 class MoveFiles extends Command
 {
@@ -33,6 +34,15 @@ class MoveFiles extends Command
                 foreach ($songs AS $song) {
                     $file = base_path() .$path.basename($song->file_url);
                     echo  $song->id." ";
+
+                    if(!File::exists($file)){
+                        $song->update([
+                            'state_id'=> config("constants.STATE_SKIPPED")
+                        ]);
+                        echo "SKIP, no file found. \n ";
+                        continue;
+                    }
+
                     // daca e mai mare de ~10mb
                     if(filesize($file) > 11000000) {
                         $song->update([

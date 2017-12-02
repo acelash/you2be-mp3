@@ -52,18 +52,22 @@ class Kernel extends ConsoleKernel
 
 
 
-        $schedule->command('movemp3')->dailyAt('02:20')
+        $schedule->command('movemp3')->hourly()
             ->sendOutputTo(storage_path($this->outputFile))
             ->after(function () {
                 $this->saveLogs('MoveFiles');
             });
-        $schedule->command('getmp3')->dailyAt('03:20')
+        $schedule->command('getmp3')->hourly()
             ->sendOutputTo(storage_path($this->outputFile))
             ->after(function () {
                 $this->saveLogs('GetAudioFromYoutube');
             });
 
-
+        $schedule->command('removemp3')->everyFiveMinutes()//twiceDaily(1, 13)
+            ->sendOutputTo(storage_path($this->outputFile))
+            ->after(function () {
+                $this->saveLogs('RemoveSkippedFiles');
+            });
        /* $schedule->command('optimage')->daily()
             ->sendOutputTo(storage_path($this->outputFile))
             ->after(function () {
