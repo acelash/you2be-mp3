@@ -92,28 +92,19 @@
         loopMode = false;
 
     $(document).ready(function () {
-        // Instance jPlayer
         my_jPlayer.jPlayer({
             ready: function () {
-                //$(".track-default").click();
             },
             timeupdate: function (event) {
                 var percentage = event.jPlayer.status.currentPercentAbsolute,
                     filled = parseInt(percentage * timeBarWidth / 100),
                     currentTime = secondsToTime(parseInt(event.jPlayer.status.currentTime)),
                     durationTime = secondsToTime(parseInt(event.jPlayer.status.duration));
-                console.log('percentage=',percentage);
-                console.log('filled=',filled);
                 $('.time_bar_filled').css('width', filled + "px");
                 $('.current-time').html(pad(currentTime.m) + ":" + pad(currentTime.s));
                 $('.player_duration').html(pad(durationTime.m) + ":" + pad(durationTime.s));
             },
-            /* play: function (event) {
-             my_playState.text(opt_text_playing);
-             },
-             pause: function (event) {
-             my_playState.text(opt_text_selected);
-             },*/
+
             ended: function (event) {
 
                 // if loop mode, play again
@@ -270,7 +261,6 @@
 
     function scrollIfNotVisible(element){
         var offset = $(element).offset().top - $(window).scrollTop();
-        console.log('offset=',offset,'window.innerHeight=',window.innerHeight);
         if(offset > window.innerHeight){
             $('html,body').animate({scrollTop: offset}, 1000);
             return false;
