@@ -4,7 +4,7 @@
 @section('pageDescription', trans('words.home_description'))
 
 @section('content')
-    <style>{!!file_get_contents(public_path('css/homepage.css'))!!}</style>
+    <style>{!!file_get_contents(public_path('css/homepage.min.css'))!!}</style>
     <div class="container page_content">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">

@@ -13,9 +13,6 @@
 
 Auth::routes();
 
-/*Route::get('/redirect/{provider}', 'SocialAuthController@redirect');
-Route::get('/callback/{provider}', 'SocialAuthController@callback');*/
-
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/lang/{slug}', 'HomeController@switchLang')->name('lang');
 Route::get('/song/store_download/{id}', 'SongsController@storeDownload')->name('store_download');
@@ -66,11 +63,6 @@ Route::group(
     function () {
 
         Route::get('home', 'AdminController@index')->name('admin_panel');
-        Route::get('users', 'UsersController@index');
-        Route::get('users/{id}', 'UsersController@show')->where('id', '[0-9]+');
-        Route::post('users/{id}', 'UsersController@update')->where('id', '[0-9]+');
-        Route::get('users/delete/{id}', 'UsersController@destroy')->where('id', '[0-9]+');
-        Route::get('users/datatable', 'UsersController@datatable');
 
         Route::get('songs', 'SongsController@index');
         Route::get('songs/approve', 'SongsController@approve');

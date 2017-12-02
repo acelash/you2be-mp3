@@ -26,8 +26,7 @@
 
 <!-- Styles -->
     <style>{!!file_get_contents(public_path('css/bootstrap.min.css'))!!}</style>
-    <style>{!!file_get_contents(public_path('css/palette.css'))!!}</style>
-    <style>{!!file_get_contents(public_path('css/general.css'))!!}</style>
+    <style>{!!file_get_contents(public_path('css/general.min.css'))!!}</style>
 
     <script>
                 @if(isset($locales))  var locales = <?=$locales?>;

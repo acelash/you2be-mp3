@@ -1,4 +1,4 @@
-<style>{!!file_get_contents(public_path('css/player.css'))!!}</style>
+<style>{!!file_get_contents(public_path('css/player.min.css'))!!}</style>
 <div id="jquery_jplayer" style="width: 0; height: 0;"></div>
 <div style="" class="sticky_player_container">
     <div id="jp_container" class="sticky_player">

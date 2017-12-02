@@ -63,7 +63,7 @@ class Kernel extends ConsoleKernel
                 $this->saveLogs('GetAudioFromYoutube');
             });
 
-        $schedule->command('removemp3')->everyFiveMinutes()//twiceDaily(1, 13)
+        $schedule->command('removemp3')->everyTenMinutes()//twiceDaily(1, 13)
             ->sendOutputTo(storage_path($this->outputFile))
             ->after(function () {
                 $this->saveLogs('RemoveSkippedFiles');

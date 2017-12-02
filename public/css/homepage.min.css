@@ -1,0 +1,1 @@
+.inline_share{height:30px;float:right;width:115px;margin:4px 5px 0;display:none;transition:300ms}.current_track>.duration,.track:hover>.duration{display:none}.current_track>.inline_share,.track:hover>.inline_share{display:inline-block}.inline_share a{display:inline-block}.inline_share a img{width:25px}.inline_share a:hover>img{opacity:.8}

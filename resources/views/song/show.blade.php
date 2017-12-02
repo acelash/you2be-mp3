@@ -21,8 +21,8 @@ else $metaLocale = "En_en";
     <meta property="og:image" content="{{$seoImg}}"/>
 @endsection
 @section('content')
-    <style>{!!file_get_contents(public_path('css/fullstory.css'))!!}</style>
-    <style>{!!file_get_contents(public_path('css/homepage.css'))!!}</style>
+    <style>{!!file_get_contents(public_path('css/fullstory.min.css'))!!}</style>
+    <style>{!!file_get_contents(public_path('css/homepage.min.css'))!!}</style>
     @include('partials.functions')
     <div class="container page_content">
         <div class="row">
