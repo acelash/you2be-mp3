@@ -20,8 +20,8 @@
             js.src = "//connect.facebook.net/{{$fbLocale}}/sdk.js#xfbml=1&version=v2.10&appId=275068006343766";
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));</script>
-    <div style="margin: 0 0 20px;" class="fb-page" data-href="https://www.facebook.com/mp3cloud.su" data-tabs="timeline" data-small-header="false"
-         data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
+    <div style="margin: 0 0 20px;" class="fb-page" data-href="https://www.facebook.com/mp3cloud.su" data-small-header="true"
+         data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="false">
         <blockquote cite="https://www.facebook.com/mp3cloud.su" class="fb-xfbml-parse-ignore"><a
                     href="https://www.facebook.com/mp3cloud.su">mp3cloud.su</a></blockquote>
     </div>
