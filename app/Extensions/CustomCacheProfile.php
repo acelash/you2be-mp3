@@ -17,6 +17,13 @@ class CustomCacheProfile extends CacheAllSuccessfulGetRequests
      */
     public function shouldCacheRequest(Request $request)
     {
+        if(!isset($request->route()->action)
+            ||
+            !array_key_exists('as',$request->route()->action)
+            ||
+            !in_array($request->route()->action['as'],["show_song_en",'show_song_ru']))
+            return false;
+
         if ($request->ajax()) {
             return false;
         }
