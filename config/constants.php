@@ -30,6 +30,6 @@ return [
     'REMOTE_FTP_USERNAME' => "user73204",
     'REMOTE_FTP_PASSWORD' => "ICQ5447oBf4H",
     "REMOTE_SERVER_KEY" => "948vyqn94vnvyv94vnal4a938v9a9alv498v",
-    "MINIM_VIEWS" => 100,
-    "MINIM_LIKES" => 1
+    "MINIM_VIEWS" => 50000,
+    "MINIM_LIKES" => 10
 ];
