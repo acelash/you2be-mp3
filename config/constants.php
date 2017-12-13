@@ -18,6 +18,7 @@ return [
     "STATE_SKIPPED" => 4, // nu apare pe site, se vor sterge  fisierele (mp3 , cover)
     "YOUTUBE_GRABBER_PAGE" => 50,
     "YOUTUBE_GRABBER_PORTION" => 30,
+    "YOUTUBE_GRABBER_PORTION_CHANNEL" => 50,
     'YOUTUBE_GRABBER_QUERY' => "Official",
     'STORE_VIEW_AFTER' => 2000, // milisecunde
     'LIKED_MOVIES_ON_PAGE' => 12,

@@ -17,6 +17,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         Commands\RemoveDrafts::class,
         Commands\GetNewYoutubeMovies::class,
+        Commands\GetYTbyChannel::class,
         Commands\GetAudioFromYoutube::class,
         Commands\OptimizeImages::class,
         Commands\MoveFiles::class,
@@ -48,6 +49,25 @@ class Kernel extends ConsoleKernel
             ->after(function () {
                 $this->saveLogs('GetNewYoutubeMovies');
             });
+
+
+        // BY CHANNEL
+        $schedule->command('getbychannel "UC2pmfLm7iq6Ov1UwYrWYkZA"')->dailyAt('03:20') // VEVO
+            ->sendOutputTo(storage_path($this->outputFile))
+            ->after(function () {
+                $this->saveLogs('GetYTbyChannel');
+            });
+        $schedule->command('getbychannel "UCCTR5nIFvWBW9MeGEGPNG4g"')->dailyAt('04:30') // CAT Music
+            ->sendOutputTo(storage_path($this->outputFile))
+            ->after(function () {
+                $this->saveLogs('GetYTbyChannel');
+            });
+        $schedule->command('getbychannel "UCFpD-o5sN0cSk8pgZSGLJ4g"')->dailyAt('05:30') // BlackStarTV
+            ->sendOutputTo(storage_path($this->outputFile))
+            ->after(function () {
+                $this->saveLogs('GetYTbyChannel');
+            });
+        // END BY CHANNEL
 
 
 

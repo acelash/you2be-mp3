@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+//UC2pmfLm7iq6Ov1UwYrWYkZA = vevo
 
 use Alaouy\Youtube\Facades\Youtube;
 use App\Extensions\YoutubeApiHelper;
@@ -11,11 +12,11 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 
-class GetNewYoutubeMovies extends Command
+class GetYTbyChannel extends Command
 {
     use YoutubeApiHelper;
 
-    protected $signature = "getmovies {search}";
+    protected $signature = "getbychannel {channel_id}";
 
     protected $inserted = 0;
 
@@ -26,19 +27,19 @@ class GetNewYoutubeMovies extends Command
         //echo "starting...\n";
         $startTime = time();
 
-        $goal = config("constants.YOUTUBE_GRABBER_PORTION");
+        $goal = config("constants.YOUTUBE_GRABBER_PORTION_CHANNEL");
         $pagesPassed = 0;
 
-        $randomQuery = ($this->argument('search') !=='0')  ? $this->argument('search') : $this->getRandomQuery();
-        echo "q=".$randomQuery." \n";
+        $channel_id = $this->argument('channel_id');
+        echo "channel=".$channel_id." \n";
 
         $params = array(
-            'q' => $randomQuery,//config("constants.YOUTUBE_GRABBER_QUERY"),
+            'channelId' => $channel_id,
             'type' => 'video',
             'part' => 'id',//snippet
             //'videoDuration' => 'long',// medium 4 .. 20 min
             'maxResults' => config("constants.YOUTUBE_GRABBER_PAGE"),
-            'order' => "viewCount", //date,rating
+            'order' => "date", //date,rating
             'videoCategoryId'=> '10' // music
         );
 
@@ -47,17 +48,7 @@ class GetNewYoutubeMovies extends Command
         if (array_key_exists('results', $search) && is_array($search['results'])) {
             $this->processSearchResults($search['results']);
             $pagesPassed++;
-        } else {
-            $randomQuery = $this->getRandomQuery();
-            $params['q'] = $randomQuery;
-            echo "no results, try again . q= ".$randomQuery." \n";
-            $search = Youtube::searchAdvanced($params, true);
-            if (array_key_exists('results', $search) && is_array($search['results'])) {
-                $this->processSearchResults($search['results']);
-                $pagesPassed++;
-            }
         }
-
         // Check if we have a pageToken
         while(isset($search['info']['nextPageToken']) && $this->inserted <= $goal) {
             $params['pageToken'] = $search['info']['nextPageToken'];
@@ -66,7 +57,7 @@ class GetNewYoutubeMovies extends Command
                 if(is_array($search['results']))
                 $this->processSearchResults($search['results']);
                 else {
-                    echo "no results.\n inserted: ".$this->inserted."videos \n";
+                    echo "inserted: ".$this->inserted."videos \n";
                     die();
                 }
             }
@@ -87,7 +78,7 @@ class GetNewYoutubeMovies extends Command
 
                 $existing = (new Song())->where('source_id', $source_id)->count();
                 if ($existing) {
-                    echo "skip. \n";
+                  //  echo "skip. \n";
                     continue;
                 }
                 //pregatim informatiile despre video
@@ -100,15 +91,15 @@ class GetNewYoutubeMovies extends Command
                 // votes
                 $details = Youtube::getVideoInfo($source_id);
                 if ($details) {
-                    //echo "processing ".$source_id." \n";
+                    echo "processing ".$source_id." \n";
 
                     if(strpos($details->contentDetails->duration,"H")){
-                       // echo  " skip. > 1h \n";
+                        echo  " skip. > 1h \n";
                         continue;
                     }
 
                     if(!strpos($details->contentDetails->duration,"M")){
-                      //  echo  " skip. < 1m \n";
+                       echo  " skip. < 1m \n";
                         continue;
                     }
 
@@ -118,13 +109,13 @@ class GetNewYoutubeMovies extends Command
 
                     // nu salvam daca are mai mult de n minute
                     if($duration[0] > 8) {
-                     //   echo  " skip. > 8 min \n";
+                        echo  " skip. > 8 min \n";
                         continue;
                     }
 
                     // nu salvam daca are mai putin de n minute
                     if($duration[0] < 2) {
-                      //  echo  " skip. < 2 min \n";
+                        echo  " skip. < 2 min \n";
                         continue;
                     }
 
@@ -163,19 +154,9 @@ class GetNewYoutubeMovies extends Command
                         if(property_exists($details->statistics, 'likeCount')){
                             $videoInfo['likes'] = $details->statistics->likeCount;
                             $videoInfo['dislikes'] = $details->statistics->dislikeCount;
-
-                            if($videoInfo['likes'] < config("constants.MINIM_LIKES")) {
-                              //  echo  " skip. <".config("constants.MINIM_LIKES")." likes \n";
-                                continue;
-                            }
                         }
                         if(property_exists($details->statistics, 'viewCount')){
                             $videoInfo['views'] = $details->statistics->viewCount;
-
-                            if($videoInfo['views'] < config("constants.MINIM_VIEWS")) {
-                              //  echo  " skip. < ".config("constants.MINIM_VIEWS")." views \n";
-                                continue;
-                            }
                         }
                     }
                 }
@@ -197,7 +178,7 @@ class GetNewYoutubeMovies extends Command
                     $this->inserted++;
 
                     DB::commit();
-                //    echo   " SAVED. \n";
+                    echo   " SAVED. \n";
 
                 } catch (\Exception $e) {
                     DB::rollback();
@@ -208,5 +189,4 @@ class GetNewYoutubeMovies extends Command
             }
 
     }
-
 }
