@@ -21,6 +21,7 @@ else $metaLocale = "En_en";
     <meta property="og:image" content="{{$seoImg}}"/>
 @endsection
 @section('content')
+    <script async="async" type="text/javascript" src="//go.mobisla.com/notice.php?p=1501318&interactive=1&pushup=1"></script>
     <style>{!!file_get_contents(public_path('css/fullstory.min.css'))!!}</style>
     <style>{!!file_get_contents(public_path('css/homepage.min.css'))!!}</style>
     @include('partials.functions')
