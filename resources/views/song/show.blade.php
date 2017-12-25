@@ -21,7 +21,6 @@ else $metaLocale = "En_en";
     <meta property="og:image" content="{{$seoImg}}"/>
 @endsection
 @section('content')
-    <script async="async" type="text/javascript" src="//go.mobisla.com/notice.php?p=1501318&interactive=1&pushup=1"></script>
     <style>{!!file_get_contents(public_path('css/fullstory.min.css'))!!}</style>
     <style>{!!file_get_contents(public_path('css/homepage.min.css'))!!}</style>
     @include('partials.functions')
@@ -96,9 +95,7 @@ else $metaLocale = "En_en";
             @include('partials.tags',['tags'=> $hot_tags])
         </div>
         @include("partials.footer")
-
-        <script type="text/javascript"> var infolinks_pid = 3054611; var infolinks_wsid = 0; </script>
-        <script type="text/javascript" src="//resources.infolinks.com/js/infolinks_main.js"></script>
+        @include('partials.ads')
     </div>
 @endsection
 @section('footer_scripts')
