@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
 <head>
+
     <!-- Global Site Tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-108246525-1"></script>
     <script>
@@ -47,6 +48,7 @@
     </script>
 </head>
 <body>
+@include('partials.ads')
 <!-- Fixed navbar -->
 <nav class="navbar">
     <div class="container">

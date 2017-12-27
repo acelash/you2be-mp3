@@ -95,7 +95,6 @@ else $metaLocale = "En_en";
             @include('partials.tags',['tags'=> $hot_tags])
         </div>
         @include("partials.footer")
-        @include('partials.ads')
     </div>
 @endsection
 @section('footer_scripts')
