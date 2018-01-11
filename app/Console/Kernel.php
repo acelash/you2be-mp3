@@ -22,6 +22,7 @@ class Kernel extends ConsoleKernel
         Commands\OptimizeImages::class,
         Commands\MoveFiles::class,
         Commands\RemoveSkippedFiles::class,
+        Commands\RemoveFiles::class,
     ];
 
     protected $outputFile = 'app/schedules.txt';
@@ -72,15 +73,10 @@ class Kernel extends ConsoleKernel
 
 
 
-        $schedule->command('movemp3')->hourly()
+        $schedule->command('removeold')->hourly()
             ->sendOutputTo(storage_path($this->outputFile))
             ->after(function () {
-                $this->saveLogs('MoveFiles');
-            });
-        $schedule->command('getmp3')->hourly()
-            ->sendOutputTo(storage_path($this->outputFile))
-            ->after(function () {
-                $this->saveLogs('GetAudioFromYoutube');
+                $this->saveLogs('RemoveFiles');
             });
 
         $schedule->command('removemp3')->cron("0 */3 * * *")
