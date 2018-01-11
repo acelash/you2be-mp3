@@ -35,7 +35,7 @@ class HomeController extends Controller
                 ) as downloads"), "downloads.entry_id", "=", "songs.id")
                 ->orderBy("downloads.total", "DESC")
                 ->orderBy("views", "DESC")
-                ->paginate(50),
+                ->paginate(40),
             'hot_tags' => (new Tag())->getHotTags()->take(config("constants.HOT_TAGS_TOTAL"))->get()
 
         ];

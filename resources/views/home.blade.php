@@ -30,9 +30,4 @@
         </div>
         @include("partials.footer")
     </div>
-
-@endsection
-
-@section('footer_scripts')
-    @include('partials.player')
 @endsection

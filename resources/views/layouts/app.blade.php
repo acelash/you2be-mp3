@@ -2,18 +2,20 @@
 <html lang="{{ app()->getLocale() }}">
 <head>
 
+    @if(env('APP_ENV') == "production")
     <!-- Global Site Tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-108246525-1"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments)};
-        gtag('js', new Date());
-        gtag('config', 'UA-108246525-1');
-    </script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-108246525-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {dataLayer.push(arguments)};
+            gtag('js', new Date());
+            gtag('config', 'UA-108246525-1');
+        </script>
+    @endif
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="google-site-verification" content="Apl1_LOMZWPa2GnKhYDb2d9xYgXGIZ1hizlhVgE7xG0" />
+    <meta name="google-site-verification" content="Apl1_LOMZWPa2GnKhYDb2d9xYgXGIZ1hizlhVgE7xG0"/>
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -21,45 +23,25 @@
     <link rel="shortcut icon" href="{{asset('public/images/logo.png')}}" type="image/x-icon">
     <meta name="description" content="@yield('pageDescription')"/>
     <meta name="keywords" content="@lang('words.keywords')"/>
-    <meta name='wmail-verification' content='429a1142b5e041cc8aa8ba8616c58508' />
-    <meta name="propeller" content="b34a9b4d77318c3433713099e6cc8e02" />
+    <meta name='wmail-verification' content='429a1142b5e041cc8aa8ba8616c58508'/>
+    <meta name="propeller" content="b34a9b4d77318c3433713099e6cc8e02"/>
 @yield('pageMeta')
 
 <!-- Styles -->
     <style>{!!file_get_contents(public_path('css/bootstrap.min.css'))!!}</style>
-    <style>{!!file_get_contents(public_path('css/general.min.css'))!!}</style>
-
+    <style>{!!file_get_contents(public_path('css/general.css'))!!}</style>
     <script>
-                @if(isset($locales))  var locales = <?=$locales?>;
-        @endif
         function getBaseUrl() {
             return "{{env('APP_URL')}}";
-        }
-        function trans(key) {
-            var keys = key.split("."),
-                file = keys[0],
-                label = keys[1];
-            if (locales[file] && locales[file][label]) {
-                return locales[file][label];
-            } else {
-                return key;
-            }
         }
     </script>
 </head>
 <body>
-@include('partials.ads')
+@if(env('APP_ENV') == "production") @include('partials.ads') @endif
 <!-- Fixed navbar -->
 <nav class="navbar">
     <div class="container">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-                    aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
             <a class="navbar-brand " href="{{route('home_'.$locale)}}">
                 <img alt="logo" src="{{asset('public/images/logo.png')}}">
                 {{config('app.name')}}</a>
@@ -83,8 +65,10 @@
                 <li><a href="{{route('new_'.$locale)}}">@lang('words.new')</a></li>
                 <li><a href="{{route('popular_'.$locale)}}">@lang('words.popular')</a></li>
                 <li class="languages">
-                    <a href="{{route('lang',['slug'=>'en'])}}"><img alt="EN" src="{{asset('public/images/en.png')}}"></a>
-                    <a href="{{route('lang',['slug'=>'ru'])}}"><img alt="RU" src="{{asset('public/images/ru.png')}}"></a>
+                    <a href="{{route('lang',['slug'=>'en'])}}"><img alt="EN"
+                                                                    src="{{asset('public/images/en.png')}}"></a>
+                    <a href="{{route('lang',['slug'=>'ru'])}}"><img alt="RU"
+                                                                    src="{{asset('public/images/ru.png')}}"></a>
                 </li>
                 @if(auth()->check())
                     <li class="dropdown">
@@ -114,16 +98,11 @@
         </div><!--/.nav-collapse -->
     </div>
 </nav>
-
 @yield('content')
-
 <!-- Scripts -->
 <script src="{{ asset('public/js/jquery-3.2.1.min.js') }}"></script>
 <script src="{{ asset('public/js/bootstrap.min.js') }}"></script>
-<script type="text/javascript" src="{{asset('public/vendors/jplayer/jplayer/jquery.jplayer.min.js')}}"></script>
 <script>{!!file_get_contents(public_path('js/share.js'))!!}</script>
 @yield('footer_scripts')
-
-
 </body>
 </html>

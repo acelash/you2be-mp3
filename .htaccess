@@ -4,7 +4,7 @@
     </IfModule>
 
     RewriteEngine On
- RewriteCond %{HTTP_HOST} ^www.mp3cloud.su$ [NC]
+    RewriteCond %{HTTP_HOST} ^www.mp3cloud.su$ [NC]
     RewriteRule ^(.*)$ https://mp3cloud.su/$1 [R=301,L]
     # Redirect Trailing Slashes If Not A Folder...
     RewriteCond %{REQUEST_FILENAME} !-d

@@ -154,13 +154,55 @@ class SongsController extends Controller
         return $this->customResponse("home", $viewData);
     }
 
-    public function storeDownload($id)
+    public function getDownloadLink($id)
     {
         $entity = $this->getModel()->find($id);
         if (!$entity) return ['status' => 'invalid id'];
 
-        $ip = $this->request->ip();
+        // daca fisierul exista, dam link la el
+        $filePath  = base_path("public/audio/{$id}.mp3");
+        if(File::exists($filePath)){
+            return [
+                'status' => 'ok'
+            ];
+        }
+        // daca nu exista, apelam jobul si generam un mp3
+        $path = "public/audio/";
+        $filename  = $path.$entity->id.".%(ext)s";
+        $domain = env("APP_ENV" == 'production') ? 'mp3cloud.su' : "music.cardeon.ru";
+        $command = '/usr/local/bin/youtube-dl -o "/home/admin/web/'.$domain.'/public_html/'.$filename.'"  --extract-audio --audio-format mp3 --audio-quality 160K https://www.youtube.com/watch?v='.$entity->source_id;
+        shell_exec($command);
 
+        $files = glob (base_path($path.$entity->id.".*"));
+        if(count($files)){
+            $this->storeDownload($id);
+            return [
+                'status' => 'ok'
+            ];
+        } else {
+            $entity->update([
+                'state_id' => config("constants.STATE_SKIPPED")
+            ]);
+            return [
+                'status' => 'false',
+                'error' => "Error"
+            ];
+        }
+    }
+
+    public function downloadSong($id){
+        $filePath  = base_path("public/audio/{$id}.mp3");
+        $song = $this->find($id);
+        if(File::exists($filePath) && $song){
+            $this->storeDownload($id);
+            return response()->download($filePath, $song->title." [mp3cloud.su].mp3");
+        } else {
+            abort(404,"File not found");
+        }
+    }
+
+    private function storeDownload($id){
+        $ip = $this->request->ip();
         $viewExists = (new SongDownload())
             ->where("entry_id", $id)
             ->where("from_ip", $ip)
@@ -170,19 +212,12 @@ class SongsController extends Controller
             $viewExists->touch();
             return ['status' => 'view already Exists'];
         }
-
         $new = (new SongDownload())->newInstance();
         $new->fill([
             "entry_id" => $id,
             "from_ip" => $ip,
         ]);
-        $new->save();
-
-        return [
-            'status' => 'ok'
-        ];
+        return $new->save();
     }
-
-
 }
 

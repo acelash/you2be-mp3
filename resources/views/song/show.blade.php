@@ -30,16 +30,6 @@ else $metaLocale = "En_en";
                 <h1>{{ $entity->title}}</h1>
                 <p>@lang('words.fullstory_text')</p>
 
-                <button id="play_song" class="btn listen track" data-source="{{asset($entity->file_url)}}"
-                        onclick="return playTrack(this)">
-                    <img class="play" src="{{asset('public/images/play-button_white.png')}}" alt="Play">
-                    <img class="pause" src="{{asset('public/images/pause_white.png')}}" alt="Pause">
-                    @lang('words.listen')
-                    <div class="song_poster" style="background-image: url('{{$entity->thumbnail}}');display: none">
-                        <span style="display: none" class="song_name">{{$entity->title}}</span>
-                    </div>
-                </button>
-
                 <a download="{{$entity->title}} [mp3cloud.su].mp3" target="_blank" href="{{asset($entity->file_url)}}">
                     <button class="btn">
                         <img class="download" src="{{asset('public/images/download_white.png')}}" alt="download">
@@ -96,7 +86,4 @@ else $metaLocale = "En_en";
         </div>
         @include("partials.footer")
     </div>
-@endsection
-@section('footer_scripts')
-    @include('partials.player-single')
 @endsection

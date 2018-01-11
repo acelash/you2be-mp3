@@ -114,50 +114,6 @@ a.accent-color:hover {
     color: #689F38;
 }
 
-.watch_btn, .watch_btn:hover {
-    margin: 15px 0;
-    padding: 6px 15px;
-    border-radius: 3px;
-    border: 1px solid #689F38;
-    color: #689F38;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 18px;
-    display: inline-block;
-}
-
-.alert {
-    width: 100%;
-    padding: 5px 0 5px 13px;
-    color: white;
-    border-radius: 3px;
-    margin: 10px 0;
-}
-
-.alert ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-}
-
-.alert-error {
-    background: #ff5b06;
-}
-
-.alert-success {
-    background: #689F38;
-}
-
-.alert-info {
-    background: rgba(255, 88, 33, 0.59);
-    text-align: center;
-}
-
-.alert-neutral {
-    color: black;
-    background: white;
-}
-
 .navbar-brand img {
     height: 40px;
     display: inline-block;
@@ -231,7 +187,6 @@ body {
     float: none;
     width: 100%;
     transition: .3s;
-    cursor: pointer;
     margin: 0 5px 5px;
     height: 40px;
 }
@@ -275,6 +230,10 @@ body {
     text-overflow: ellipsis;
     overflow: hidden;
     margin-top: 5px;
+    color: inherit;
+}
+.song_name:hover {
+    text-decoration: none;
 }
 
 .song_poster img {
@@ -297,34 +256,6 @@ body {
     top: 0;
     left: 0;
     z-index: 1;
-}
-
-.track:not(.current_track):hover > .song_poster img.play, .track:not(.current_track):hover > .song_poster .song_poster_cover {
-    display: inline-block;
-}
-
-.pause {
-    display: none;
-}
-
-.track.current_track {
-    background-color: rgb(232, 232, 232);
-}
-
-.track.current_track.playing .pause {
-    display: inline-block;
-}
-
-.track.current_track.playing .play {
-    display: none;
-}
-
-.track.current_track .song_poster_cover {
-    display: inline-block;
-}
-
-.track.current_track:not(.playing) .play {
-    display: inline-block;
 }
 
 .song_download, .song_video {

@@ -29,11 +29,8 @@ class GetAudioFromYoutube extends Command
         foreach ($songs as $song){
             echo " ".$song->id." ";
             $filename  = $path.$song->id.".%(ext)s";
-           // $command = 'youtube-dl -o "/home/admin/web/mp3.cardeon.ru/public_html/'.$filename.'"  -f "bestaudio"  https://www.youtube.com/watch?v='.$song->source_id;
             $command = '/usr/local/bin/youtube-dl -o "/home/admin/web/mp3cloud.su/public_html/'.$filename.'"  --extract-audio --audio-format mp3 --audio-quality 160K https://www.youtube.com/watch?v='.$song->source_id;
-            //echo "command: ".$command." \n";
-            $output = shell_exec($command);
-            //echo "output: ".$output." \n";
+            shell_exec($command);
 
             $files = glob (base_path($path.$song->id.".*"));
             //if file exists, save
