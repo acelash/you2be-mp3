@@ -3,13 +3,12 @@
         <div class="song_poster" style="background-image: url('{{$song->thumbnail_mini}}')"></div>
         <a href="{{route('show_song_'.$locale,[ 'slug' => prepareSlugUrl($song->id,$song->title)])}}" class="song_name" >{{$song->title}}</a>
 
-        <a class="song_download" onclick="downloadSong(this, {{$song->id}})">
-            <img class="off" src="{{asset('public/images/download.png')}}" alt="Download">
-            <img class="on"  src="{{asset('public/images/download2.png')}}" alt="Download">
+        <a class="song_download" onclick="downloadSong(this, {{$song->id}},true)">
+            <img src="{{asset('public/images/download.png')}}" alt="Download">
+            <img class="wait" src="{{asset('public/images/spinner.gif')}}" alt="Please wait...">
         </a>
         <a class="song_video" href="{{route('show_song_'.$locale,[ 'slug' => prepareSlugUrl($song->id,$song->title)])}}">
-            <img class="off" src="{{asset('public/images/video.png')}}" alt="Watch video">
-            <img class="on"  src="{{asset('public/images/video2.png')}}" alt="Watch video">
+            <img src="{{asset('public/images/video.png')}}" alt="Watch video">
         </a>
         <span class="duration">{{gmdate("i:s", $song->duration)}}</span>
         <div class="inline_share">

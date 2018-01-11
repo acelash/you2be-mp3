@@ -468,3 +468,6 @@ img.on {
     display: inline-block;
     margin: 5px;
 }
+img.wait {
+    display: none;
+}

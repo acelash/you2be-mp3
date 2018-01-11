@@ -1,15 +1,40 @@
 <script>
-    function downloadSong(song, track_id) {
+    function downloadSong(song, track_id,from_list) {
+        if(from_list){
+            $(song).find("img").hide();
+            $(song).find(".wait").show();
+        } else {
+            $(song).find(".btn").hide();
+            $(song).find("span").show();
+        }
+
         $.ajax({
             type: "GET",
-            url: getBaseUrl() + "/song/get_link/" + track_id,
+            url: getBaseUrl() + "song/get_link/" + track_id,
             data: [],
             success: function (response) {
+                if(from_list){
+                    $(song).find("img").show();
+                    $(song).find(".wait").hide();
+                } else {
+                    $(song).find(".btn").hide();
+                    $(song).find("span").show();
+                }
                 if(response.status == "ok"){
-                    window.location = getBaseUrl() + "/song/get_song/" + track_id;
+                    window.location = getBaseUrl() + "song/get_song/" + track_id;
+                } else {
+                    alert(response.error);
                 }
             },
             error: function (request, status, error_message) {
+                if(from_list){
+                    $(song).find("img").show();
+                    $(song).find(".wait").hide();
+                } else {
+                    $(song).find(".btn").hide();
+                    $(song).find("span").show();
+                }
+                alert(error_message);
                 console.log(request.responseJSON);
             }
         });

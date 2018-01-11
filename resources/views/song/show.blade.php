@@ -30,10 +30,11 @@ else $metaLocale = "En_en";
                 <h1>{{ $entity->title}}</h1>
                 <p>@lang('words.fullstory_text')</p>
 
-                <a download="{{$entity->title}} [mp3cloud.su].mp3" target="_blank" href="{{asset($entity->file_url)}}">
+                <a class="download_link" onclick="downloadSong(this, {{$entity->id}},false)">
                     <button class="btn">
                         <img class="download" src="{{asset('public/images/download_white.png')}}" alt="download">
                         @lang('words.download_as_mp3')</button>
+                    <span style="display: none" class="waiting"><img src="{{asset('public/images/spinner.gif')}}"> @lang('words.preparing_download')</span>
                 </a>
                 <div class="song_tags">
                     @lang('words.song_tags')

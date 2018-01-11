@@ -16,6 +16,7 @@ use App\Models\SongDownload;
 use App\Models\SongView;
 use App\Models\Tag;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 
 class SongsController extends Controller
 {
@@ -192,7 +193,7 @@ class SongsController extends Controller
 
     public function downloadSong($id){
         $filePath  = base_path("public/audio/{$id}.mp3");
-        $song = $this->find($id);
+        $song = $this->getModel()->find($id);
         if(File::exists($filePath) && $song){
             $this->storeDownload($id);
             return response()->download($filePath, $song->title." [mp3cloud.su].mp3");
