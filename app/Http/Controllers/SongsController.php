@@ -220,5 +220,26 @@ class SongsController extends Controller
         ]);
         return $new->save();
     }
+
+    public function storeView($id){
+
+        $ip = $this->request->ip();
+
+        $viewExists = (new SongView())
+            ->where("entry_id", $id)
+            ->where("from_ip", $ip)
+            ->get()
+            ->first();
+        if ($viewExists) {
+            $viewExists->touch();
+            return ['status' => 'view already Exists'];
+        }
+        $new = (new SongView())->newInstance();
+        $new->fill([
+            "entry_id" => $id,
+            "from_ip" => $ip,
+        ]);
+        return ['status' => 'done'];
+    }
 }
 

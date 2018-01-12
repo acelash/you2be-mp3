@@ -4,11 +4,11 @@
         <a href="{{route('show_song_'.$locale,[ 'slug' => prepareSlugUrl($song->id,$song->title)])}}" class="song_name" >{{$song->title}}</a>
 
         <a class="song_download" onclick="downloadSong(this, {{$song->id}},true)">
-            <img src="{{asset('public/images/download.png')}}" alt="Download">
+            <img class="image_buton" src="{{asset('public/images/download.png')}}" alt="Download">
             <img class="wait" src="{{asset('public/images/spinner.gif')}}" alt="Please wait...">
         </a>
         <a class="song_video" href="{{route('show_song_'.$locale,[ 'slug' => prepareSlugUrl($song->id,$song->title)])}}">
-            <img src="{{asset('public/images/video.png')}}" alt="Watch video">
+            <img  class="image_buton" src="{{asset('public/images/video.png')}}" alt="Watch video">
         </a>
         <span class="duration">{{gmdate("i:s", $song->duration)}}</span>
         <div class="inline_share">

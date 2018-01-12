@@ -87,4 +87,21 @@ else $metaLocale = "En_en";
         </div>
         @include("partials.footer")
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // views store
+            setTimeout(function () {
+                $.ajax({
+                    type: "GET",
+                    url: getBaseUrl() + "song/store_view/{{$entity->id}}",
+                    data: [],
+                    success: function (response) {
+                    },
+                    error: function (request, status, error_message) {
+                        var response = request.responseJSON;
+                    }
+                });
+            },{{config("constants.STORE_VIEW_AFTER")}});
+        });
+    </script>
 @endsection

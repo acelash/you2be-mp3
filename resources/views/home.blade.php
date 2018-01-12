@@ -9,13 +9,6 @@
     <div class="container page_content">
         <div class="row">
             <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 track_list">
-                <h1 style=" text-align: center;padding: 0 30px;">
-                    @if(isset($sorted) && $sorted == 'new')
-                        @lang('words.new_songs')
-                    @else
-                        @lang('words.popular_songs')
-                    @endif
-                </h1>
                 <ul class="songs">
                     @forelse($songs as $song)
                         @include('song.one',['song'=>$song,'loop'=>$loop])

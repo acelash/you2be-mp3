@@ -54,7 +54,7 @@
                                @if(isset($query))value="{{$query}}" @endif
                                placeholder="@lang('words.search_placeholder')">
                         <button class="search_btn">
-                            <img src="{{asset('public/images/search.svg')}}">
+                            <img src="{{asset('public/images/search.png')}}">
                             @lang('words.search')
                         </button>
                     </form>
@@ -62,8 +62,8 @@
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="{{route('new_'.$locale)}}">@lang('words.new')</a></li>
-                <li><a href="{{route('popular_'.$locale)}}">@lang('words.popular')</a></li>
+                <li><a href="{{route('new_'.$locale)}}"><img alt="new" src="{{asset('public/images/flash.png')}}"> @lang('words.new')</a></li>
+                <li><a href="{{route('popular_'.$locale)}}"><img alt="popular" src="{{asset('public/images/favorites.png')}}"> @lang('words.popular')</a></li>
                 <li class="languages">
                     <a href="{{route('lang',['slug'=>'en'])}}"><img alt="EN"
                                                                     src="{{asset('public/images/en.png')}}"></a>

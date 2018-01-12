@@ -16,6 +16,7 @@ Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/lang/{slug}', 'HomeController@switchLang')->name('lang');
 Route::get('/song/get_link/{id}', 'SongsController@getDownloadLink')->name('get_download_link');
+Route::get('/song/store_view/{id}', 'SongsController@storeView')->name('store_view');
 Route::get('/song/get_song/{id}', 'SongsController@downloadSong')->name('download_song');
 Route::get('/copyrights', 'HomeController@copyrights')->name('copyrights');
 

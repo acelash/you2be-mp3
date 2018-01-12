@@ -21,12 +21,9 @@ return [
     "YOUTUBE_GRABBER_PORTION_CHANNEL" => 50,
     'YOUTUBE_GRABBER_QUERY' => "Official",
     'STORE_VIEW_AFTER' => 2000, // milisecunde
-    'LIKED_MOVIES_ON_PAGE' => 12,
-    'MOVIES_CATALOG_ON_PAGE' => 24,
     'THUMBNAIL_MINI_HEIGHT' => 50, // px, facem resize la postere
     'THUMBNAIL_HEIGHT' => 200, // px, facem resize la postere
-    'MOVIE_TEXT_PREVIEW' => 300, // cite litere din text se arata in preview
-    'HOT_TAGS_TOTAL' => 50,
+    'HOT_TAGS_TOTAL' => 60,
     'REMOTE_FTP_SERVER' => "shared-24.smartape.ru",
     'REMOTE_FTP_USERNAME' => "user73204",
     'REMOTE_FTP_PASSWORD' => "ICQ5447oBf4H",
