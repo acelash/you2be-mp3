@@ -36,7 +36,7 @@
 }
 
 .divider-color {
-    border-color: #e2e2e2;/*#BDBDBD;*/
+    border-color: #475667;
 }
 /* nd palette */
 
@@ -79,6 +79,7 @@ a.accent-color:hover {
 
 .content_block h2, .content_block h1 {
     margin: 10px 0;
+    color: #15C69B;
 }
 
 .content_block hr {
@@ -96,7 +97,6 @@ a.accent-color:hover {
 }
 
 .copyrights {
-    /*float: right;*/
     display: inline-block;
     margin: 5px;
     color: #F5AC0E;
@@ -105,7 +105,8 @@ a.accent-color:hover {
 .contacts {
     display: inline-block;
     color: #F5AC0E;
-    margin: 5px;
+    position: relative;
+    top: -2px;
 }
 
 .navbar-brand img {
@@ -170,6 +171,35 @@ a.accent-color:hover {
 
 body {
     padding-bottom: 60px;
+}
+
+.inline_share {
+    height: 30px;
+    float: right;
+    width: 115px;
+    margin: 4px 5px 0;
+    display: none;
+    transition: 300ms;
+}
+
+.track_list h1 {
+    color: #F5AC0E;
+}
+
+.track:hover > .duration {
+     display: none;
+ }
+.track:hover > .inline_share {
+    display: inline-block;
+}
+.inline_share a {
+    display: inline-block;
+}
+.inline_share a img {
+    width: 25px;
+}
+.inline_share a:hover > img {
+    opacity: .8;
 }
 
 .songs {

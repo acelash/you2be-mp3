@@ -4,17 +4,26 @@
 @section('pageDescription', trans('words.home_description'))
 
 @section('content')
-    <style>{!!file_get_contents(public_path('css/homepage.min.css'))!!}</style>
+    <style>
+        .title {
+            color: #F5AC0E;
+            text-align: center;
+            padding: 0 30px;
+        }
+        .text_rules {
+            color: #15C69B;
+        }
+    </style>
     <div class="container page_content">
         <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <h1 style="text-align: center;padding: 0 30px;">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+                <h1 class="title">
                     @lang('words.copyrights')
                 </h1>
 
                 @if($locale == 'ru')
 
-                    <ul>
+                    <ul class="text_rules">
                         <li>Мы уважаем права интеллектуальной собственности других лиц. Мы можем удалить любой Контент, у которого есть основания полагать,
                             нарушает любой из интеллектуальных прав собственности других лиц.
                         </li>
@@ -47,7 +56,7 @@
                     </ul>
 
                 @else
-                    <ul>
+                    <ul class="text_rules">
                         <li>We respect the intellectual property rights of others. We may in our sole
                             discretion remove any Content we have reason to believe violates any of the intellectual
                             property rights of others.

@@ -17,8 +17,8 @@
                     $(song).find("img").show();
                     $(song).find(".wait").hide();
                 } else {
-                    $(song).find(".btn").hide();
-                    $(song).find("span").show();
+                    $(song).find(".btn").show();
+                    $(song).find("span").hide();
                 }
                 if(response.status == "ok"){
                     window.location = getBaseUrl() + "song/get_song/" + track_id;
@@ -31,8 +31,8 @@
                     $(song).find("img").show();
                     $(song).find(".wait").hide();
                 } else {
-                    $(song).find(".btn").hide();
-                    $(song).find("span").show();
+                    $(song).find(".btn").show();
+                    $(song).find("span").hide();
                 }
                 alert(error_message);
                 console.log(request.responseJSON);

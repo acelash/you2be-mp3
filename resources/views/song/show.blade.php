@@ -21,29 +21,33 @@ else $metaLocale = "En_en";
     <meta property="og:image" content="{{$seoImg}}"/>
 @endsection
 @section('content')
+    @if(env('APP_ENV') == 'production')
     <style>{!!file_get_contents(public_path('css/fullstory.min.css'))!!}</style>
-    <style>{!!file_get_contents(public_path('css/homepage.min.css'))!!}</style>
+    @else
+    <style>{!!file_get_contents(public_path('css/fullstory.css'))!!}</style>
+    @endif
     @include('partials.functions')
     <div class="container page_content">
         <div class="row">
-            <div class="col-lg-8 ">
-                <h1>{{ $entity->title}}</h1>
-                <p>@lang('words.fullstory_text')</p>
+            <div class="col-lg-8">
+                <h1 class="fullstory_title">{{ $entity->title}}</h1>
+                <p class="fullstory_text">@lang('words.fullstory_text')</p>
 
                 <a class="download_link" onclick="downloadSong(this, {{$entity->id}},false)">
                     <button class="btn">
-                        <img class="download" src="{{asset('public/images/download_white.png')}}" alt="download">
+                        <img class="download" src="{{asset('public/images/down-arrow.png')}}" alt="download">
                         @lang('words.download_as_mp3')</button>
                     <span style="display: none" class="waiting"><img src="{{asset('public/images/spinner.gif')}}"> @lang('words.preparing_download')</span>
                 </a>
                 <div class="song_tags">
-                    @lang('words.song_tags')
+                    <span>@lang('words.song_tags')</span>
                     @foreach($entity->tags()->take(7)->get() as $tag)
-                        <a href="{{route('show_tag_'.$locale,[ 'slug' => prepareSlugUrl($tag->id,$tag->name)])}}"> {{$tag->name}} </a>
+
+                        <a href="{{route('show_tag_'.$locale,[ 'slug' => prepareSlugUrl($tag->id,$tag->name)])}}"> {{$tag->name}}@if(!$loop->last),@endif </a>
                     @endforeach
                 </div>
                 <div class="share_container">
-                    <div>@lang('words.share_text')</div>
+                    <div style="float: left;margin-top:8px;">@lang('words.share_text')</div>
                     <a onclick="Share.facebook('{{$seoUrl}}','{{$seoTitle}}','{{$seoImg}}','{{$seoDescription}}')">
                         <img alt="facebook" src="{{asset('public/images/facebook.png')}}">
                     </a>

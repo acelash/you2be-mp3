@@ -2,12 +2,15 @@
 <html lang="{{ app()->getLocale() }}">
 <head>
 
-    @if(env('APP_ENV') == "production")
+@if(env('APP_ENV') == "production")
     <!-- Global Site Tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-108246525-1"></script>
         <script>
             window.dataLayer = window.dataLayer || [];
-            function gtag() {dataLayer.push(arguments)};
+
+            function gtag() {
+                dataLayer.push(arguments)
+            };
             gtag('js', new Date());
             gtag('config', 'UA-108246525-1');
         </script>
@@ -25,11 +28,16 @@
     <meta name="keywords" content="@lang('words.keywords')"/>
     <meta name='wmail-verification' content='429a1142b5e041cc8aa8ba8616c58508'/>
     <meta name="propeller" content="b34a9b4d77318c3433713099e6cc8e02"/>
-@yield('pageMeta')
+    @yield('pageMeta')
 
 <!-- Styles -->
     <style>{!!file_get_contents(public_path('css/bootstrap.min.css'))!!}</style>
-    <style>{!!file_get_contents(public_path('css/general.css'))!!}</style>
+    @if(env('APP_ENV') == 'production')
+        <style>{!!file_get_contents(public_path('css/general.min.css'))!!}</style>
+    @else
+        <style>{!!file_get_contents(public_path('css/general.css'))!!}</style>
+    @endif
+
     <script>
         function getBaseUrl() {
             return "{{env('APP_URL')}}";
@@ -62,8 +70,12 @@
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="{{route('new_'.$locale)}}"><img alt="new" src="{{asset('public/images/flash.png')}}"> @lang('words.new')</a></li>
-                <li><a href="{{route('popular_'.$locale)}}"><img alt="popular" src="{{asset('public/images/favorites.png')}}"> @lang('words.popular')</a></li>
+                <li><a href="{{route('new_'.$locale)}}"><img alt="new"
+                                                             src="{{asset('public/images/flash.png')}}"> @lang('words.new')
+                    </a></li>
+                <li><a href="{{route('popular_'.$locale)}}"><img alt="popular"
+                                                                 src="{{asset('public/images/favorites.png')}}"> @lang('words.popular')
+                    </a></li>
                 <li class="languages">
                     <a href="{{route('lang',['slug'=>'en'])}}"><img alt="EN"
                                                                     src="{{asset('public/images/en.png')}}"></a>
