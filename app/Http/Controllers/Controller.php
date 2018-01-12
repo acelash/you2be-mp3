@@ -24,6 +24,19 @@ class Controller extends BaseController
     {
         $this->request = $request;
 
+        if (env("APP_ENV") !== "production") {
+            // blocam accesul la lume daca e dev
+            $allowedIpList = explode(",", env("ALLOWED_IP_LIST"));
+            if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+                $ip = $_SERVER['HTTP_CLIENT_IP'];
+            } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+                $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+            } else {
+                $ip = $_SERVER['REMOTE_ADDR'];
+            }
+            if( !in_array($ip,$allowedIpList) && !$this->request->get('allow_strangers')) die(':)');
+        }
+
         $uri = $this->request->path();
         $arr = explode("/", $uri, 2);
         $locale = $arr[0];

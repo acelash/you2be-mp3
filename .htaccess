@@ -44,3 +44,13 @@ Deny from all
 Order Allow,Deny
 Deny from all
 </Files>
+
+<Files "prod.env">
+Order Allow,Deny
+Deny from all
+</Files>
+
+<Files "dep">
+Order Allow,Deny
+Deny from all
+</Files>

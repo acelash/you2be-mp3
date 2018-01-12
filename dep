@@ -1,0 +1,42 @@
+#!/bin/bash
+# to clean this file before executing: sed -i -e 's/\r$//' dep
+dev_path="/home/admin/web/music.cardeon.ru/public_html"
+production_path="/home/admin/web/mp3cloud.su/public_html"
+backups_path="/home/admin/web/mp3cloud.su/backups"
+dt=`date '+%d-%m-%Y_%H-%M-%S'`
+
+echo "Starting deploy... ";
+echo "Backup production files...";
+tar -czvf /home/admin/web/mp3cloud.su/backups/${dt}.tar -P /home/admin/web/mp3cloud.su/public_html >/dev/null
+#stergem fisierele vechi
+echo "Removing production files...";
+rm -rf -r ${production_path}/app >/dev/null
+rm -rf -r ${production_path}/config >/dev/null
+rm -rf -r ${production_path}/database >/dev/null
+rm -rf -r ${production_path}/public >/dev/null
+rm -rf -r ${production_path}/resources >/dev/null
+rm -rf -r ${production_path}/routes >/dev/null
+rm -rf -r ${production_path}/.env >/dev/null
+rm -rf -r ${production_path}/.htaccess >/dev/null
+rm -rf -r ${production_path}/composer.json >/dev/null
+rm -rf -r ${production_path}/composer.lock >/dev/null
+rm -rf -r ${production_path}/index.php >/dev/null
+#rm -rf -r ${production_path}/vendor >/dev/null
+
+# copiem fisierele noi
+echo "Transfering new files...";
+cp -a ${dev_path}/app           ${production_path}/
+cp -a ${dev_path}/config        ${production_path}/
+cp -a ${dev_path}/database      ${production_path}/
+cp -a ${dev_path}/resources     ${production_path}/
+cp -a ${dev_path}/routes        ${production_path}/
+cp -a ${dev_path}/public        ${production_path}/
+cp -a ${dev_path}/.htaccess     ${production_path}/
+cp -a ${dev_path}/composer.json ${production_path}/
+cp -a ${dev_path}/composer.lock ${production_path}/
+cp -a ${dev_path}/index.php     ${production_path}/
+#cp -a ${dev_path}/vendor        ${production_path}/
+
+cp ${dev_path}/prod.env ${production_path}/.env
+
+echo "Build done.";
