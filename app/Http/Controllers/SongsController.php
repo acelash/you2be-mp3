@@ -196,7 +196,12 @@ class SongsController extends Controller
         $song = $this->getModel()->find($id);
         if(File::exists($filePath) && $song){
             $this->storeDownload($id);
-            return response()->download($filePath, $song->title." [mp3cloud.su].mp3");
+
+            header('Content-type: audio/mpeg');
+            header('Content-Disposition: attachment; filename="'.$song->title.' [mp3cloud.su].mp3"');
+            readfile($filePath);
+            die();
+            //return response()->download($filePath, $song->title." [mp3cloud.su].mp3");
         } else {
             abort(404,"File not found");
         }
