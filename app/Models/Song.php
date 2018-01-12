@@ -65,6 +65,12 @@ class Song extends Elegant
         return $this->hasMany('App\Models\SongDownload', "entry_id", "id");
     }
 
+    public function views()
+    {
+        return $this->hasMany('App\Models\SongView', "entry_id", "id");
+    }
+
+
     public function tags()
     {
         return $this->belongsToMany(Tag::class, 'song_tag', 'song_id', 'tag_id');
