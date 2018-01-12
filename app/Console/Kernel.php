@@ -15,13 +15,9 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        Commands\RemoveDrafts::class,
         Commands\GetNewYoutubeMovies::class,
         Commands\GetYTbyChannel::class,
-        Commands\GetAudioFromYoutube::class,
         Commands\OptimizeImages::class,
-        Commands\MoveFiles::class,
-        Commands\RemoveSkippedFiles::class,
         Commands\RemoveFiles::class,
     ];
 
