@@ -170,11 +170,11 @@ class SongsController extends Controller
         // daca nu exista, apelam jobul si generam un mp3
         $path = "public/audio/";
         $filename  = $path.$entity->id.".%(ext)s";
-        $domain = env("APP_ENV" == 'production') ? 'mp3cloud.su' : "music.cardeon.ru";
+        $domain = env("APP_ENV") == 'production' ? 'mp3cloud.su' : "music.cardeon.ru";
         $command = '/usr/local/bin/youtube-dl -o "/home/admin/web/'.$domain.'/public_html/'.$filename.'"  --extract-audio --audio-format mp3 --audio-quality 160K https://www.youtube.com/watch?v='.$entity->source_id;
         shell_exec($command);
 
-        $files = glob (base_path($path.$entity->id.".*"));
+        $files = glob (base_path($path.$entity->id.".mp3"));
         if(count($files)){
             $this->storeDownload($id);
             return [
