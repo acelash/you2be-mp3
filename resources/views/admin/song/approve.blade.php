@@ -4,7 +4,6 @@
 @section('pageDescription', trans('words.home_description'))
 
 @section('content')
-    <style>{!!file_get_contents(public_path('css/homepage.min.css'))!!}</style>
     <style>
        /* .songs {
             margin-top: 20px;

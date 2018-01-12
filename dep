@@ -13,7 +13,7 @@ echo "Removing production files...";
 rm -rf -r ${production_path}/app >/dev/null
 rm -rf -r ${production_path}/config >/dev/null
 rm -rf -r ${production_path}/database >/dev/null
-rm -rf -r ${production_path}/public >/dev/null
+#rm -rf -r ${production_path}/public >/dev/null
 rm -rf -r ${production_path}/resources >/dev/null
 rm -rf -r ${production_path}/routes >/dev/null
 rm -rf -r ${production_path}/.env >/dev/null
@@ -23,6 +23,18 @@ rm -rf -r ${production_path}/composer.lock >/dev/null
 rm -rf -r ${production_path}/index.php >/dev/null
 #rm -rf -r ${production_path}/vendor >/dev/null
 
+# stergem mapele necesare din public
+#rm -rf -r ${production_path}/public/admin >/dev/null
+rm -rf -r ${production_path}/public/css >/dev/null
+rm -rf -r ${production_path}/public/images/* >/dev/null
+rm -rf -r ${production_path}/public/js >/dev/null
+rm -rf -r ${production_path}/public/.htaccess >/dev/null
+rm -rf -r ${production_path}/public/index.php >/dev/null
+rm -rf -r ${production_path}/public/web.config >/dev/null
+rm -rf -r ${production_path}/public/config.json >/dev/null
+
+
+
 # copiem fisierele noi
 echo "Transfering new files...";
 cp -a ${dev_path}/app           ${production_path}/
@@ -30,12 +42,22 @@ cp -a ${dev_path}/config        ${production_path}/
 cp -a ${dev_path}/database      ${production_path}/
 cp -a ${dev_path}/resources     ${production_path}/
 cp -a ${dev_path}/routes        ${production_path}/
-cp -a ${dev_path}/public        ${production_path}/
+#cp -a ${dev_path}/public        ${production_path}/
 cp -a ${dev_path}/.htaccess     ${production_path}/
 cp -a ${dev_path}/composer.json ${production_path}/
 cp -a ${dev_path}/composer.lock ${production_path}/
 cp -a ${dev_path}/index.php     ${production_path}/
 #cp -a ${dev_path}/vendor        ${production_path}/
+#copiem fisierele necesare in public
+#cp -a ${dev_path}/public/admin              ${production_path}/public/
+cp -a ${dev_path}/public/css                 ${production_path}/public/
+cp -a ${dev_path}/public/images/*            ${production_path}/public/images/
+cp -a ${dev_path}/public/js                  ${production_path}/public/
+cp -a ${dev_path}/public/.htaccess           ${production_path}/public/
+cp -a ${dev_path}/public/index.php           ${production_path}/public/
+cp -a ${dev_path}/public/web.config          ${production_path}/public/
+cp -a ${dev_path}/public/config.json         ${production_path}/public/
+
 
 cp ${dev_path}/prod.env ${production_path}/.env
 
