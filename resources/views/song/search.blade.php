@@ -5,7 +5,6 @@
 
 
 @section('content')
-    <style>{!!file_get_contents(public_path('css/homepage.min.css'))!!}</style>
     @include('partials.functions')
     <div class="container page_content">
         <div class="row">
