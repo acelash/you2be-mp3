@@ -93,7 +93,7 @@ class GetNewYoutubeMovies extends Command
                 //pregatim informatiile despre video
                 $videoInfo = [
                     'user_id' => config("constants.ROBOT_USER_ID"),
-                    'state_id' => config("constants.STATE_DRAFT"),
+                    'state_id' => config("constants.STATE_WITH_AUDIO"),
                     'source_id' => $source_id,
                 ];
 

@@ -70,20 +70,13 @@ class Kernel extends ConsoleKernel
             });
         // END BY CHANNEL
 
-
-
-
         $schedule->command('removeold')->hourly()
             ->sendOutputTo(storage_path($this->outputFile))
             ->after(function () {
                 $this->saveLogs('RemoveFiles');
             });
 
-        $schedule->command('removemp3')->cron("0 */3 * * *")
-            ->sendOutputTo(storage_path($this->outputFile))
-            ->after(function () {
-                $this->saveLogs('RemoveSkippedFiles');
-            });
+
        /* $schedule->command('optimage')->daily()
             ->sendOutputTo(storage_path($this->outputFile))
             ->after(function () {
