@@ -244,6 +244,7 @@ class SongsController extends Controller
             "entry_id" => $id,
             "from_ip" => $ip,
         ]);
+        $new->save();
         return ['status' => 'done'];
     }
 }
