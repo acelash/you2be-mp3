@@ -61,4 +61,7 @@ cp -a ${dev_path}/public/config.json         ${production_path}/public/
 
 cp ${dev_path}/prod.env ${production_path}/.env
 
+php artisan cache:clear
+php artisan view:clear
+
 echo "Build done.";
