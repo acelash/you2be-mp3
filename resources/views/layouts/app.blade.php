@@ -45,7 +45,7 @@
     </script>
 </head>
 <body>
-@if(env('APP_ENV') == "production") @include('partials.ads') @endif
+{{--@if(env('APP_ENV') == "production") @include('partials.ads') @endif--}}
 <!-- Fixed navbar -->
 <nav class="navbar">
     <div class="container">
