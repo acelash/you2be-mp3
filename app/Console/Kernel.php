@@ -19,12 +19,19 @@ class Kernel extends ConsoleKernel
         Commands\GetYTbyChannel::class,
         Commands\OptimizeImages::class,
         Commands\RemoveFiles::class,
+        Commands\GetChannelInfo::class,
     ];
 
     protected $outputFile = 'app/schedules.txt';
 
     protected function schedule(Schedule $schedule)
     {
+        $schedule->command('getmovies "0"')->hourly()
+            ->sendOutputTo(storage_path($this->outputFile))
+            ->after(function () {
+                $this->saveLogs('GetYTSongs');
+            });
+
         $schedule->command('getbychannel "0"')->everyTenMinutes()
             ->sendOutputTo(storage_path($this->outputFile))
             ->after(function () {
@@ -37,6 +44,11 @@ class Kernel extends ConsoleKernel
                 $this->saveLogs('RemoveFiles');
             });
 
+        $schedule->command('getchannels')->hourly()
+            ->sendOutputTo(storage_path($this->outputFile))
+            ->after(function () {
+                $this->saveLogs('GetChannelInfo');
+            });
 
        /* $schedule->command('optimage')->daily()
             ->sendOutputTo(storage_path($this->outputFile))

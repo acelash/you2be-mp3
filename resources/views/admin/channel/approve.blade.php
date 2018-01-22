@@ -7,7 +7,7 @@
     <style>
 
        .song_name {
-           max-width: 700px;
+           float: right;
        }
         .song_approve, .song_skip,.song_duration {
             width: 90px;
@@ -24,7 +24,7 @@
         }
 
         .song_skip {
-            background: #3e74ff;
+            background: #ff902e;
         }
         .approve_box,.approve_label {
             margin: 15px 0;
@@ -91,10 +91,14 @@
                                 <label onclick="return select4approving(this)" class="approve_label" for="song_{{$channel->id}}">
                                     <input checked onclick="return select4approving(this)" id="song_{{$channel->id}}" type="checkbox" class="approve_box" value="{{$channel->id}}">
                                 </label>
-                                <a class="song_name">{{$channel->channel_id}}</a>
+
+                                <span>Subscribers: {{$channel->subscribers}}</span>
+                                <span>Videos: {{$channel->videos}}</span>
 
                                 <a class="song_approve" onclick="approveSong(this,{{$channel->id}})"> APPROVE </a>
-                                <a target="_blank" href="https://www.youtube.com/channel/{{$channel->channel_id}}" class="song_skip" onclick="skipSong(this,{{$channel->id}})"> VIEW </a>
+                                <a  class="song_skip" onclick="skipSong(this,{{$channel->id}})"> SKIP </a>
+                                <a target="_blank" href="https://www.youtube.com/channel/{{$channel->channel_id}}" class="song_name">{{$channel->title}}</a>
+
                             </div>
                         </li>
                     @empty

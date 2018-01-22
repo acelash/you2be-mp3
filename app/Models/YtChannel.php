@@ -12,6 +12,11 @@ class YtChannel extends Elegant
         'channel_id',
         'parsed_at',
         'active',
+        'title',
+        'description',
+        'subscribers',
+        'videos',
+        'state_id',
     ];
 
 }

@@ -19,9 +19,6 @@ class Song extends Elegant
         'views',
         'likes',
         'dislikes',
-        'file_url',
-        'thumbnail',
-        'thumbnail_mini',
         'duration',
         'approved',
     ];
@@ -44,9 +41,6 @@ class Song extends Elegant
             'songs.views',
             'songs.likes',
             'songs.dislikes',
-            'songs.file_url',
-            'songs.thumbnail',
-            'songs.thumbnail_mini',
             'songs.duration',
             'songs.created_at',
             'songs.updated_at',
@@ -116,7 +110,6 @@ class Song extends Elegant
         $query = $this->select(
             "songs.id",
             "songs.title",
-            "songs.thumbnail",
             "songs.created_at"
         )
             ->addSelect("states.name AS state")
@@ -178,8 +171,6 @@ class Song extends Elegant
                 });
             }
         }
-
-
 
           $query->where("songs.id", "<>", DB::raw($song->id));
 

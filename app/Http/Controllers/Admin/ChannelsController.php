@@ -213,6 +213,7 @@ class ChannelsController extends Controller
         $viewData['channels'] = (new YtChannel())
             ->getAll()
             ->where("active", 0)
+            ->where("state_id", 2)
             ->take(50)
             ->get();
 
@@ -223,7 +224,7 @@ class ChannelsController extends Controller
     {
         $channel = (new YtChannel())->find($id);
         if ($type == 1) {
-            $channel->update(['active' => 1]);
+            $channel->update(['active' => 2]);
             return [
                 'status' => 'skipped'
             ];
