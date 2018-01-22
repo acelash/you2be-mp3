@@ -40,7 +40,7 @@ class GetChannelInfo extends Command
                     'state_id' => 2
                 ];
 
-                if ($channelInfo->statistics->subscriberCount > 50000) {
+                if ($channelInfo->statistics->subscriberCount > 100000) {
                     $data['active'] = 1;
                 }
 
