@@ -74,6 +74,10 @@ Route::group(
         Route::post('songs/{id}', 'SongsController@update')->where('id', '[0-9]+');
         Route::get('songs/delete/{id}', 'SongsController@destroy')->where('id', '[0-9]+');
         Route::get('songs/datatable', 'SongsController@datatable');
+
+        Route::get('channels', 'ChannelsController@index');
+        Route::get('channels/approve', 'ChannelsController@approve');
+        Route::get('channels/store_approve/{id}/{type}', 'ChannelsController@storeApprove');
     }
 );
 

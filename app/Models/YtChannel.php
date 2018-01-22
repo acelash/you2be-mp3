@@ -11,6 +11,7 @@ class YtChannel extends Elegant
     protected $fillable = [
         'channel_id',
         'parsed_at',
+        'active',
     ];
 
 }

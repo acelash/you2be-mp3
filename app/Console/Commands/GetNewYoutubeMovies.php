@@ -7,6 +7,7 @@ use Alaouy\Youtube\Facades\Youtube;
 use App\Extensions\YoutubeApiHelper;
 use App\Models\Movie;
 use App\Models\Song;
+use App\Models\YtChannel;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
@@ -168,9 +169,20 @@ class GetNewYoutubeMovies extends Command
                 $new = (new Song())->newInstance();
                 $new->fill($videoInfo);
 
+                $existingChannel = (new YtChannel())->where('channel_id',$details->snippet->channelId)->count();
+
+                if(!$existingChannel){
+                    $newChannel = (new YtChannel())->newInstance();
+                    $newChannel->fill([
+                        'channel_id' => $details->snippet->channelId
+                    ]);
+                }
+
+
                 DB::beginTransaction();
                 try {
                     $new->save();
+                    if(isset($newChannel)) $newChannel->save();
 
                     // tags
                     if(property_exists($details->snippet, 'tags')){

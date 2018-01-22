@@ -99,6 +99,7 @@
                             <li><a><i class="fa fa-file-movie-o"></i> {{trans('translate.songs')}} <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
                                     <li><a href="{{url('admin/songs/approve')}}">Approve songs</a></li>
+                                    <li><a href="{{url('admin/channels/approve')}}">Approve channels</a></li>
                                  {{--   <li><a href="{{url('admin/songs/new')}}">{{trans('translate.add')}}</a></li>
                                     <li><a href="{{url('admin/songs')}}">{{trans('translate.all_songs')}}</a></li>--}}
                                 </ul>

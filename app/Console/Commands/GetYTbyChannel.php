@@ -34,7 +34,9 @@ class GetYTbyChannel extends Command
         $channel_id = $this->argument('channel_id');
 
         if($channel_id == 0){
-            $channel = (new YtChannel())->orderBy("parsed_at","ASC")->get()->first();
+            $channel = (new YtChannel())
+                ->where("active",1)
+                ->orderBy("parsed_at","ASC")->get()->first();
             if($channel){
                 $channel_id = $channel['channel_id'];
             }

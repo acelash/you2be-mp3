@@ -25,31 +25,7 @@ class Kernel extends ConsoleKernel
 
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('getmovies 0')->hourly()
-            ->sendOutputTo(storage_path($this->outputFile))
-            ->after(function () {
-                $this->saveLogs('GetNewYoutubeMovies');
-            });
-
-        $schedule->command('getmovies "Official Audio"')->dailyAt('23:20')
-        ->sendOutputTo(storage_path($this->outputFile))
-            ->after(function () {
-                $this->saveLogs('GetNewYoutubeMovies');
-            });
-        $schedule->command('getmovies "Official Video"')->dailyAt('22:20')
-            ->sendOutputTo(storage_path($this->outputFile))
-            ->after(function () {
-                $this->saveLogs('GetNewYoutubeMovies');
-            });
-        $schedule->command('getmovies "Клип"')->dailyAt('21:20')
-            ->sendOutputTo(storage_path($this->outputFile))
-            ->after(function () {
-                $this->saveLogs('GetNewYoutubeMovies');
-            });
-
-
-
-        $schedule->command('getbychannel "0"')->hourly()
+        $schedule->command('getbychannel "0"')->everyTenMinutes()
             ->sendOutputTo(storage_path($this->outputFile))
             ->after(function () {
                 $this->saveLogs('GetYTbyChannel');

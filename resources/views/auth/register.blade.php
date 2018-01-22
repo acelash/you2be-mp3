@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    <style>{!!file_get_contents(public_path('css/auth.css'))!!}</style>
 <div class="container">
     <div class="row">
         {{--<div class="col-md-4 col-md-offset-4 page_content">
