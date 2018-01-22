@@ -5,7 +5,7 @@ $seoTitle = $entity->title ." | ".trans('words.download_listen');
 
 $seoDescription = trans("words.share_description_prefix")." ". $entity->title;
 $seoUrl = Request::url();
-$seoImg = $entity->thumbnail;
+$seoImg =  "https://i.ytimg.com/vi/".$entity->source_id."/sddefault.jpg";
 if($locale == "ru") $metaLocale = 'RU_ru';
 else $metaLocale = "En_en";
 

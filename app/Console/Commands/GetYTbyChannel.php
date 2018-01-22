@@ -8,6 +8,7 @@ use Alaouy\Youtube\Facades\Youtube;
 use App\Extensions\YoutubeApiHelper;
 use App\Models\Movie;
 use App\Models\Song;
+use App\Models\YtChannel;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
@@ -31,6 +32,14 @@ class GetYTbyChannel extends Command
         $pagesPassed = 0;
 
         $channel_id = $this->argument('channel_id');
+
+        if($channel_id == 0){
+            $channel = (new YtChannel())->orderBy("parsed_at","ASC")->get()->first();
+            if($channel){
+                $channel_id = $channel['channel_id'];
+            }
+        }
+
         echo "channel=".$channel_id." \n";
 
         $params = array(
@@ -63,6 +72,9 @@ class GetYTbyChannel extends Command
             }
             $pagesPassed++;
         }
+
+        $updateChannelEntry = (new YtChannel());
+        $updateChannelEntry->where("channel_id",$channel_id)->update(['parsed_at'=>time()]);
 
         $endTime = time();
         echo "end (".($endTime - $startTime)." sec). \n";

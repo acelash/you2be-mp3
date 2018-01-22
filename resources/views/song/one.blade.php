@@ -1,6 +1,6 @@
 <li>
     <div  class="track">
-        <div class="song_poster" style="background-image: url('{{$song->thumbnail_mini}}')"></div>
+        <div class="song_poster" style="background-image: url('https://i.ytimg.com/vi/{{$song->source_id}}/default.jpg')"></div>
         <a href="{{route('show_song_'.$locale,[ 'slug' => prepareSlugUrl($song->id,$song->title)])}}" class="song_name" >{{$song->title}}</a>
 
         <a class="song_download" onclick="downloadSong(this, {{$song->id}},true)">
@@ -17,7 +17,8 @@
 
             $seoDescription = trans("words.share_description_prefix")." ". $seoTitle;//str_limit(strip_tags($entity->text), 160);
             $seoUrl = route('show_song_'.$locale,[ 'slug' => prepareSlugUrl($song->id,$song->title)]);
-            $seoImg = $song->thumbnail;
+            $seoImg =  "https://i.ytimg.com/vi/".$song->source_id."/sddefault.jpg";
+
             ?>
             <a onclick="Share.facebook('{{$seoUrl}}','{{$seoTitle}}','{{$seoImg}}','{{$seoDescription}}')">
                 <img alt="facebook" src="{{asset('public/images/facebook.png')}}">

@@ -48,23 +48,12 @@ class Kernel extends ConsoleKernel
             });
 
 
-        // BY CHANNEL
-        $schedule->command('getbychannel "UC2pmfLm7iq6Ov1UwYrWYkZA"')->dailyAt('03:20') // VEVO
+
+        $schedule->command('getbychannel "0"')->hourly()
             ->sendOutputTo(storage_path($this->outputFile))
             ->after(function () {
                 $this->saveLogs('GetYTbyChannel');
             });
-        $schedule->command('getbychannel "UCCTR5nIFvWBW9MeGEGPNG4g"')->dailyAt('04:30') // CAT Music
-            ->sendOutputTo(storage_path($this->outputFile))
-            ->after(function () {
-                $this->saveLogs('GetYTbyChannel');
-            });
-        $schedule->command('getbychannel "UCFpD-o5sN0cSk8pgZSGLJ4g"')->dailyAt('05:30') // BlackStarTV
-            ->sendOutputTo(storage_path($this->outputFile))
-            ->after(function () {
-                $this->saveLogs('GetYTbyChannel');
-            });
-        // END BY CHANNEL
 
         $schedule->command('removeold')->hourly()
             ->sendOutputTo(storage_path($this->outputFile))
