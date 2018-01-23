@@ -68,14 +68,14 @@ class GetYTbyChannel extends Command
                 $this->processSearchResults($search['results']);
                 else {
                     echo "inserted: ".$this->inserted."videos \n";
-                    die();
+
+                    if(isset($channel)) $channel->update(['parsed_at'=>time()]);
+                    echo "updated channel:".$channel->parsed_at.". \n";
                 }
             }
             $pagesPassed++;
         }
 
-        $updateChannelEntry = (new YtChannel());
-        $updateChannelEntry->where("channel_id",$channel_id)->update(['parsed_at'=>time()]);
 
         $endTime = time();
         echo "end (".($endTime - $startTime)." sec). \n";

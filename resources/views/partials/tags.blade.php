@@ -7,6 +7,10 @@
         @empty
             <li>No tags</li>
         @endforelse
+
+    <!-- admitad.banner: 567mbt4hqpcfd6e7169322af2ed61b GearBest.com INT -->
+        <a style="margin-top: 10px;display: block;" target="_blank" rel="nofollow" href="https://pafutos.com/g/567mbt4hqpcfd6e7169322af2ed61b/?i=4"><img width="300" height="300" border="0" src="https://ad.admitad.com/b/567mbt4hqpcfd6e7169322af2ed61b/" alt="GearBest.com INT"/></a>
+        <!-- /admitad.banner -->
     </div>
     <div id="fb-root"></div>
     <?php

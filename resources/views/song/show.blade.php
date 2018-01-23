@@ -32,8 +32,10 @@ else $metaLocale = "En_en";
             <div class="col-lg-8">
                 <h1 class="fullstory_title">{{ $entity->title}}</h1>
                 <p class="fullstory_text">@lang('words.fullstory_text')</p>
-
-                <a class="download_link" onclick="downloadSong(this, {{$entity->id}},false)">
+                <!-- admitad.banner: 0dfgabxr9zcfd6e7169322af2ed61b GearBest.com INT -->
+                <a style="display: block;text-align: center" target="_blank" rel="nofollow" href="https://pafutos.com/g/0dfgabxr9zcfd6e7169322af2ed61b/?i=4"><img width="250" height="250" border="0" src="https://ad.admitad.com/b/0dfgabxr9zcfd6e7169322af2ed61b/" alt="GearBest.com INT"/></a>
+                <!-- /admitad.banner -->
+                <a style="margin: 10px auto;display: block;text-align: center" class="download_link" onclick="downloadSong(this, {{$entity->id}},false)">
                     <button class="btn">
                         <img class="download" src="{{asset('public/images/down-arrow.png')}}" alt="download">
                         @lang('words.download_as_mp3')</button>
