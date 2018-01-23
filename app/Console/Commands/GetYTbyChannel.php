@@ -11,7 +11,6 @@ use App\Models\Song;
 use App\Models\YtChannel;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\File;
 
 class GetYTbyChannel extends Command
 {
@@ -144,22 +143,6 @@ class GetYTbyChannel extends Command
                     $publishedAt = substr($publishedAt, 0, strpos($publishedAt, 'T'));
                     $videoInfo['source_created_at'] =  strtotime($publishedAt);
 
-                    $thumbnails = $details->snippet->thumbnails;
-
-                    // salvam imagine mini
-                    $remoteUrl = $thumbnails->medium->url;
-                    $imageName = $source_id . "." . config("constants.THUMBNAIL_EXTENSION");
-                    $thumbnail_mini_path = base_path() . '/' . config("constants.THUMBNAIL_MINI_PATH") . $imageName;
-                    file_put_contents($thumbnail_mini_path, file_get_contents($remoteUrl));
-                    $videoInfo['thumbnail_mini'] = asset(config("constants.THUMBNAIL_MINI_PATH") . $imageName);
-
-                    // salvam imagine medium
-                    $remoteUrl = $thumbnails->medium->url;
-                    $imageName = $source_id . "." . config("constants.THUMBNAIL_EXTENSION");
-                    $thumbnail_path = base_path() . '/' . config("constants.THUMBNAIL_PATH") . $imageName;
-                    file_put_contents($thumbnail_path, file_get_contents($remoteUrl));
-                    $videoInfo['thumbnail'] = asset(config("constants.THUMBNAIL_PATH") . $imageName);
-
                     $videoInfo['source_title'] = $details->snippet->title;
                     $videoInfo['title'] = $this->prepareTitle($details->snippet->title);
 
@@ -196,8 +179,6 @@ class GetYTbyChannel extends Command
 
                 } catch (\Exception $e) {
                     DB::rollback();
-                    if(File::exists($thumbnail_path)) unlink($thumbnail_path);
-                    if(File::exists($thumbnail_mini_path)) unlink($thumbnail_mini_path);
                     echo  $source_id . " not saved:{$e->getMessage()} \n";
                 }
             }
