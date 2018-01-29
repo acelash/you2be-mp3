@@ -54,7 +54,7 @@ class GetYTbyChannel extends Command
         );
 
         $search = Youtube::searchAdvanced($params, true);
-
+       // print_r($search);
         if (array_key_exists('results', $search) && is_array($search['results'])) {
             $this->processSearchResults($search['results']);
             $pagesPassed++;
@@ -68,13 +68,13 @@ class GetYTbyChannel extends Command
                 $this->processSearchResults($search['results']);
                 else {
                     echo "inserted: ".$this->inserted."videos \n";
-
-                    if(isset($channel)) $channel->update(['parsed_at'=>time()]);
-                    echo "updated channel:".$channel->parsed_at.". \n";
                 }
             }
             $pagesPassed++;
         }
+
+        if(isset($channel)) $channel->update(['parsed_at'=>time()]);
+        echo "updated channel:".$channel->parsed_at.". \n";
 
 
         $endTime = time();
@@ -91,7 +91,7 @@ class GetYTbyChannel extends Command
 
                 $existing = (new Song())->where('source_id', $source_id)->count();
                 if ($existing) {
-                  //  echo "skip. \n";
+                    echo "skip. ";
                     continue;
                 }
                 //pregatim informatiile despre video
