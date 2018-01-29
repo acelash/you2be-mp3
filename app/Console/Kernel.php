@@ -32,7 +32,7 @@ class Kernel extends ConsoleKernel
                 $this->saveLogs('GetYTSongs');
             });
 
-        $schedule->command('getbychannel "0"')->everyTenMinutes()
+        $schedule->command('getbychannel "0"')->everyFiveMinutes()
             ->sendOutputTo(storage_path($this->outputFile))
             ->after(function () {
                 $this->saveLogs('GetYTbyChannel');
@@ -44,7 +44,7 @@ class Kernel extends ConsoleKernel
                 $this->saveLogs('RemoveFiles');
             });
 
-        $schedule->command('getchannels')->hourly()
+        $schedule->command('getchannels')->everyThirtyMinutes()
             ->sendOutputTo(storage_path($this->outputFile))
             ->after(function () {
                 $this->saveLogs('GetChannelInfo');
