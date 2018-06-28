@@ -24,10 +24,6 @@ return [
     'THUMBNAIL_MINI_HEIGHT' => 50, // px, facem resize la postere
     'THUMBNAIL_HEIGHT' => 200, // px, facem resize la postere
     'HOT_TAGS_TOTAL' => 60,
-    'REMOTE_FTP_SERVER' => "shared-24.smartape.ru",
-    'REMOTE_FTP_USERNAME' => "user73204",
-    'REMOTE_FTP_PASSWORD' => "ICQ5447oBf4H",
-    "REMOTE_SERVER_KEY" => "948vyqn94vnvyv94vnal4a938v9a9alv498v",
     "MINIM_VIEWS" => 50000,
     "MINIM_LIKES" => 10
 ];
